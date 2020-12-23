@@ -1,0 +1,13 @@
+*~
+.DS_Store
+atlassian-ide-plugin.xml
+.ant-targets-*.xml
+*.ipr
+*.iws
+*.sublime-project
+*.sublime-workspace
+*.iml
+.idea/
+auth.txt
+*.apk
+*.tar.gz

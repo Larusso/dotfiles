@@ -1,0 +1,64 @@
+[alias]
+	ci = "commit"
+	co = "checkout"
+	commend = "commit --amend --no-edit"
+	fco = "!git co $(git branch | fzf)"
+	fix-message = "commit --amend --allow-empty"
+	graph = "!\"git lg\""
+	last-commit = "!sh -c \\\"git log -1 --pretty=tformat:\\\\\\\"%H\\\\\\\" --author=\\\\\\\"`git config user.name`\\\\\\\" $*\\\""
+	lg = "!\"git lg1\""
+	lg1 = "!sh -c \\\"git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' $*\\\""
+	lg2 = "!sh -c \\\"git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' $*\\\""
+	lg3 = "!sh -c \\\"git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)' $*\\\""
+	make-private = "config user.email \"manfred.endres@tslarusso.de\""
+	make-wooga = "config user.email \"manfred.endres@wooga.net\""
+	next = "!git co $(git log master --reverse --ancestry-path HEAD..master --pretty=tformat:\"%H\" | head -1)"
+	prev = "!git co $(git rev-list --first-parent --max-count=2 HEAD | tail -1)"
+	prune-all = "!git remote | xargs -n 1 git remote prune"
+	prune-merged = "!git branch -d $(git branch --merged)"
+	st = "status -s"
+
+[color]
+	ui = "auto"
+
+[commit]
+	gpgSign = true
+
+[core]
+	autocrlf = "input"
+	commitGraph = true
+	editor = "vim"
+	quotepath = false
+
+[filter "lfs"]
+	clean = "git-lfs clean -- %f"
+	process = "git-lfs filter-process"
+	required = true
+	smudge = "git-lfs smudge -- %f"
+
+[gpg]
+	program = "/nix/store/hpq38snw0393pyylf6v8i7bv3dm4wvg3-gnupg-2.2.24/bin/gpg2"
+
+[merge]
+	tool = "opendiff"
+
+[pull]
+	rebase = true
+
+[push]
+	default = "current"
+
+[rebase]
+	autoStash = true
+
+[tag]
+	gpgsign = true
+
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+
+[user]
+	email = "manfred.endres@tslarusso.de"
+	name = "Manfred Endres"
+	signingKey = "EA3055E0"
+	useConfigOnly = true
