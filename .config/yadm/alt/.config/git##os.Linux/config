@@ -37,7 +37,7 @@
 	smudge = "git-lfs smudge -- %f"
 
 [gpg]
-	program = "/nix/store/hpq38snw0393pyylf6v8i7bv3dm4wvg3-gnupg-2.2.24/bin/gpg2"
+	program = "/usr/bin/gpg"
 
 [merge]
 	tool = "opendiff"
@@ -55,7 +55,7 @@
 	gpgsign = true
 
 [url "git@github.com:"]
-	insteadOf = "https://github.com/"
+ 	insteadOf = "https://github.com/"
 
 [user]
 	email = "manfred.endres@tslarusso.de"
