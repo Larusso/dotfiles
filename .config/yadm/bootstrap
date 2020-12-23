@@ -18,6 +18,12 @@ YADM_DIR="${0:h}"
 : ${YADM_GITCONFIG:=$YADM_DIR/gitconfig}
 : ${YADM_GITIGNORE:=$YADM_DIR/gitignore}
 : ${YADM_UNSTABLE:=$YADM_DIR/unstable}
+# Pull submodules
+function init_submodules {
+  print -P "%F{blue}::%f init yadm submodules ..."
+  cd "$HOME"
+  yadm submodule update --recursive --init
+}
 
 # Create symlinks to shell runcoms in $HOME.
 function bootstrap_xsh {
@@ -52,6 +58,7 @@ function prompt_logout {
   loginctl terminate-session $session
 }
 
+init_submodules
 bootstrap_xsh
 change_login_shell
 prompt_logout

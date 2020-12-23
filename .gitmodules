@@ -1,0 +1,3 @@
+[submodule ".config/xsh"]
+	path = .config/xsh
+	url = git@github.com:sgleizes/xsh
