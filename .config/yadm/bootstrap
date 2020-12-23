@@ -1,0 +1,57 @@
+#!/usr/bin/env zsh
+#
+# Bootstrap program for the dotfiles repository.
+#
+
+# Enable the default zsh options.
+emulate zsh
+
+setopt errexit      # exit the script if any statement returns a non-true valu
+setopt pipefail     # unveil hidden pipeline command errors
+setopt extendedglob # enable '#', '~', '^' operators and flags in patterns
+
+# Deduce the path to the parent directory.
+YADM_DIR="${0:h}"
+
+
+# Paths to repository configuration files.
+: ${YADM_GITCONFIG:=$YADM_DIR/gitconfig}
+: ${YADM_GITIGNORE:=$YADM_DIR/gitignore}
+: ${YADM_UNSTABLE:=$YADM_DIR/unstable}
+
+# Create symlinks to shell runcoms in $HOME.
+function bootstrap_xsh {
+  print -P "%F{blue}::%f Linking shell runcoms to xsh runcoms..."
+
+  # Source xsh with the appropriate configuration directory.
+  XSH_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/shell"
+  source "${XSH_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/xsh}/xsh.sh"
+
+  # Bootstrap xsh for all supported shells.
+  xsh bootstrap -s posix:bash:zsh >/dev/null
+}
+
+# Change the default login shell for the current user.
+function change_login_shell {
+  if [[ $(cat /etc/passwd | grep $USER) == *:/bin/zsh ]] {
+    return
+  }
+
+  print -P "%F{green}::%f Changing the login shell to /bin/zsh"
+  chsh $USER --shell=/bin/zsh
+}
+
+# Prompt the user to logout from the current session.
+function prompt_logout {
+  local ans session
+  print -Pn "%F{green}::%f It is recommended to relogin using the new shell configuration, logout now? [Y/n] "
+  read -sk ans; print
+  [[ $ans != ('y'|$'\n') ]] && return
+
+  session=$(loginctl session-status | head -n 1 | awk '{print $1}' || true)
+  loginctl terminate-session $session
+}
+
+bootstrap_xsh
+change_login_shell
+prompt_logout
