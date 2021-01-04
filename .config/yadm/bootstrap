@@ -13,6 +13,22 @@ setopt extendedglob # enable '#', '~', '^' operators and flags in patterns
 # Deduce the path to the parent directory.
 YADM_DIR="${0:h}"
 
+# Detect the platform (similar to $OSTYPE)
+OS="`uname`"
+case $OS in
+  'Linux')
+    OS='Linux'
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    ;;
+  'Darwin') 
+    OS='macOS'
+    ;;
+  *) ;;
+esac
+
+print -P "%F{green}::%f detected OS $OS"
 
 # Paths to repository configuration files.
 : ${YADM_GITCONFIG:=$YADM_DIR/gitconfig}
@@ -23,6 +39,32 @@ function init_submodules {
   print -P "%F{blue}::%f init yadm submodules ..."
   cd "$HOME"
   yadm submodule update --recursive --init
+}
+
+# install homebrew if missing
+function init_homebrew {
+  print -P "%F{blue}::%f init homebrew ..."
+  
+  if ! command -v brew >/dev/null 2>&1; then
+    print -P "%F{blue}::%f installing homebrew ..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  if [ -f "${HOME}/.Brewfile" ]; then
+    print -P "%F{green}::%f updating brew bundle ..."
+    brew bundle --global
+  fi
+}
+
+# setup iterm2 preference folder
+function setup_iterm2 {
+  print -P "%F{blue}::%f setting iTerm preference folder..."
+  ITERM_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/iterm2"
+  if [ -d  "$ITERM_CONFIG_DIR" ]; then
+    defaults write com.googlecode.iterm2 PrefsCustomFolder "$ITERM_CONFIG_DIR"
+  else
+    print -P "%F{yellow}:: [SKIP] iTerm preference directory $ITERM_CONFIG_DIR does not exist. %f"
+  fi
 }
 
 # Create symlinks to shell runcoms in $HOME.
@@ -59,6 +101,13 @@ function prompt_logout {
 }
 
 init_submodules
-bootstrap_xsh
-change_login_shell
-prompt_logout
+if [ "$OS" = "macOS" ]; then
+  init_homebrew
+  setup_iterm2
+fi
+
+if [ "$OS" = "Linux" ]; then
+  bootstrap_xsh
+  change_login_shell
+  prompt_logout
+fi
