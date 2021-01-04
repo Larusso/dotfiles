@@ -516,6 +516,7 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+          "zeal"
         },
         class = {
           "Arandr",
@@ -542,7 +543,7 @@ awful.rules.rules = {
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true,  titlebars_enabled = false}},
+      }, properties = { floating = true,  titlebars_enabled = true}},
 
     { rule_any = {
         class = {
