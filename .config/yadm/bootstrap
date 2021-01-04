@@ -30,6 +30,21 @@ esac
 
 print -P "%F{green}::%f detected OS $OS"
 
+pacman_packages=(
+  alacritty
+  awesome
+  dmenu
+  nerd-fonts-droid-sans-mono
+  nvidia
+  nvidia-settings
+  openssh
+  pacman-contrib
+  picom-jonaburg-git
+  rustup
+  yadm
+  zsh-theme-powerlevel10k-git
+)
+
 # Paths to repository configuration files.
 : ${YADM_GITCONFIG:=$YADM_DIR/gitconfig}
 : ${YADM_GITIGNORE:=$YADM_DIR/gitignore}
@@ -56,10 +71,18 @@ function init_homebrew {
     print -P "%F{blue}::%f installing homebrew ..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
+}
 
-  if [ -f "${HOME}/.Brewfile" ]; then
-    print -P "%F{green}::%f updating brew bundle ..."
-    brew bundle --global
+# install packages
+function install_packages {
+  if [ "$OS" = "macOS" ]; then
+    if [ -f "${HOME}/.Brewfile" ]; then
+      print -P "%F{green}::%f install packages with brew ..."
+      brew bundle --global
+    fi
+  elif [ "$OS" = "Linux" ]; then
+    print -P "%F(green)::%f install packages with pacman ..."
+    yay -S --needed $pacman_packages
   fi
 }
 
@@ -113,6 +136,8 @@ if [ "$OS" = "macOS" ]; then
   init_homebrew
   setup_iterm2
 fi
+
+install_packages
 
 if [ "$OS" = "Linux" ]; then
   bootstrap_xsh
