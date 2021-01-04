@@ -1,6 +1,7 @@
 [submodule ".config/xsh"]
 	path = .config/xsh
-	url = git@github.com:sgleizes/xsh
+	url = https://github.com/sgleizes/xsh.git
 [submodule ".config/yadm/alt/.config/awesome##os.Linux/nice"]
 	path = ".config/yadm/alt/.config/awesome##os.Linux/nice"
 	url = https://github.com/mut-ex/awesome-wm-nice.git
+	branch = awesome-4v3-stable
