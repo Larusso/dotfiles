@@ -1,0 +1,6 @@
+#
+# Fzf configuration module for bash.
+#
+
+source "/usr/share/fzf/key-bindings.bash"
+source "/usr/share/fzf/completion.bash"

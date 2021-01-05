@@ -8,3 +8,4 @@
 #
 
 xsh module core
+xsh module fzf
