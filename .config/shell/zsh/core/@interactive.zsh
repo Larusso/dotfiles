@@ -13,9 +13,28 @@ xsh load core -s posix
 
 HISTSIZE="10000"
 SAVEHIST="10000"
-HISTFILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zsh_history"
-P10K_THEME_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh"
-mkdir -p "$(dirname "$HISTFILE")"
+history_file="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zsh_history"
+
+p10k_theme_path="${XDG_DATA_HOME:-$HOME/.local/share}/powerlevel10k"
+
+case $(uname) in
+  'Linux')
+    if [ -d "/usr/share/zsh-theme-powerlevel10k" ]; then
+      p10k_theme_path="/usr/share/zsh-theme-powerlevel10k/"
+    fi
+    ;;
+  'Darwin') 
+    if [ -d "/usr/local/opt/powerlevel10k/" ]; then
+      p10k_theme_path="/usr/local/opt/powerlevel10k/"
+    fi
+    ;;
+  *) ;;
+esac
+
+p10k_theme_config="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh"
+p10k_theme="${p10k_theme_path}/powerlevel10k.zsh-theme"
+
+mkdir -p "$(dirname "$history_file")"
 
 setopt HIST_FCNTL_LOCK
 setopt HIST_IGNORE_DUPS
@@ -35,7 +54,10 @@ unsetopt EXTENDED_HISTORY
 #POWERLEVEL9K_STATUS_CROSS=true;
 #POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
 
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f $P10K_THEME_CONFIG ]] || source $P10K_THEME_CONFIG
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+if [ -f $p10k_theme ]; then
+  source "$p10k_theme"
+  [[ ! -f $p10k_theme_config ]] || source "$p10k_theme_config"
+fi
+
+source "/usr/share/fzf/key-bindings.zsh"
+source "/usr/share/fzf/completion.zsh"
