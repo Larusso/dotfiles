@@ -1,6 +1,8 @@
 tap "homebrew/cask-fonts"
+tap "romkatv/powerlevel10k"
 brew "yadm"
 brew "svn"
+brew "romkatv/powerlevel10k/powerlevel10k"
 cask "1password"
 cask "firefox"
 cask "font-droid-sans-mono-nerd-font"
