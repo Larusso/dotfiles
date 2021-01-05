@@ -5,3 +5,9 @@
 	path = ".config/yadm/alt/.config/awesome##os.Linux/nice"
 	url = https://github.com/mut-ex/awesome-wm-nice.git
 	branch = awesome-4v3-stable
+[submodule "work/wooga/atlas/plugin_development/gradle/atlas-build-unity/.vim/bundle/Vundle.vim"]
+	path = work/wooga/atlas/plugin_development/gradle/atlas-build-unity/.vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
