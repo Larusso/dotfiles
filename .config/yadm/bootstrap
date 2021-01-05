@@ -54,7 +54,7 @@ pacman_packages=(
 function update_yadm_repo_url {
   print -P "%F{blue}::%f update yadm repo URL ..."
   yadm remote set-url origin "git@github.com:Larusso/dotfiles.git"
-  yadm remote add readonly "https://github.com/Larusso/dotfiles.git"
+  yadm remote add readonly "https://github.com/Larusso/dotfiles.git" 2>/dev/null || true
 }
 
 # Pull submodules
