@@ -92,6 +92,7 @@ function setup_iterm2 {
   ITERM_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/iterm2"
   if [ -d  "$ITERM_CONFIG_DIR" ]; then
     defaults write com.googlecode.iterm2 PrefsCustomFolder "$ITERM_CONFIG_DIR"
+    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder --bool yes
   else
     print -P "%F{yellow}:: [SKIP] iTerm preference directory $ITERM_CONFIG_DIR does not exist. %f"
   fi
