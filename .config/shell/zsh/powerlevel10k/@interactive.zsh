@@ -17,8 +17,9 @@ function p10k_theme_install_path {
 
   for i in "${p10k_install_paths[@]}"
   do
-    if [ -d "/usr/share/zsh-theme-powerlevel10k" ]; then
-      return "$i"
+    if [ -d "$i" ]; then
+      echo "$i"
+      return 0
     fi
   done
 }
@@ -34,9 +35,8 @@ function p10k_theme_install_path {
 #POWERLEVEL9K_STATUS_CROSS=true;
 #POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
 
-p10k_theme=p10k_theme_install_path
+p10k_theme="$(p10k_theme_install_path)/powerlevel10k.zsh-theme"
 p10k_theme_config="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh"
-p10k_theme="${p10k_theme_path}/powerlevel10k.zsh-theme"
 
 if [ -f $p10k_theme ]; then
   source "$p10k_theme"
