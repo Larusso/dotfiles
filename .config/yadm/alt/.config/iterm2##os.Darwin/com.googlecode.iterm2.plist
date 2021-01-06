@@ -283,7 +283,7 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>1156 1040 799 448 0 0 3360 1890 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>260 238 2439 1272 0 0 3008 1692 </string>
+	<string>534 113 2271 1272 0 0 3008 1692 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1139,8 +1139,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas I</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -1542,7 +1552,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -1799,8 +1809,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas II</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -2202,7 +2222,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -2460,8 +2480,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas III</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -2863,7 +2893,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -3121,8 +3151,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas V</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -3524,7 +3564,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -3782,8 +3822,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VI</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -4185,7 +4235,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -4443,8 +4493,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VII</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -4846,7 +4906,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -5104,8 +5164,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VIII</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -5507,7 +5577,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -5765,8 +5835,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas IX</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -6168,7 +6248,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -6426,8 +6506,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas I</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -6829,7 +6919,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -7086,8 +7176,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas II</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -7489,7 +7589,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -7747,8 +7847,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas III</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -8150,7 +8260,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -8408,8 +8518,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas V</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -8811,7 +8931,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -9069,8 +9189,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VI</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -9472,7 +9602,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -9730,8 +9860,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VII</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -10133,7 +10273,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -10391,8 +10531,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VIII</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -10794,7 +10944,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -11052,8 +11202,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas IX</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -11455,7 +11615,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -11713,8 +11873,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas I</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -12116,7 +12286,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -12374,8 +12544,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas II</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -12777,7 +12957,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -13035,8 +13215,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas III</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -13438,7 +13628,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -13696,8 +13886,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas IV</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -14099,7 +14299,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -14357,8 +14557,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas V</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -14760,7 +14970,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -15018,8 +15228,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VI</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -15421,7 +15641,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -15679,8 +15899,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VII</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -16082,7 +16312,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -16340,8 +16570,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas VIII</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -16743,7 +16983,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -17001,8 +17241,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas IX</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -17404,7 +17654,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -17662,8 +17912,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas Jenkins</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -18065,7 +18325,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -18323,8 +18583,18 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Font</key>
+			<string>Helvetica-Bold</string>
+			<key>Badge Max Height</key>
+			<real>0.94999999999999996</real>
+			<key>Badge Max Width</key>
+			<real>0.25</real>
+			<key>Badge Right Margin</key>
+			<real>10</real>
 			<key>Badge Text</key>
 			<string>Atlas UCS</string>
+			<key>Badge Top Margin</key>
+			<real>10</real>
 			<key>Blend</key>
 			<real>0.76584749516752582</real>
 			<key>Blinking Cursor</key>
@@ -18726,7 +18996,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoNerdFontComplete- 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -18809,7 +19079,7 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {3360, 1890}}</string>
+		<string>{{0, 0}, {2048, 1280}}</string>
 		<key>topLeft</key>
 		<string>{269, 595}</string>
 	</dict>
@@ -18818,7 +19088,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>615211581.64107704</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>65</integer>
+	<integer>66</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>

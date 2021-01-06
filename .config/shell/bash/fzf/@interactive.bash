@@ -2,5 +2,20 @@
 # Fzf configuration module for bash.
 #
 
-source "/usr/share/fzf/key-bindings.bash"
-source "/usr/share/fzf/completion.bash"
+case $(uname) in
+  'Linux')
+    fzf_path="/usr/share/fzf"
+    ;;
+  'Darwin') 
+    fzf_path="/usr/local/opt/fzf/shell"
+    ;;
+  *) ;;
+esac
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$fzf_path/completion.bash" 2> /dev/null
+
+# Key bindings
+# ------------
+source "$fzf_path/key-bindings.bash"
