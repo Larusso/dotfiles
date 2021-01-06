@@ -331,8 +331,17 @@
   # parameter. For example, if POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_FOREGROUND is not set, it falls
   # back to POWERLEVEL9K_DIR_FOREGROUND.
   #
-  # typeset -g POWERLEVEL9K_DIR_CLASSES=()
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+    '~/work(|/*)' WORK    ''
+    '*'           DEFAULT ''
+  )
 
+  typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=88
+  typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=103
+  typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=124
+
+  #
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%244Fin '
 
