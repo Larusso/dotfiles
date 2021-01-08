@@ -4,10 +4,16 @@
 
 alias reload='exec "$XSHELL"' # reload the current shell configuration
 
-alias ls=exa
-alias ll=ls -l
-alias la=ls -la
-alias gradle=gw
+alias ls="exa"
+alias ll="ls -l"
+alias la="ls -la"
+alias gradle="gw"
+
+# Add vi customization to less
+VLESS=$(find /usr/share/vim -name 'less.sh')
+if [ ! -z $VLESS ]; then
+	  alias less=$VLESS
+fi
 
 gpgkill() {
   gpg-connect-agent killagent /bye
