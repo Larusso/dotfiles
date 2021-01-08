@@ -9,3 +9,5 @@
 #
 
 xsh module core
+xsh module env
+xsh module uvm 

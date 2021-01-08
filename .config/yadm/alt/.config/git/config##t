@@ -37,7 +37,12 @@
 	smudge = "git-lfs smudge -- %f"
 
 [gpg]
+{% if yadm.os == "Darwin" %}
+	program = "/usr/local/bin/gpg"
+{% endif %}
+{% if yadm.os == "Linux" %}
 	program = "/usr/bin/gpg"
+{% endif %}
 
 [merge]
 	tool = "opendiff"

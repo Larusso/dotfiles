@@ -132,6 +132,15 @@ function prompt_logout {
   loginctl terminate-session $session
 }
 
+function link_launchd_agents {
+  print -Pn "%F{green}::%f Link launchd LaunchAgents "
+
+  for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/launchd/LaunchAgents/*.plist; do
+    ln -s "$filename" $HOME/Library/LaunchAgents/$(basename $filename) >/dev/null
+    launchctl load "$HOME/Library/LaunchAgents/$(basename $filename)" >/dev/null
+  done
+}
+
 update_yadm_repo_url
 init_submodules
 if [ "$OS" = "macOS" ]; then
@@ -140,9 +149,13 @@ if [ "$OS" = "macOS" ]; then
 fi
 
 install_packages
+bootstrap_xsh
+
+if [ "$OS" = "macOS" ]; then
+  link_launchd_agents
+fi
 
 if [ "$OS" = "Linux" ]; then
-  bootstrap_xsh
   change_login_shell
   prompt_logout
 fi

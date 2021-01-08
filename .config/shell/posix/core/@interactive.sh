@@ -7,9 +7,13 @@ alias reload='exec "$XSHELL"' # reload the current shell configuration
 alias ls=exa
 alias ll=ls -l
 alias la=ls -la
+alias gradle=gw
 
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
+gpgkill() {
+  gpg-connect-agent killagent /bye
+  gpg-connect-agent updatestartuptty /bye
+  gpg-connect-agent /bye
+}
 
 gg() {
   if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]]; then

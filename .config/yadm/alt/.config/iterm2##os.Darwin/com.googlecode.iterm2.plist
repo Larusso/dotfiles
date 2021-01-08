@@ -283,7 +283,9 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>1156 1040 799 448 0 0 3360 1890 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>534 113 2271 1272 0 0 3008 1692 </string>
+	<string>74 558 1732 1042 0 0 3008 1692 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>409 237 1536 939 0 0 3008 1692 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -511,7 +513,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string></string>
+			<string>zsh</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -544,7 +546,7 @@
 				<real>1</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>Advanced</string>
 			<key>Default Bookmark</key>
@@ -19079,16 +19081,16 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {2048, 1280}}</string>
+		<string>{{0, 0}, {3008, 1692}}</string>
 		<key>topLeft</key>
-		<string>{269, 595}</string>
+		<string>{319, 1073}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>840FE642-2DDC-4F0E-BD78-CB3DAD6F46B3</string>
 	<key>NoSyncLastTipTime</key>
 	<real>615211581.64107704</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>66</integer>
+	<integer>67</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>

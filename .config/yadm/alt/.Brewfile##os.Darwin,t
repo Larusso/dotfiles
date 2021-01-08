@@ -9,16 +9,14 @@ brew "romkatv/powerlevel10k/powerlevel10k"
 brew "fzf"
 brew "exa"
 brew "gpg2"
-{% if yadm.class == "development" %}
+brew "pinentry-mac"
+{% if yadm.hostname == "MAC-1439" %}
 brew "git-crypt"
 brew "git-lfs"
 brew "rustup"
 brew "ripgrep"
 brew "direnv"
-{% endif %}
-{% if yadm.hostname == "MAC-1439" %}
 brew "awscli"
-brew "heroku"
 brew "fastlane"
 brew "graphviz"
 brew "gradle"
@@ -28,6 +26,6 @@ cask "adoptopenjdk/openjdk/adoptopenjdk8"
 {% endif %}
 cask "1password"
 cask "firefox"
-cask "font-droid-sans-mono-nerd-font"
+# cask "font-droid-sans-mono-nerd-font"
 cask "iterm2"
 cask "visual-studio-code"
