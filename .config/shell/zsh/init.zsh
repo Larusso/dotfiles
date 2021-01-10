@@ -11,4 +11,5 @@ xsh module powerlevel10k
 xsh module core
 xsh module fzf
 xsh module env
-xsh module uvm 
+xsh module uvm
+xsh module highlighter 
