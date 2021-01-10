@@ -20,5 +20,9 @@ setopt SHARE_HISTORY
 unsetopt EXTENDED_HISTORY
 
 colors() {
-  for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+  for i in {0..255}; do let "c=255"; print -Pn "%K{$i} %F{$c}${(l:3::0:)i}%f %k " ${${(M)$((i%6)):#3}:+$'\n'}; done
+}
+
+xsh_debug() {
+    XSH_VERBOSE=1 XSH_BENCHMARK=1 zsh
 }

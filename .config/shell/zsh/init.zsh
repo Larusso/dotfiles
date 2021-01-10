@@ -7,9 +7,10 @@
 # they will be loaded. Try `xsh help` for more information.
 #
 
-xsh module powerlevel10k
-xsh module core
-xsh module fzf
-xsh module env
-xsh module uvm
-xsh module highlighter 
+xsh module powerlevel10k    interactive
+xsh module core             interactive:env:login
+xsh module fzf              interactive
+xsh module env              interactive
+xsh module direnv           interactive
+xsh module uvm              env
+xsh module highlighter      interactive 
