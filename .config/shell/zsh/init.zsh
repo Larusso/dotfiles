@@ -14,3 +14,5 @@ xsh module env              interactive
 xsh module direnv           interactive
 xsh module uvm              env
 xsh module highlighter      interactive 
+xsh module gradle           env
+xsh module cargo            interactive
