@@ -11,3 +11,5 @@ atlassian-ide-plugin.xml
 auth.txt
 *.apk
 *.tar.gz
+stale_outputs_checked
+.envrc
