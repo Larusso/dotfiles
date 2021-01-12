@@ -3,7 +3,7 @@
 #
 
 # Abort if requirements are not met.
-if ! command -v nodeenv &> /dev/null
+if ! command -v nodenv &> /dev/null
 then
   return 1
 fi
