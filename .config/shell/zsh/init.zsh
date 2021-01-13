@@ -7,6 +7,7 @@
 # they will be loaded. Try `xsh help` for more information.
 #
 
+xsh module gpg              interactive
 xsh module powerlevel10k    interactive
 xsh module core             interactive:env:login
 xsh module fzf              interactive

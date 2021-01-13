@@ -7,6 +7,7 @@
 # they will be loaded. Try `xsh help` for more information.
 #
 
+xsh module gpg
 xsh module core
 xsh module fzf
 xsh module env
