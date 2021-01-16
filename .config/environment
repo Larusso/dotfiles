@@ -5,5 +5,5 @@ syslog -s -l warn "Set environment variables with ~/.config/environment $(whoami
 
 launchctl setenv XSH_CONFIG_DIR ~/.config/shell
 launchctl setenv GNUPGHOME ~/.config/gnupg
-
+launchctl setenv SSH_AUTH_SOCK $(gpgconf --list-dirs agent-ssh-socket)
 syslog -s -l warn "Set environment variables with ~/.config/environment $(whoami) - complete"
