@@ -4,5 +4,6 @@ set -e
 syslog -s -l warn "Set environment variables with ~/.config/environment $(whoami) - start"
 
 launchctl setenv XSH_CONFIG_DIR ~/.config/shell
+launchctl setenv GNUPGHOME ~/.config/gnupg
 
 syslog -s -l warn "Set environment variables with ~/.config/environment $(whoami) - complete"
