@@ -4,13 +4,6 @@
 
 alias reload='exec "$XSHELL"' # reload the current shell configuration
 
-export LANG=en
-export PATH=/usr/local/bin:$PATH
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-gpg-connect-agent updatestartuptty /bye >/dev/null
-
 alias ls="exa"
 alias ll="ls -l"
 alias la="ls -la"
@@ -21,7 +14,6 @@ then
   alias icat="kitty +kitten icat"
   alias d="kitty +kitten diff"
 fi
-
 
 # Add vi customization to less
 VLESS=$(find /usr/share/vim -name 'less.sh')
