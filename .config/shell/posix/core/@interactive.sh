@@ -16,6 +16,13 @@ alias ll="ls -l"
 alias la="ls -la"
 alias gradle="gw"
 
+if [[ $TERM == *"kitty" ]]
+then
+  alias icat="kitty +kitten icat"
+  alias d="kitty +kitten diff"
+fi
+
+
 # Add vi customization to less
 VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then
