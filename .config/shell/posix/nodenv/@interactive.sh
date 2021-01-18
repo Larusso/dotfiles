@@ -10,7 +10,7 @@ fi
 
 nodenv() {
     unset -f nodenv
-    export RBENV_ROOT=$XDG_DATA_HOME/nodenv
+    export RBENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/nodenv
     eval "$(command nodenv init -)"
     nodenv $@
 }

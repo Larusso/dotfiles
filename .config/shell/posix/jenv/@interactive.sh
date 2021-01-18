@@ -10,7 +10,7 @@ fi
 
 jenv() {
     unset -f jenv
-    export JENV_ROOT=$XDG_DATA_HOME/jenv
+    export JENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/jenv
     eval "$(command jenv init -)"
     jenv $@
 }

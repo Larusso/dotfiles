@@ -7,7 +7,7 @@ export CARGO_HOME="$XDG_LIB_HOME/cargo"
 
 # Abort if requirements are not met.
 if [ ! -f "${CARGO_HOME}/env" ]; then
-  return 1
+  #return 1
 fi
 
 source "${CARGO_HOME}/env"

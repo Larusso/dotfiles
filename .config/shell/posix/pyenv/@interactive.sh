@@ -10,7 +10,7 @@ fi
 
 pyenv() {
     unset -f pyenv
-    export RBENV_ROOT=$XDG_DATA_HOME/pyenv
+    export RBENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/pyenv
     eval "$(command pyenv init -)"
     pyenv $@
 }
