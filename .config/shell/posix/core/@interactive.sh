@@ -8,7 +8,7 @@ alias ls="exa"
 alias ll="ls -l"
 alias la="ls -la"
 alias gradle="gw"
-
+alias gg="git status -s"
 if [[ $TERM == *"kitty" ]]
 then
   alias icat="kitty +kitten icat"
@@ -27,7 +27,7 @@ gpgkill() {
   gpg-connect-agent /bye
 }
 
-gg() {
+ggf() {
   if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]]; then
     git -c color.status=always status --short |
     fzf --exit-0 --height 50% --border --ansi --multi --ansi --nth 2..,.. \
