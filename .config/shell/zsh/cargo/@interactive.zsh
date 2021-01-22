@@ -2,15 +2,15 @@
 # Cargo configuration module for zsh.
 #
 
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export CARGO_HOME="$XDG_LIB_HOME/cargo"
+export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
+export CARGO_HOME="${XDG_LIB_HOME:-$HOME/.local/lib}/cargo"
 
 # Abort if requirements are not met.
-if [ ! -f "${CARGO_HOME}/env" ]; then
+if [ ! -f "$CARGO_HOME/env" ]; then
   #return 1
 fi
 
-source "${CARGO_HOME}/env"
+source "$CARGO_HOME/env"
 
 export CARGO_NAME="Manfred Endres"
 export CARGO_EMAIL="manfred.endres@tslarusso.de"
