@@ -11,3 +11,12 @@ set encoding=utf-8
 
 nmap <F3> :set invrelativenumber<CR>
 nmap <F4> :set invnumber<CR>
+
+" Insert and command-line mode Caps Lock.
+" Lock search keymap to be the same as insert mode.
+set imsearch=-1
+" Load the keymap that acts like capslock.
+set keymap=insert-only_capslock
+" Turn it off by default.
+set iminsert=0
+

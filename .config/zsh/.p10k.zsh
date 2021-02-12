@@ -179,8 +179,9 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=7
-  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=232
+  #typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=226
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=207
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
 
@@ -209,7 +210,8 @@
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND=236
+  #typeset -g POWERLEVEL9K_DIR_BACKGROUND=53
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND=235
   # Default current directory foreground color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=254
   # If directory is too long, shorten some of its segments to the shortest possible unique
@@ -305,10 +307,10 @@
   #
   # For example, given these settings:
   #
-  #   typeset -g POWERLEVEL9K_DIR_CLASSES=(
-  #     '~/work(|/*)'  WORK     ''
-  #     '~(|/*)'       HOME     ''
-  #     '*'            DEFAULT  '')
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+    '~/work(|/*)'  WORK     ''
+    '~(|/*)'       HOME     ''
+    '*'            DEFAULT  '')
   #
   # Whenever the current directory is ~/work or a subdirectory of ~/work, it gets styled with one
   # of the following classes depending on its writability and existence: WORK, WORK_NOT_WRITABLE or
@@ -318,11 +320,11 @@
   # option to define custom colors and icons for different directory classes.
   #
   #   # Styling for WORK.
-  #   typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=4
-  #   typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=254
-  #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=250
-  #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
+  # typeset -g POWERLEVEL9K_DIR_WORK_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=53
+  typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=254
+  typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=250
+  typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
   #
   #   # Styling for WORK_NOT_WRITABLE.
   #   typeset -g POWERLEVEL9K_DIR_WORK_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -349,9 +351,9 @@
 
   #####################################[ vcs: git status ]######################################
   # Version control system colors.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=034
+  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=046
   typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=226
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=034
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=051
   typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=124
   typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=238
 
