@@ -31,6 +31,7 @@ esac
 print -P "%F{green}::%f detected OS $OS"
 
 pacman_packages=(
+  kitty
   alacritty
   awesome
   dmenu
@@ -42,6 +43,7 @@ pacman_packages=(
   picom-jonaburg-git
   rustup
   yadm
+  neovim
   zsh-theme-powerlevel10k-git
 )
 
@@ -74,6 +76,17 @@ function init_homebrew {
   fi
 }
 
+function init_paru {
+  print -P "%F{blue}::%f init paru (AUR helper) ..."
+  if ! command -v paru >/dev/null 2>&1; then
+    print -P "%F{blue}::%f installing homebrew ..."
+    sudo pacman -S --needed base-devel
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si
+  fi
+}
+
 # install packages
 function install_packages {
   if [ "$OS" = "macOS" ]; then
@@ -83,7 +96,7 @@ function install_packages {
     fi
   elif [ "$OS" = "Linux" ]; then
     print -P "%F(green)::%f install packages with pacman ..."
-    yay -S --needed $pacman_packages
+     -S --needed $pacman_packages
   fi
 }
 
@@ -146,6 +159,9 @@ init_submodules
 if [ "$OS" = "macOS" ]; then
   init_homebrew
   setup_iterm2
+fi
+if [ "$OS" = "Linux" ]; then
+  init_paru
 fi
 
 install_packages
