@@ -79,9 +79,11 @@ function init_homebrew {
 function init_paru {
   print -P "%F{blue}::%f init paru (AUR helper) ..."
   if ! command -v paru >/dev/null 2>&1; then
-    print -P "%F{blue}::%f installing homebrew ..."
+    print -P "%F{blue}::%f installing paru ..."
     sudo pacman -S --needed base-devel
-    git clone https://aur.archlinux.org/paru.git
+    cd /opt
+    sudo git clone https://aur.archlinux.org/paru.git
+    sudo chown -R $(whoami):$(whoami) ./paru
     cd paru
     makepkg -si
   fi
@@ -89,14 +91,15 @@ function init_paru {
 
 # install packages
 function install_packages {
+  print -P "%F{blue}::%f install packages ..."
   if [ "$OS" = "macOS" ]; then
     if [ -f "${HOME}/.Brewfile" ]; then
       print -P "%F{green}::%f install packages with brew ..."
       brew bundle --global
     fi
   elif [ "$OS" = "Linux" ]; then
-    print -P "%F(green)::%f install packages with pacman ..."
-     -S --needed $pacman_packages
+    print -P "%F{green}::%f install packages with pacman ..."
+    paru -S --needed $pacman_packages
   fi
 }
 
