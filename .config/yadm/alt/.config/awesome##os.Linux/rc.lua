@@ -355,6 +355,15 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" },   "b",     function () awful.util.spawn("firefox -private-window") end,
               {description = "open firefox private mode", group = "applications"}),
 
+    -- Mailspring
+    awful.key({ modkey, },           "m",     function () awful.util.spawn("mailspring") end,
+              {description = "open mailspring", group = "applications"}),
+
+    -- 1Password 
+    awful.key({ modkey, },           "\\",     function () awful.util.spawn("1password") end,
+              {description = "open 1password", group = "applications"}),
+
+
 
     awful.key({ modkey }, "x",
               function ()
