@@ -44,7 +44,15 @@ pacman_packages=(
   rustup
   yadm
   neovim
+  mailspring
+  os-prober
+  pcmanfm-gtk3
+  xdg-user-dirs
+  zsh
   zsh-theme-powerlevel10k-git
+  ttf-meslo-nerd-font-powerlevel10k
+  pmount-safe-removal
+
 )
 
 # Paths to repository configuration files.
