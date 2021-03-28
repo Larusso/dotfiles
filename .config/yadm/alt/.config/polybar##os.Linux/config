@@ -21,7 +21,7 @@ include-file = ~/.config/polybar/settings.conf
 include-file = ~/.config/polybar/master.conf
 include-file = ~/.config/polybar/modules.conf
 
-[bar/main]
+[bar/awesome]
 inherit = bar/master
 monitor = ${env:MONITOR:HDMI-1}
 
