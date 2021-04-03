@@ -15,7 +15,7 @@ size-transition = true
 #             Corners           #
 #################################
 # requires: https://github.com/sdhand/compton or https://github.com/jonaburg/picom
-corner-radius = 10.0;
+corner-radius = 0.0;
 rounded-corners-exclude = [
   #"window_type = 'normal'",
   "class_g = 'awesome'",
@@ -44,7 +44,7 @@ round-borders-exclude = [
 # unless explicitly requested using the wintypes option.
 #
 # shadow = false
-shadow = false;
+shadow = true;
 
 # The blur radius for shadows, in pixels. (defaults to 12)
 # shadow-radius = 12
