@@ -25,9 +25,24 @@ include-file = ~/.config/polybar/modules.conf
 inherit = bar/master
 monitor = ${env:MONITOR:HDMI-1}
 
-modules-left =  
+modules-left = menu 
 modules-center = workspaces mpd
 modules-right = filesystem temperature pulseaudio date powermenu
+
+tray-position = right
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[bar/i3]
+inherit = bar/master
+monitor = ${env:MONITOR:HDMI-1}
+
+modules-left = menu i3-workspaces
+modules-center = mpd
+modules-right = filesystem temperature pulseaudio updates powermenu date
 
 tray-position = right
 tray-padding = 2
