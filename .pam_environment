@@ -9,3 +9,4 @@ SSH_AUTH_SOCK	DEFAULT=$(gpgconf --list-dirs agent-ssh-socket)
 XSH_DIR		    DEFAULT=${XDG_CONFIG_HOME}/xsh
 XSH_CONFIG_DIR  DEFAULT=${XDG_CONFIG_HOME}/shell
 STARSHIP_CONFIG DEFAULT=${XDG_CONFIG_HOME}/starship/starship.toml
+TERMINAL	DEFAULT=kitty
