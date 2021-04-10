@@ -17,6 +17,7 @@
 ;==========================================================
 [section/base]
 include-file = ~/.config/polybar/colors.conf
+include-file = ~/.config/polybar/sep.conf
 include-file = ~/.config/polybar/settings.conf
 include-file = ~/.config/polybar/master.conf
 include-file = ~/.config/polybar/modules.conf
@@ -25,7 +26,7 @@ include-file = ~/.config/polybar/modules.conf
 inherit = bar/master
 monitor = ${env:MONITOR:HDMI-1}
 
-modules-left = menu 
+modules-left = menu
 modules-center = workspaces mpd
 modules-right = filesystem temperature pulseaudio date powermenu
 
@@ -42,10 +43,10 @@ monitor = ${env:MONITOR:HDMI-1}
 
 modules-left = menu i3-workspaces
 modules-center = mpd
-modules-right = filesystem temperature pulseaudio updates powermenu date
+modules-right = sep-r10 updates sep-r9 wireless-network sep-r8 wired-network sep-r7 cpu sep-r6 memory sep-r5 filesystem sep-r4 temperature sep-r3 pulseaudio sep-r2 date sep-r1
 
 tray-position = right
-tray-padding = 2
+tray-padding = 5
 
 cursor-click = pointer
 cursor-scroll = ns-resize
