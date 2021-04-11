@@ -30,7 +30,7 @@ modules-left = menu
 modules-center = workspaces mpd
 modules-right = filesystem temperature pulseaudio date powermenu
 
-tray-position = right
+tray-position = center
 tray-padding = 2
 
 cursor-click = pointer
@@ -41,11 +41,11 @@ cursor-scroll = ns-resize
 inherit = bar/master
 monitor = ${env:MONITOR:HDMI-1}
 
-modules-left = menu i3-workspaces
-modules-center = mpd
-modules-right = sep-r10 updates sep-r9 wireless-network sep-r8 wired-network sep-r7 cpu sep-r6 memory sep-r5 filesystem sep-r4 temperature sep-r3 pulseaudio sep-r2 date sep-r1
+modules-left = menu sep-l1 i3-workspaces sep-l2 mpd
+modules-center = 
+modules-right = sep-r10 updates sep-r9 wireless-network sep-r8 wired-network sep-r7 cpu sep-r6 memory sep-r5 filesystem sep-r4 temperature sep-r3 pulseaudio sep-r2 date
 
-tray-position = right
+tray-position = none
 tray-padding = 5
 
 cursor-click = pointer
