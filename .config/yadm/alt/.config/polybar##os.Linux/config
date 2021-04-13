@@ -42,7 +42,7 @@ inherit = bar/master
 monitor = ${env:MONITOR:HDMI-1}
 
 modules-left = menu sep-l1 i3-workspaces sep-l2 mpd
-modules-center = 
+modules-center = title 
 modules-right = sep-r10 updates sep-r9 wireless-network sep-r8 wired-network sep-r7 cpu sep-r6 memory sep-r5 filesystem sep-r4 temperature sep-r3 pulseaudio sep-r2 date
 
 tray-position = none
