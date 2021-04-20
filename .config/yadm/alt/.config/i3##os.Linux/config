@@ -221,4 +221,3 @@ bindsym $mod+o mode "launcher"
 exec ~/.config/polybar/launch.sh
 exec systemctl --user start autostart.target
 exec zeal
-exec 1password
