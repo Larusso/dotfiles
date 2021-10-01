@@ -21,12 +21,6 @@ if [ ! -z $VLESS ]; then
 	  alias less=$VLESS
 fi
 
-gpgkill() {
-  gpg-connect-agent killagent /bye
-  gpg-connect-agent updatestartuptty /bye
-  gpg-connect-agent /bye
-}
-
 ggf() {
   if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]]; then
     git -c color.status=always status --short |

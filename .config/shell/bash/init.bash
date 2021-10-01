@@ -8,6 +8,7 @@
 #
 
 xsh module gpg
+xsh module ssh 
 xsh module core
 xsh module fzf
 xsh module env

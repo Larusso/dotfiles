@@ -8,6 +8,7 @@
 #
 
 xsh module gpg              interactive
+xsh module ssh              interactive
 xsh module powerlevel10k    interactive
 xsh module core             interactive:env:login
 xsh module fzf              interactive
