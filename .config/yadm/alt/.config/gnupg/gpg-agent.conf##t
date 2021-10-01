@@ -8,4 +8,3 @@ pinentry-program /usr/local/bin/pinentry-mac
 {% if yadm.os == "Linux" %}
 pinentry-program /usr/bin/pinentry-tty
 {% endif %}
-enable-ssh-support
