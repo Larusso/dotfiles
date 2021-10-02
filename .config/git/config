@@ -39,14 +39,6 @@
 	required = true
 	smudge = "git-lfs smudge -- %f"
 
-[gpg]
-{% if yadm.os == "Darwin" %}
-	program = "/usr/local/bin/gpg"
-{% endif %}
-{% if yadm.os == "Linux" %}
-	program = "/usr/bin/gpg"
-{% endif %}
-
 [merge]
 	tool = "opendiff"
 
@@ -74,10 +66,16 @@
 [diff]
     tool = kitty
     guitool = kitty.gui
+
 [difftool]
     prompt = false
     trustExitCode = true
+
 [difftool "kitty"]
     cmd = kitty +kitten diff $LOCAL $REMOTE
+
 [difftool "kitty.gui"]
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+
+[includeIf "gitdir:work/wooga/"]
+    path = wooga.gitconfig
