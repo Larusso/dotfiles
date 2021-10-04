@@ -4,8 +4,12 @@
 #
 
 export GPG_TTY=$(tty)
-# export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-# gpgconf --launch gpg-agent
+
+if [ "$HOSTNAME" = "MAC-1439.local" ]; then
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  gpgconf --launch gpg-agent
+fi
+
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 gpgkill() {
