@@ -5,7 +5,7 @@
 
 export GPG_TTY=$(tty)
 
-if [ "$HOSTNAME" = "MAC-1439.local" ]; then
+if [ $(uname -n) = "MAC-1439.local" ]; then
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   gpgconf --launch gpg-agent
 fi
