@@ -17,3 +17,7 @@ gpgkill() {
   gpg-connect-agent updatestartuptty /bye
   gpg-connect-agent /bye
 }
+
+gpgSerials() {
+  gpg-connect-agent "scd serialno" "learn --force" /bye
+}
