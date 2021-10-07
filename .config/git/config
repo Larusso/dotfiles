@@ -60,7 +60,7 @@
 [user]
 	email = "manfred.endres@tslarusso.de"
 	name = "Manfred Endres"
-	signingKey = "EA3055E0"
+	signingKey = "EF8E6FD1"
 	useConfigOnly = true
 
 [diff]
@@ -79,3 +79,5 @@
 
 [includeIf "gitdir:work/wooga/"]
     path = wooga.gitconfig
+[init]
+	defaultBranch = master

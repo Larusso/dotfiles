@@ -3,3 +3,5 @@
 	name = "Manfred Endres"
 	signingKey = "EA3055E0"
 	useConfigOnly = true
+[init]
+	defaultBranch = master
