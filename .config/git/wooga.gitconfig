@@ -3,3 +3,7 @@
 	name = "Manfred Endres"
 	signingKey = "EA3055E0"
 	useConfigOnly = true
+
+[url "git@github.com:"]
+ 	insteadOf = "https://github.com/"
+
