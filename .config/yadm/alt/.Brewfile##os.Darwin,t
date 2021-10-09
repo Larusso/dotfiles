@@ -4,6 +4,8 @@
 tap "homebrew/cask-fonts"
 tap "romkatv/powerlevel10k"
 brew "yadm"
+brew "coreutils"
+brew "util-linux"
 brew "svn"
 brew "romkatv/powerlevel10k/powerlevel10k"
 brew "fzf"
