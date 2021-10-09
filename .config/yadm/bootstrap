@@ -37,7 +37,7 @@ pacman_packages=(
 
   #desktop
   i3-gaps
-  i3-lock
+  i3lock
   i3status
   lightdm
   lightdm-slick-greeter
@@ -196,6 +196,13 @@ function link_launchd_agents {
   done
 }
 
+function import_gpg_keys {
+  print -Pn "%F{green}::%f Import GPG public keys"
+  for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/gnupg/key_*.pub; do
+    gpg --import < "$filename"
+  done
+}
+
 update_yadm_repo_url
 init_submodules
 if [ "$OS" = "macOS" ]; then
@@ -208,6 +215,7 @@ fi
 
 install_packages
 bootstrap_xsh
+import_gpg_keys
 
 if [ "$OS" = "macOS" ]; then
   link_launchd_agents
