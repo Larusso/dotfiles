@@ -3,7 +3,9 @@
 # SSH configuration module.
 #
 
-if [ $(uname -n) != "MAC-1439.local" ]; then
+# SSH-Agent will be started by macOS launchD com.openssh.ssh-agent
+# We need to start it manually on linux
+if [ "$OSTYPE" == "linux-gnu"* ]; then
     if ! pgrep -u "$USER" ssh-agent > /dev/null; then
         ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
     fi
