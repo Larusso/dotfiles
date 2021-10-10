@@ -202,6 +202,7 @@ function import_gpg_keys {
   for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/gnupg/key_*.pub; do
     gpg --import < "$filename"
   done
+  print -Pn "%F{red}::%f To sign with imported keys updating the trust level."
 }
 
 update_yadm_repo_url
