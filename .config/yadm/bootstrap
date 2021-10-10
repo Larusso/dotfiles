@@ -192,8 +192,11 @@ function link_launchd_agents {
 
   for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/launchd/LaunchAgents/*.plist; do
     mkdir -p "$HOME/Library/LaunchAgents"
-    ln -s "$filename" $HOME/Library/LaunchAgents/$(basename $filename) >/dev/null
-    launchctl load "$HOME/Library/LaunchAgents/$(basename $filename)" >/dev/null
+    if [[ ! -f $HOME/Library/LaunchAgents/$(basename $filename) ]] then
+      print -Pn "%F{blue}::%f Link $(basename $filename)"
+      ln -s "$filename" $HOME/Library/LaunchAgents/$(basename $filename) >/dev/null
+      launchctl load "$HOME/Library/LaunchAgents/$(basename $filename)" >/dev/null
+    fi
   done
 }
 
@@ -202,7 +205,26 @@ function import_gpg_keys {
   for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/gnupg/key_*.pub; do
     gpg --import < "$filename"
   done
-  print -Pn "%F{red}::%f To sign with imported keys updating the trust level."
+  print -Pn "%F{red}::%f To sign with imported keys updating the trust level"
+}
+
+function install_terminal_fonts {
+  print -Pn "%F{green}::%f Downlowd Terminal Fonts"
+  local temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
+  print -P "%F{blue}::%f Download MesloLGS NF ..."
+  wget -O "$temp_dir/MesloLGS NF Regular.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+  wget -O "$temp_dir/MesloLGS NF Bold.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+  wget -O "$temp_dir/MesloLGS NF Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+  wget -O "$temp_dir/MesloLGS NF Bold Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+  print -P "%F{blue}::%f Install Fonts ..."
+
+  cp "$temp_dir/MesloLGS NF Regular.ttf" "$HOME/Library/Fonts"
+  cp "$temp_dir/MesloLGS NF Bold.ttf" "$HOME/Library/Fonts"
+  cp "$temp_dir/MesloLGS NF Italic.ttf" "$HOME/Library/Fonts"
+  cp "$temp_dir/MesloLGS NF Bold Italic.ttf" "$HOME/Library/Fonts"
+
+  rm -fr "$temp_dir" 
 }
 
 update_yadm_repo_url
@@ -221,6 +243,7 @@ import_gpg_keys
 
 if [ "$OS" = "macOS" ]; then
   link_launchd_agents
+  install_terminal_fonts
 fi
 
 if [ "$OS" = "Linux" ]; then
