@@ -191,6 +191,7 @@ function link_launchd_agents {
   print -Pn "%F{green}::%f Link launchd LaunchAgents "
 
   for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/launchd/LaunchAgents/*.plist; do
+    mkdir -p "$HOME/Library/LaunchAgents"
     ln -s "$filename" $HOME/Library/LaunchAgents/$(basename $filename) >/dev/null
     launchctl load "$HOME/Library/LaunchAgents/$(basename $filename)" >/dev/null
   done
