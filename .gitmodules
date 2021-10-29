@@ -17,3 +17,6 @@
 [submodule ".config/shell/zsh/vim-mode/zsh-vim-mode"]
 	path = .config/shell/zsh/vim-mode/zsh-vim-mode
 	url = https://github.com/softmoth/zsh-vim-mode.git
+[submodule ".config/vifm/colors"]
+	path = .config/vifm/colors
+	url = https://github.com/vifm/vifm-colors
