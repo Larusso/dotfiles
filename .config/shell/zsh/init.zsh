@@ -12,6 +12,7 @@ xsh module ssh              interactive
 xsh module vim-mode         interactive
 xsh module powerlevel10k    interactive
 xsh module core             interactive:env:login
+xsh module aws		    env
 xsh module fzf              interactive
 xsh module env              interactive
 xsh module direnv           interactive

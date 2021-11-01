@@ -10,6 +10,7 @@
 xsh module gpg
 xsh module ssh 
 xsh module core
+xsh module aws
 xsh module fzf
 xsh module env
 xsh module uvm 
