@@ -14,3 +14,4 @@ xsh module aws
 xsh module fzf
 xsh module env
 xsh module uvm 
+xsh module emacs        env
