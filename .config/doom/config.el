@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Manfred Endres"
+      user-mail-address "manfred.endres@tslarusso.de")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -57,3 +57,26 @@
 
 (set-frame-parameter (selected-frame) 'alpha '(90 . 80))
 (add-to-list 'default-frame-alist '(alpha . (90 . 80)))
+
+(defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+
+(add-hook 'focus-out-hook 'save-all)
+
+(setq auto-save-visited-mode t)
+(setq auto-save-visited-interval 20)
+
+(defadvice switch-to-buffer (before save-buffer-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice other-window (before other-window-now activate)
+  (when buffer-file-name (save-buffer)))
+(defadvice other-frame (before other-frame-now activate)
+  (when buffer-file-name (save-buffer)))
+
+(ad-activate 'switch-to-buffer)
+(ad-activate 'other-window)
+(ad-activate 'other-frame)
+
+(setq neo-smart-open t)
+(setq projectile-switch-project-action 'neotree-projectile-action)
