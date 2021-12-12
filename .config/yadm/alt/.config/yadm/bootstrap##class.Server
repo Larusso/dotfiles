@@ -1,0 +1,214 @@
+#!/usr/bin/env zsh
+#
+# Bootstrap program for the dotfiles repository.
+#
+
+# Enable the default zsh options.
+emulate zsh
+
+setopt errexit      # exit the script if any statement returns a non-true valu
+setopt pipefail     # unveil hidden pipeline command errors
+setopt extendedglob # enable '#', '~', '^' operators and flags in patterns
+
+# Deduce the path to the parent directory.
+YADM_DIR="${0:h}"
+
+# Detect the platform (similar to $OSTYPE)
+OS="`uname`"
+case $OS in
+  'Linux')
+    OS='Linux'
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    ;;
+  'Darwin') 
+    OS='macOS'
+    ;;
+  *) ;;
+esac
+
+print -P "%F{green}::%f detected OS $OS"
+
+pacman_packages=(
+  #cli tools
+  exa
+  git-lfs
+  zsh
+  openssh
+  fzf
+  rustup
+  yadm
+  neovim
+  zsh-theme-powerlevel10k-git
+
+  #system
+  xdg-user-dirs
+  pacman-contrib
+  os-prober
+)
+
+# Paths to repository configuration files.
+: ${YADM_GITCONFIG:=$YADM_DIR/gitconfig}
+: ${YADM_GITIGNORE:=$YADM_DIR/gitignore}
+: ${YADM_UNSTABLE:=$YADM_DIR/unstable}
+
+# Updating yadm repo origin URL
+function update_yadm_repo_url {
+  print -P "%F{blue}::%f update yadm repo URL ..."
+  yadm remote set-url origin "git@github.com:Larusso/dotfiles.git"
+  yadm remote add readonly "https://github.com/Larusso/dotfiles.git" 2>/dev/null || true
+}
+
+# Pull submodules
+function init_submodules {
+  print -P "%F{blue}::%f init yadm submodules ..."
+  cd "$HOME"
+  yadm submodule update --recursive --init
+}
+
+# install homebrew if missing
+function init_homebrew {
+  print -P "%F{blue}::%f init homebrew ..."
+  
+  if ! command -v brew >/dev/null 2>&1; then
+    print -P "%F{blue}::%f installing homebrew ..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+}
+
+function init_paru {
+  print -P "%F{blue}::%f init paru (AUR helper) ..."
+  if ! command -v paru >/dev/null 2>&1; then
+    print -P "%F{blue}::%f installing paru ..."
+    sudo pacman -S --needed base-devel
+    cd /opt
+    sudo git clone https://aur.archlinux.org/paru.git
+    sudo chown -R $(whoami):$(whoami) ./paru
+    cd paru
+    makepkg -si
+  fi
+}
+
+# install packages
+function install_packages {
+  print -P "%F{blue}::%f install packages ..."
+  if [ "$OS" = "macOS" ]; then
+    if [ -f "${HOME}/.Brewfile" ]; then
+      print -P "%F{green}::%f install packages with brew ..."
+      brew bundle --global
+    fi
+  elif [ "$OS" = "Linux" ]; then
+    print -P "%F{green}::%f install packages with pacman ..."
+    paru -S --needed $pacman_packages
+  fi
+}
+
+# setup iterm2 preference folder
+function setup_iterm2 {
+  print -P "%F{blue}::%f setting iTerm preference folder..."
+  ITERM_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/iterm2"
+  if [ -d  "$ITERM_CONFIG_DIR" ]; then
+    defaults write com.googlecode.iterm2 PrefsCustomFolder "$ITERM_CONFIG_DIR"
+    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool 'yes'
+  else
+    print -P "%F{yellow}:: [SKIP] iTerm preference directory $ITERM_CONFIG_DIR does not exist. %f"
+  fi
+}
+
+# Create symlinks to shell runcoms in $HOME.
+function bootstrap_xsh {
+  print -P "%F{blue}::%f Linking shell runcoms to xsh runcoms..."
+
+  # Source xsh with the appropriate configuration directory.
+  XSH_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/shell"
+  source "${XSH_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/xsh}/xsh.sh"
+
+  # Bootstrap xsh for all supported shells.
+  xsh bootstrap -s posix:bash:zsh >/dev/null
+}
+
+# Change the default login shell for the current user.
+function change_login_shell {
+  if [[ $(cat /etc/passwd | grep $USER) == *:/bin/zsh ]] {
+    return
+  }
+
+  print -P "%F{green}::%f Changing the login shell to /bin/zsh"
+  chsh $USER --shell=/bin/zsh
+}
+
+# Prompt the user to logout from the current session.
+function prompt_logout {
+  local ans session
+  print -Pn "%F{green}::%f It is recommended to relogin using the new shell configuration, logout now? [Y/n] "
+  read -sk ans; print
+  [[ $ans != ('y'|$'\n') ]] && return
+
+  session=$(loginctl session-status | head -n 1 | awk '{print $1}' || true)
+  loginctl terminate-session $session
+}
+
+function link_launchd_agents {
+  print -Pn "%F{green}::%f Link launchd LaunchAgents "
+
+  for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/launchd/LaunchAgents/*.plist; do
+    mkdir -p "$HOME/Library/LaunchAgents"
+    if [[ ! -f $HOME/Library/LaunchAgents/$(basename $filename) ]] then
+      print -Pn "%F{blue}::%f Link $(basename $filename)"
+      ln -s "$filename" $HOME/Library/LaunchAgents/$(basename $filename) >/dev/null
+      launchctl load "$HOME/Library/LaunchAgents/$(basename $filename)" >/dev/null
+    fi
+  done
+}
+
+function import_gpg_keys {
+  print -Pn "%F{green}::%f Import GPG public keys"
+  for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/gnupg/key_*.pub; do
+    gpg --import < "$filename"
+  done
+  print -Pn "%F{red}::%f To sign with imported keys updating the trust level"
+}
+
+function install_terminal_fonts {
+  print -Pn "%F{green}::%f Downlowd Terminal Fonts"
+  local temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
+  print -P "%F{blue}::%f Download MesloLGS NF ..."
+  wget -O "$temp_dir/MesloLGS NF Regular.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+  wget -O "$temp_dir/MesloLGS NF Bold.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+  wget -O "$temp_dir/MesloLGS NF Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+  wget -O "$temp_dir/MesloLGS NF Bold Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+  print -P "%F{blue}::%f Install Fonts ..."
+
+  cp "$temp_dir/MesloLGS NF Regular.ttf" "$HOME/Library/Fonts"
+  cp "$temp_dir/MesloLGS NF Bold.ttf" "$HOME/Library/Fonts"
+  cp "$temp_dir/MesloLGS NF Italic.ttf" "$HOME/Library/Fonts"
+  cp "$temp_dir/MesloLGS NF Bold Italic.ttf" "$HOME/Library/Fonts"
+
+  rm -fr "$temp_dir" 
+}
+
+update_yadm_repo_url
+init_submodules
+if [ "$OS" = "macOS" ]; then
+  init_homebrew
+  setup_iterm2
+fi
+if [ "$OS" = "Linux" ]; then
+  init_paru
+fi
+
+install_packages
+bootstrap_xsh
+import_gpg_keys
+
+if [ "$OS" = "macOS" ]; then
+  link_launchd_agents
+  install_terminal_fonts
+fi
+
+if [ "$OS" = "Linux" ]; then
+  change_login_shell
+  prompt_logout
+fi
