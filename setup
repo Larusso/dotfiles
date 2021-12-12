@@ -1,18 +1,22 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #
 # Bootstrap program for the system.
 #
-
-# Enable the default zsh options
-emulate zsh
-
-setopt errexit      # exit the script if any statement returns a non-true valu
-setopt pipefail     # unveil hidden pipeline command errors
-setopt extendedglob # enable '#', '~', '^' operators and flags in patterns
+set -e
 
 # Detect the platform (similar to $OSTYPE)
 os="$(uname)"
 distro="unknown"
+
+# Color variables
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+# Clear the color after that
+clear='\033[0m'
 
 case $os in
   'Linux')
@@ -31,15 +35,15 @@ case $os in
   *) ;;
 esac
 
-print -P "%F{green}::%f detected OS $os and distro $distro"
+echo -e "${green}::${clear} detected OS ${os} and distro ${distro}"
 
 # install yay if missing
 function install_paru {
     if ! command -v paru >/dev/null 2>&1; then
-        print -P "%F{blue}::%f installing paru dependencies ..."
+        echo -e "${blue}::${clear} installing puru dependencies ..."
         sudo pacman -S --needed git base-devel
 
-        print -P "%F{blue}::%f installing paru ..."
+        echo -e "${blue}::${clear} installing paru ..."
         git clone https://aur.archlinux.org/paru.git
         cd paru
         makepkg -si
@@ -48,17 +52,17 @@ function install_paru {
 
 # install homebrew if missing
 function init_homebrew {
-  print -P "%F{blue}::%f init homebrew ..."
-  
-  if ! command -v brew >/dev/null 2>&1; then
-    print -P "%F{blue}::%f installing homebrew ..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  fi
+    echo -e "${blue}::${clear} init homebrew ..."
+
+    if ! command -v brew >/dev/null 2>&1; then
+        echo -e "${blue}::${clear} installing homebrew ..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    fi
 }
 
 # bootstrap yadm
 function init_yadm {
-    print -P "%F{blue}::%f init yadm dotfile manager ..."
+    echo -e "${blue}::${clear} init yadm dotfile manager ..."
 
     yadm_tmp=$(mktemp -d -t yadm-XXXXXXX)
     yadm="$yadm_tmp/yadm"
