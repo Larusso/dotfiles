@@ -34,14 +34,14 @@ esac
 print -P "%F{green}::%f detected OS $os and distro $distro"
 
 # install yay if missing
-function install_yay {
-    if ! command -v yay >/dev/null 2>&1; then
-        print -P "%F{blue}::%f installing yay dependencies ..."
+function install_paru {
+    if ! command -v paru >/dev/null 2>&1; then
+        print -P "%F{blue}::%f installing paru dependencies ..."
         sudo pacman -S --needed git base-devel
 
-        print -P "%F{blue}::%f installing yay ..."
-        git clone https://aur.archlinux.org/yay.git
-        cd yay
+        print -P "%F{blue}::%f installing paru ..."
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
         makepkg -si
     fi
 }
@@ -75,7 +75,7 @@ function init_yadm {
 if [ "$os" = "macOS" ]; then
     init_homebrew
 elif [ "$os" = "Linux" ] && [ "$distro" = "arch"]; then
-    install_yay
+    install_paru
 fi
 
 init_yadm
