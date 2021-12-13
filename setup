@@ -102,6 +102,7 @@ function init_yadm {
         set_yadm_class "$yadm"
         $yadm remote add origin https://github.com/Larusso/dotfiles.git
         $yadm pull origin master
+        $yadm bootstrap
     fi
     rm -fr $yadm_tmp
 }
