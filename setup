@@ -18,6 +18,8 @@ cyan='\033[0;36m'
 # Clear the color after that
 clear='\033[0m'
 
+class=$1
+
 case $os in
   'Linux')
     os='Linux'
@@ -34,7 +36,6 @@ case $os in
     ;;
   *) ;;
 esac
-
 echo -e "${green}::${clear} detected OS ${os} and distro ${distro}"
 
 # install yay if missing
@@ -47,6 +48,8 @@ function install_paru {
         git clone https://aur.archlinux.org/paru.git
         cd paru
         makepkg -si
+    else
+        echo -e "${green}::${clear} paru already installed"
     fi
 }
 
@@ -57,22 +60,49 @@ function init_homebrew {
     if ! command -v brew >/dev/null 2>&1; then
         echo -e "${blue}::${clear} installing homebrew ..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    else
+        echo -e "${green}::${clear} brew already installed"
+    fi
+}
+
+# setup yadm class
+function set_yadm_class {
+    if [ -z ${class+x} ]; then
+        echo -e "${green}::${clear} no yadm class set"
+    else
+        echo -e "${blue}::${clear} set yadm class to '${class}'"
+        $1 config local.class "${class}"
     fi
 }
 
 # bootstrap yadm
 function init_yadm {
     echo -e "${blue}::${clear} init yadm dotfile manager ..."
-
     yadm_tmp=$(mktemp -d -t yadm-XXXXXXX)
-    yadm="$yadm_tmp/yadm"
 
-    PATH=$yadm_tmp:$PATH
+    if ! command -v brew >/dev/null 2>&1; then
+        echo -e "${blue}::${clear} installing yadm..."
 
-    curl -fLo $yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm
-    chmod a+x $yadm
+        yadm="$yadm_tmp/yadm"
+        PATH=$yadm_tmp:$PATH
 
-    $yadm clone -f https://github.com/Larusso/dotfiles.git
+        curl -fLo $yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm
+        chmod a+x $yadm
+    else
+        echo -e "${green}::${clear} yadm already installed"
+        yadm="yadm"
+    fi
+
+    if [ -d "$HOME/.local/share/yadm/repo.git" ]; then
+        echo -e "${green}::${clear} yadm repo already setup"
+        set_yadm_class "$yadm"
+        $yadm pull
+    else
+        $yadm init -f
+        set_yadm_class "$yadm"
+        $yadm remote add origin https://github.com/Larusso/dotfiles.git
+        $yadm pull origin master
+    fi
     rm -fr $yadm_tmp
 }
 
