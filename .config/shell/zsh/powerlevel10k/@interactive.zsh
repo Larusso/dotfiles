@@ -37,7 +37,12 @@ function p10k_theme_install_path {
 #POWERLEVEL9K_STATUS_CROSS=true;
 #POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
 
-p10k_theme_config="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh"
+if [ "$TERM" = "linux"]; then
+  p10k_theme_config="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k-term-linux.zsh"
+else
+  p10k_theme_config="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.p10k.zsh"
+fi
+
 p10k_theme="$(p10k_theme_install_path)"
 
 if [ $? ]; then
