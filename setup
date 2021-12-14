@@ -115,7 +115,7 @@ function install_zsh {
         echo -e "${blue}::${clear} installing zsh ..."
         if [ "$os" = "macOS" ]; then
             /usr/local/bin/brew install zsh    
-        elif [ "$os" = "Linux" ] && [ "$distro" = "arch"]; then
+        elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
             paru -S zsh
         fi
     else
@@ -125,7 +125,7 @@ function install_zsh {
 
 if [ "$os" = "macOS" ]; then
     init_homebrew
-elif [ "$os" = "Linux" ] && [ "$distro" = "arch"]; then
+elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
     install_paru
 fi
 
