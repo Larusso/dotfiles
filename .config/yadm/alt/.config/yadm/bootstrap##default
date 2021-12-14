@@ -84,6 +84,9 @@ pacman_packages=(
   pavucontrol
   os-prober
   gnome-keyring
+  powerline-console-fonts
+  man-db
+  man-pages
 )
 
 # Paths to repository configuration files.

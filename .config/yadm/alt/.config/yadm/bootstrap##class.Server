@@ -46,6 +46,10 @@ pacman_packages=(
   xdg-user-dirs
   pacman-contrib
   os-prober
+  libfido2
+  man-db
+  man-pages
+  powerline-console-fonts-git
 )
 
 # Paths to repository configuration files.
