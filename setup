@@ -38,7 +38,8 @@ case $os in
 esac
 echo -e "${green}::${clear} detected OS ${os} and distro ${distro}"
 
-# install yay if missing
+# install paru if missing
+# https://github.com/morganamilo/paru
 function install_paru {
     if ! command -v paru >/dev/null 2>&1; then
         echo -e "${blue}::${clear} installing puru dependencies ..."
@@ -78,16 +79,17 @@ function set_yadm_class {
 # bootstrap yadm
 function init_yadm {
     echo -e "${blue}::${clear} init yadm dotfile manager ..."
-    yadm_tmp=$(mktemp -d -t yadm-XXXXXXX)
 
-    if ! command -v brew >/dev/null 2>&1; then
+    if ! command -v yadm >/dev/null 2>&1; then
         echo -e "${blue}::${clear} installing yadm..."
 
-        yadm="$yadm_tmp/yadm"
-        PATH=$yadm_tmp:$PATH
-
-        curl -fLo "$yadm" https://github.com/TheLocehiliosan/yadm/raw/master/yadm
-        chmod a+x "$yadm"
+        if [ "$os" = "macOS" ]; then
+            /usr/local/bin/brew install yadm 
+            yadm="/usr/local/bin/yadm"
+        elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
+            paru -S lsb-release yadm
+            yadm="yadm"
+        fi
     else
         echo -e "${green}::${clear} yadm already installed"
         yadm="yadm"
@@ -105,7 +107,6 @@ function init_yadm {
         $yadm alt
         $yadm bootstrap
     fi
-    rm -fr "$yadm_tmp"
 }
 
 # install zsh
