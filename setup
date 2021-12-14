@@ -101,10 +101,26 @@ function init_yadm {
         $yadm init -f
         set_yadm_class "$yadm"
         $yadm remote add origin https://github.com/Larusso/dotfiles.git
-        $yadm pull origin master
+        $yadm pull origin master --set-upstream
+        $yadm alt
         $yadm bootstrap
     fi
     rm -fr $yadm_tmp
+}
+
+# install zsh
+function install_zsh {
+    echo -e "${blue}::${clear} init zsh ..."
+    if ! command -v zsh >/dev/null 2>&1; then
+        echo -e "${blue}::${clear} installing zsh ..."
+        if [ "$os" = "macOS" ]; then
+            /usr/local/bin/brew install zsh    
+        elif [ "$os" = "Linux" ] && [ "$distro" = "arch"]; then
+            paru -S zsh
+        fi
+    else
+        echo -e "${green}::${clear} zsh already installed"
+    fi
 }
 
 if [ "$os" = "macOS" ]; then
@@ -113,4 +129,5 @@ elif [ "$os" = "Linux" ] && [ "$distro" = "arch"]; then
     install_paru
 fi
 
+install_zsh
 init_yadm
