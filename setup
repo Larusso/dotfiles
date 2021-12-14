@@ -86,8 +86,8 @@ function init_yadm {
         yadm="$yadm_tmp/yadm"
         PATH=$yadm_tmp:$PATH
 
-        curl -fLo $yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm
-        chmod a+x $yadm
+        curl -fLo "$yadm" https://github.com/TheLocehiliosan/yadm/raw/master/yadm
+        chmod a+x "$yadm"
     else
         echo -e "${green}::${clear} yadm already installed"
         yadm="yadm"
@@ -105,7 +105,7 @@ function init_yadm {
         $yadm alt
         $yadm bootstrap
     fi
-    rm -fr $yadm_tmp
+    rm -fr "$yadm_tmp"
 }
 
 # install zsh
