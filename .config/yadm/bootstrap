@@ -70,7 +70,7 @@ function init_paru {
     sudo git clone https://aur.archlinux.org/paru.git
     sudo chown -R $(whoami):$(whoami) ./paru
     cd paru
-    makepkg -si
+    makepkg -si --noconfirm
   fi
 }
 
@@ -84,7 +84,7 @@ function install_packages {
     fi
   elif [ "$OS" = "Linux" ]; then
     print -P "%F{green}::%f install packages with pacman ..."
-    paru -S --needed $pacman_packages
+    paru -S --needed --noconfirm $pacman_packages
   fi
 }
 
