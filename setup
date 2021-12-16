@@ -43,7 +43,7 @@ echo -e "${green}::${clear} detected OS ${os} and distro ${distro}"
 function install_paru {
     if ! command -v paru >/dev/null 2>&1; then
         echo -e "${blue}::${clear} installing puru dependencies ..."
-        sudo pacman -S --needed git base-devel
+        sudo pacman -S --needed git base-devel --noconfirm
 
         echo -e "${blue}::${clear} installing paru ..."
         git clone https://aur.archlinux.org/paru.git
@@ -87,7 +87,7 @@ function init_yadm {
             /usr/local/bin/brew install yadm 
             yadm="/usr/local/bin/yadm"
         elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
-            paru -S lsb-release yadm
+            paru -S lsb-release yadm --noconfirm
             yadm="yadm"
         fi
     else
@@ -117,7 +117,7 @@ function install_zsh {
         if [ "$os" = "macOS" ]; then
             /usr/local/bin/brew install zsh    
         elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
-            paru -S zsh
+            paru -S zsh --noconfirm
         fi
     else
         echo -e "${green}::${clear} zsh already installed"
