@@ -48,7 +48,7 @@ function install_paru {
         echo -e "${blue}::${clear} installing paru ..."
         git clone https://aur.archlinux.org/paru.git
         cd paru
-        makepkg -si
+        makepkg -si --noconfirm
     else
         echo -e "${green}::${clear} paru already installed"
     fi
@@ -126,7 +126,7 @@ function install_zsh {
 
 if [ "$os" = "Linux" ]; then
     if [ $EUID != 0 ]; then
-        sudo "$0" "$@"
+        sudo "setup" "$@"
         exit $?
     fi
 fi
