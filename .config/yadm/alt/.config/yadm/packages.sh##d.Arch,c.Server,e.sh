@@ -5,7 +5,6 @@ pacman_packages=(
   zsh
   openssh
   fzf
-  rustup
   yadm
   neovim
   zsh-theme-powerlevel10k-git
