@@ -124,6 +124,13 @@ function install_zsh {
     fi
 }
 
+if [ "$os" = "Linux" ]; then
+    if [ $EUID != 0 ]; then
+        sudo "$0" "$@"
+        exit $?
+    fi
+fi
+
 if [ "$os" = "macOS" ]; then
     init_homebrew
 elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
