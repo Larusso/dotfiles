@@ -52,7 +52,6 @@ pacman_packages=(
   pavucontrol
   os-prober
   gnome-keyring
-  powerline-console-fonts
   man-db
   man-pages
 )
