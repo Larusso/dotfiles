@@ -29,7 +29,7 @@ font pango:monospace 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i ~/.config/i3/lockscreen.png -t
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i ~/.config/i3/lockscreen.png -t
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -111,6 +111,9 @@ bindsym $mod+Shift+b exec firefox -private-window
 # open 1password
 bindsym $mod+backslash exec 1password
 
+# suspend system
+bindsym $mod+Shift+Delete exec systemctl suspend
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -136,17 +139,17 @@ set $ws8 8
 set $ws9 9
 set $ws10 10
 
-workspace $ws1 output primary HDMI-0 HDMI-1
-workspace $ws3 output primary HDMI-0 HDMI-1
-workspace $ws5 output primary HDMI-0 HDMI-1
-workspace $ws7 output primary HDMI-0 HDMI-1
-workspace $ws9 output primary HDMI-0 HDMI-1
+workspace $ws1 output primary DisplayPort-1 DisplayPort-0 HDMI-0 HDMI-1
+workspace $ws3 output primary DisplayPort-1 DisplayPort-0 HDMI-0 HDMI-1
+workspace $ws5 output primary DisplayPort-1 DisplayPort-0 HDMI-0 HDMI-1
+workspace $ws7 output primary DisplayPort-1 DisplayPort-0 HDMI-0 HDMI-1
+workspace $ws9 output primary DisplayPort-1 DisplayPort-0 HDMI-0 HDMI-1
 
-workspace $ws2 output HDMI-1 HDMI-2 primary
-workspace $ws4 output HDMI-1 HDMI-2 primary
-workspace $ws6 output HDMI-1 HDMI-2 primary
-workspace $ws8 output HDMI-1 HDMI-2 primary
-workspace $ws10 output HDMI-1 HDMI-2 primary
+workspace $ws2 output DisplayPort-0 DisplayPort-1 HDMI-1 HDMI-2 primary
+workspace $ws4 output DisplayPort-0 DisplayPort-1 HDMI-1 HDMI-2 primary
+workspace $ws6 output DisplayPort-0 DisplayPort-1 HDMI-1 HDMI-2 primary
+workspace $ws8 output DisplayPort-0 DisplayPort-1 HDMI-1 HDMI-2 primary
+workspace $ws10 output DisplayPort-0 DisplayPort-1 HDMI-1 HDMI-2 primary
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -178,6 +181,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+w exec "feh --bg-scale --recursive --randomize $HOME/wallpers/4k/*"
 
 
 floating_modifier $mod
@@ -231,5 +235,8 @@ bindsym $mod+o mode "launcher"
 # }
 
 exec ~/.config/polybar/launch.sh
-exec systemctl --user start autostart.target
-exec zeal
+exec_always /usr/bin/feh --no-fehbg --bg-scale --recursive --randomize ~/wallpapers/4k/*
+exec_always picom --no-vsync --experimental-backends
+exec nvidia-settings --load-config-only &
+# exec systemctl --user start autostart.target
+# exec zeal
