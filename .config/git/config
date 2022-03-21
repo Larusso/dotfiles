@@ -40,7 +40,8 @@
 	smudge = "git-lfs smudge -- %f"
 
 [merge]
-	tool = "opendiff"
+	tool = vimdiff
+	conflictstyle = diff3
 
 [pull]
 	rebase = true
@@ -81,3 +82,5 @@
     path = wooga.gitconfig
 [init]
 	defaultBranch = master
+[mergetool]
+	prompt = false
