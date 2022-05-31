@@ -13,6 +13,7 @@ if [[ $TERM == *"kitty" ]]
 then
   alias icat="kitty +kitten icat"
   alias d="kitty +kitten diff"
+  alias ssh="kitty +kitten ssh"
 fi
 
 # Add vi customization to less
