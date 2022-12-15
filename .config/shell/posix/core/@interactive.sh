@@ -16,6 +16,9 @@ then
   alias ssh="kitty +kitten ssh"
 fi
 
+
+
+
 # Add vi customization to less
 VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then

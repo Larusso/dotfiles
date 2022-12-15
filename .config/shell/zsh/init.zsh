@@ -9,6 +9,7 @@
 
 xsh module gpg              interactive
 xsh module ssh              interactive
+xsh module docker			env 
 xsh module vim-mode         interactive
 xsh module powerlevel10k    interactive
 xsh module core             interactive:env:login

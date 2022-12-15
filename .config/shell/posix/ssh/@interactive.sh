@@ -17,7 +17,7 @@ fi
 importSSHKey() {
     local temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
     local ret_value=0
-    cd $temp_dir
+    pushd $temp_dir
 
     ssh-keygen -K 2> err_output 1> output
 
@@ -33,7 +33,7 @@ importSSHKey() {
         echo $(<err_output)
         ret_value=1
     fi
-    cd --
+    popd
     rm -fr temp_dir
     return $ret_value
 }
