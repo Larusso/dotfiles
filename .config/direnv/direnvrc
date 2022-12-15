@@ -11,12 +11,12 @@ use_rbenv() {
 }
 
 use_pyenv() {
-    export RBENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/pyenv
+    export PYENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/pyenv
     eval "$(command pyenv init -)"
 }
 
 use_nodenv() {
-    export RBENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/nodenv
+    export NODEENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/nodenv
     eval "$(command nodenv init -)"
 }
 
