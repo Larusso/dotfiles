@@ -34,3 +34,60 @@ export_alias() {
   chmod +x "$target"
   1>&2 echo "direnv: export alias +$name"
 }
+
+export_aws_secret_file() {
+    local secret_id
+    local secret_file
+    local env_name
+
+    env_name="$1"
+    secret_id="$2"
+    if [ -n "$3" ]; then
+      local file_name
+      local tmp
+      file_name="$3"
+      tmp=$(mktemp -d)
+      secret_file="${tmp}/${file_name}"
+    else
+      secret_file=$(mktemp)
+    fi
+
+    aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretBinary" | base64 -D > "${secret_file}"
+    export "${env_name}"="${secret_file}" 
+}
+
+export_aws_secret_string() {
+    local secret_id
+    local secret_env_name
+
+    secret_env_name="$1"
+    secret_id="$2"
+
+    export "${secret_env_name}"=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretString")
+}
+
+export_aws_secret_username_password() {
+    local username_env_name
+    local password_env_name
+    local secret_id
+
+    username_env_name="$1"
+    password_env_name="$2"
+    secret_id="$3"
+
+    export "${username_env_name}"=$(aws secretsmanager describe-secret --secret-id "${secret_id}" | jq -r ".Tags[1].Value")
+    export_aws_secret_string "${password_env_name}" "${secret_id}"
+}
+
+export_aws_credentials() {
+    local secret_id
+    local secret_key_id
+    local secret_access_key
+
+    secret_id="$1"
+    secret_key_id=$(aws secretsmanager describe-secret --secret-id "${secret_id}" | jq -r ".Tags[1].Value")
+    secret_access_key=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretString")
+
+    export AWS_ACCESS_KEY_ID="${secret_key_id}"
+    export AWS_SECRET_ACCESS_KEY="${secret_access_key}"
+}
