@@ -4,8 +4,8 @@
 #
 
 export GPG_TTY=$(tty)
-
-if [ $(uname -n) = "mw-llaruss-C94H" ]; then
+current_hostname=$(uname -n)
+if [[ "$current_hostname" == "mw-llaruss-C94H" ]] || [[ "$current_hostname" == "mw-mendres-JYJJ" ]]; then
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   gpgconf --launch gpg-agent
 fi
