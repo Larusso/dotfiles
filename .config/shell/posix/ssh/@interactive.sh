@@ -14,26 +14,58 @@ if [ "$OSTYPE" == "linux-gnu"* ]; then
     fi
 fi
 
-importSSHKey() {
-    local temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
-    local ret_value=0
-    pushd $temp_dir
+# listSSHKeys() {
+#     setopt PUSHDSILENT
+#     set +e 
 
-    ssh-keygen -K 2> err_output 1> output
+#     local temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
+#     local ret_value=0
+#     trap "popd; exit" INT
+#     pushd $temp_dir
+#     ssh-keygen -K 2> err_output 1> output
 
-    if [ $? == 0 ]
-    then
-        source_key_name=$(perl -n -e'/id_(.*?)_sk_rk/ && print$1' < output)
-        keyname=${1:-"$source_key_name"}
+#     if [ $? == 0 ]
+#     then
+#         >&2 echo ""
+#         >&2 echo "Found Keys:"
+#         ls -1 id_* | sed -e "s/\.pub//" | uniq
+#     else
+#         >&2 echo $(<err_output)
+#         ret_value=1
+#     fi
+#     popd
+#     rm -fr temp_dir
+#     return $ret_value
+# }
 
-        echo "Moved key id_${source_key_name}_sk_rk to ${HOME}/.ssh/id_${keyname}_sk"
-        mv "id_${source_key_name}_sk_rk" "${HOME}/.ssh/id_${keyname}_sk" 
-        mv "id_${source_key_name}_sk_rk.pub" "${HOME}/.ssh/id_${keyname}_sk.pub"
-    else
-        echo $(<err_output)
-        ret_value=1
-    fi
-    popd
-    rm -fr temp_dir
-    return $ret_value
-}
+# importSSHKey() {
+#     setopt PUSHDSILENT
+#     set +e 
+
+#     local temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
+#     local ret_value=0
+#     trap "popd; exit 1" INT
+#     pushd $temp_dir
+#     (trap "popd; exit 1" INT; ssh-keygen -K 2> err_output 1> output)
+
+#     if [ $? == 0 ]
+#     then
+#         if [ $# -eq 0 ]
+#         then
+#             >&2 echo "copy all keys"
+#             mv -v id_* "${HOME}/.ssh"
+#         else
+#             for key in "$@"
+#             do
+#                 mv -v "${key}" "${HOME}/.ssh"
+#                 mv -v "${key}.pub" "${HOME}/.ssh"
+#             done
+#         fi
+#     else
+#         echo $(<err_output)
+#         ret_value=1
+#     fi
+#     popd
+#     rm -fr temp_dir
+#     return $ret_value
+# }
