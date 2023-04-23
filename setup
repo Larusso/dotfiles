@@ -7,6 +7,7 @@ set -e
 # Detect the platform (similar to $OSTYPE)
 os="$(uname)"
 distro="unknown"
+brew_home="/usr/local/bin"
 
 # Color variables
 red='\033[0;31m'
@@ -31,8 +32,11 @@ case $os in
   'WindowsNT')
     os='Windows'
     ;;
-  'Darwin') 
+  'Darwin')
     os='macOS'
+    if ["$(uname -m)" == "arm64"]; then
+        brew_home="/opt/homebrew/bin"
+    fi
     ;;
   *) ;;
 esac
@@ -115,7 +119,7 @@ function install_zsh {
     if ! command -v zsh >/dev/null 2>&1; then
         echo -e "${blue}::${clear} installing zsh ..."
         if [ "$os" = "macOS" ]; then
-            /usr/local/bin/brew install zsh    
+            "${brew_home}/brew" install zsh    
         elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
             paru -S zsh --noconfirm
         fi

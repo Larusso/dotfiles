@@ -3,7 +3,12 @@ default-cache-ttl-ssh 3600
 max-cache-ttl 7200
 max-cache-ttl-ssh 7200
 {% if yadm.os == "Darwin" %}
+{% if yadm.arch == "x86_64" %}
 pinentry-program /usr/local/bin/pinentry-mac
+{% endif %}
+{% if yadm.arch == "arm64" %}
+pinentry-program /opt/homebrew/bin/pinentry-mac
+{% endif %}
 {% endif %}
 {% if yadm.os == "Linux" %}
 pinentry-program /usr/bin/pinentry-tty

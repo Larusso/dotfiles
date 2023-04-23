@@ -8,7 +8,12 @@
 	<string>local.gnupg-agent</string>
 	<key>ProgramArguments</key>
 	<array>
+{% if yadm.arch == "x86_64" %}
 		<string>/usr/local/bin/gpg-connect-agent</string>
+{% endif %}
+{% if yadm.arch == "arm64" %}
+		<string>/opt/homebrew/bin/gpg-connect-agent</string>
+{% endif %}
 		<string>/bye</string>
 	</array>
 	<key>RunAtLoad</key>
