@@ -34,7 +34,7 @@ case $os in
     ;;
   'Darwin')
     os='macOS'
-    if ["$(uname -m)" == "arm64"]; then
+    if [ $(uname -m) == "arm64" ]; then
         brew_home="/opt/homebrew/bin"
     fi
     ;;
@@ -88,8 +88,8 @@ function init_yadm {
         echo -e "${blue}::${clear} installing yadm..."
 
         if [ "$os" = "macOS" ]; then
-            /usr/local/bin/brew install yadm 
-            yadm="/usr/local/bin/yadm"
+            "${brew_home}/brew" install yadm 
+            yadm="${brew_home}/yadm"
         elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
             paru -S lsb-release yadm --noconfirm
             yadm="yadm"
