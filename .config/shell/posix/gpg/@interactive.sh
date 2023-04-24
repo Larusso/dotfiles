@@ -21,3 +21,7 @@ gpgkill() {
 gpgSerials() {
   gpg-connect-agent "scd serialno" "learn --force" /bye
 }
+
+gpgImportFromGithub() {
+  curl "https://github.com/${1}.gpg" | gpg --import
+}

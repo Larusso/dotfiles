@@ -34,13 +34,14 @@ case $os in
     ;;
   'Darwin')
     os='macOS'
-    if [ $(uname -m) == "arm64" ]; then
+    if [ "$(uname -m)" == "arm64" ]; then
         brew_home="/opt/homebrew/bin"
     fi
     ;;
   *) ;;
 esac
 echo -e "${green}::${clear} detected OS ${os} and distro ${distro}"
+echo $brew_home
 
 # install paru if missing
 # https://github.com/morganamilo/paru

@@ -6,8 +6,12 @@ case $(uname) in
   'Linux')
     fzf_path="/usr/share/fzf"
     ;;
-  'Darwin') 
-    fzf_path="/usr/local/opt/fzf/shell"
+  'Darwin')
+    if [ "$(uname -m)" = "arm64" ]; then
+      fzf_path="/opt/homebrew/opt/fzf/shell"
+    else
+      fzf_path="/usr/local/opt/fzf/shell"
+    fi
     ;;
   *) ;;
 esac
