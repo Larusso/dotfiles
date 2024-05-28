@@ -7,12 +7,13 @@
 # they will be loaded. Try `xsh help` for more information.
 #
 
-xsh module gpg
-xsh module ssh 
-xsh module core
-xsh module docker 
-xsh module aws
-xsh module fzf
-xsh module env
-xsh module uvm 
-xsh module emacs        env
+# xsh module gpg
+# xsh module git 
+# xsh module ssh 
+# xsh module core
+# xsh module docker 
+# xsh module aws
+# xsh module fzf
+# xsh module env
+# xsh module uvm 
+# xsh module emacs        env

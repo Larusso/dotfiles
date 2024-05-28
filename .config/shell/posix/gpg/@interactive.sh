@@ -3,11 +3,19 @@
 # Gpg configuration module.
 #
 
+ensure_gpg_agent_running() {
+  if ! pgrep -x "gpg-agent" > /dev/null; then
+    gpgconf --launch gpg-agent
+  fi
+  
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  gpg-connect-agent updatestartuptty /bye >/dev/null
+}
+
 export GPG_TTY=$(tty)
 current_hostname=$(uname -n)
 if [[ "$current_hostname" == "mw-llaruss-C94H" ]] || [[ "$current_hostname" == "mw-mendres-JYJJ" ]]; then
-  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-  gpgconf --launch gpg-agent
+  ensure_gpg_agent_running
 fi
 
 gpg-connect-agent updatestartuptty /bye >/dev/null

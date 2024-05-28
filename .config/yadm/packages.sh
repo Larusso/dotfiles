@@ -1,0 +1,1 @@
+alt/.config/yadm/packages.sh##default,e.sh

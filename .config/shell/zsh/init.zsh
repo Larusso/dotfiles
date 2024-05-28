@@ -8,13 +8,15 @@
 #
 
 xsh module gpg              interactive
+xsh module git              env 
 xsh module ssh              interactive
 xsh module docker			env 
 xsh module vim-mode         interactive
 xsh module powerlevel10k    interactive
 xsh module core             interactive:env:login
-xsh module aws		        env
+xsh module aws		        interactive:env
 xsh module fzf              interactive
+#xsh module atuin            interactive
 xsh module env              interactive
 xsh module direnv           interactive
 xsh module uvm              env
