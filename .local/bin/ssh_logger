@@ -1,0 +1,19 @@
+#!/bin/bash
+
+VERBOSITY=""
+case "${GIT_REMOTE_VERBOSITY:-0}" in
+  1)
+    VERBOSITY="-v"
+    ;;
+  2)
+    VERBOSITY="-vv"
+    ;;
+  3)
+    VERBOSITY="-vvv"
+    ;;
+  *)
+    VERBOSITY=""
+    ;;
+esac
+
+exec ssh $VERBOSITY "$@"
