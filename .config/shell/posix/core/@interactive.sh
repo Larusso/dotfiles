@@ -4,7 +4,7 @@
 
 alias reload='exec "$XSHELL"' # reload the current shell configuration
 
-alias ls="exa"
+alias ls="eza"
 alias ll="ls -l"
 alias la="ls -la"
 alias gradle="gw"
@@ -73,4 +73,4 @@ export FZF_DEFAULT_OPTS='--no-reverse'
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_T_OPTS="--select-1 --exit-0"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_ALT_C_OPTS="--preview 'exa --tree {} | head -200'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree {} | head -200'"
