@@ -33,19 +33,20 @@
 	editor = "vim"
 	quotepath = false
 	pager = delta
+	attributesfile = .gitattributes
 
 [interactive]
-	diffFilter = delte --color-only
+	diffFilter = delta --color-only
 
 [delta]
-    features = weeping-willow
-	keep-plus-minus-markers = false
-	hunk-header-style = omit
+    #features = weeping-willow
+	# keep-plus-minus-markers = false
+	# hunk-header-style = omit
 	true-color = always
 	navigate = true
 	dark = true
 	side-by-side = false
-	line-numbers = true
+	line-numbers = false 
 
 
 [filter "lfs"]
@@ -58,6 +59,10 @@
 	tool = vimdiff
 	conflictstyle = zdiff3
 	#conflictstyle = diff3
+
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
 
 [pull]
 	rebase = true
@@ -81,7 +86,8 @@
 	useConfigOnly = true
 
 [diff]
-    tool = kitty
+	external = difft
+    tool = difftastic
     guitool = kitty.gui
 
 [difftool]
@@ -94,6 +100,9 @@
 [difftool "kitty.gui"]
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 
+[difftool "difftastic"]
+    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+
 [includeIf "gitdir:work/wooga/"]
     path = wooga.gitconfig
 [init]
@@ -102,3 +111,5 @@
 	prompt = false
 [include]
     path = ../delta/themes.gitconfig
+[pager]
+    difftool = true

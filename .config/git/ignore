@@ -13,4 +13,7 @@ auth.txt
 *.tar.gz
 stale_outputs_checked
 .envrc
+*.secret
+*.secret.json
+*.key
 .fleet/
