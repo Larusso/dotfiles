@@ -23,6 +23,8 @@
 
 [color]
 	ui = "auto"
+[column]
+	ui = auto
 
 [commit]
 	gpgSign = true
@@ -69,12 +71,22 @@
 
 [push]
 	default = "current"
+	autoSetupRemote = true
 
 [rebase]
 	autoStash = true
+	updateRefs = true
+
+[rerere]
+        enabled = true
+        autoupdate = true
+
+[branch]
+	sort = -committerdate
 
 [tag]
 	gpgsign = true
+	sort = version:refname
 
 #[url "git@github.com:wooga"]
  	#insteadOf = "https://github.com/wooga"
