@@ -8,9 +8,9 @@ then
   return 1
 fi
 
-jenv() {
-    unset -f jenv
-    export JENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/jenv
-    eval "$(command jenv init -)"
-    jenv $@
-}
+# jenv() {
+#     unset -f jenv
+#     export JENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/jenv
+#     eval "$(command jenv init -)"
+#     jenv $@
+# }

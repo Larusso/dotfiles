@@ -12,5 +12,5 @@ fi
 #     unset -f rbenv
 #     export RBENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/rbenv
 #     eval "$(command rbenv init -)"
-#     rbenv $@
+#     command rbenv "$@"
 # }
