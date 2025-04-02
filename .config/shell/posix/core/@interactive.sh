@@ -16,9 +16,6 @@ then
   alias ssh="kitty +kitten ssh"
 fi
 
-
-
-
 # Add vi customization to less
 VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then
@@ -65,6 +62,10 @@ nuke() {
   then
     echo $pid | xargs kill -${1:-9}
   fi
+}
+
+print-path() {
+  echo "$PATH" | tr ':' '\n'
 }
 
 # shared fzf settings

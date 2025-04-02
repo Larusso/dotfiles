@@ -16,9 +16,9 @@ export GPG_TTY=$(tty)
 current_hostname=$(uname -n)
 if [[ "$current_hostname" == "mw-llaruss-C94H" ]] || [[ "$current_hostname" == "mw-mendres-JYJJ" ]]; then
   ensure_gpg_agent_running
+else
+  gpg-connect-agent updatestartuptty /bye >/dev/null
 fi
-
-gpg-connect-agent updatestartuptty /bye >/dev/null
 
 gpgkill() {
   gpg-connect-agent killagent /bye
