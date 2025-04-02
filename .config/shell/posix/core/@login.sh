@@ -9,6 +9,7 @@ add_to_path_if_exists() {
 add_to_path_if_exists "$HOME/.dotnet"
 add_to_path_if_exists "$HOME/.dotnet/tools"
 add_to_path_if_exists "/usr/local/bin"
+add_to_path_if_exists "/nix/var/nix/profiles/default/bin"
 add_to_path_if_exists "/opt/homebrew/bin"
 add_to_path_if_exists "$HOME/.local/bin"
 
