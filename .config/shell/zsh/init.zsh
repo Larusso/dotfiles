@@ -17,7 +17,7 @@ xsh module powerlevel10k    interactive
 xsh module aws		        interactive:env
 xsh module fzf              interactive
 #xsh module atuin            interactive
-# xsh module env              interactive
+xsh module env              env
 xsh module direnv           interactive
 xsh module uvm              env
 xsh module highlighter      interactive 
