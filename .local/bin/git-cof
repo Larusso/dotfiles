@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+set -e
+
+show_help() {
+  echo "Usage: git cof [-b [local-branch-name]] [--fetch]"
+  echo
+  echo "Options:"
+  echo "  -b [name]     Create a new local branch from a remote branch. If no name is provided,"
+  echo "               the local branch will be named after the remote (excluding the remote name)."
+  echo "  --fetch       Run 'git fetch --all --prune' before continuing."
+  echo "  -h, --help    Show this help message."
+}
+
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || {
+  echo "Not in a git repository"
+  exit 1
+}
+
+# Flags
+do_fetch=0
+mode="default"
+local_branch=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      show_help
+      exit 0
+      ;;
+    --fetch)
+      do_fetch=1
+      shift
+      ;;
+    -b)
+      mode="branch"
+      shift
+      if [[ "$1" != "" && "$1" != -* ]]; then
+        local_branch="$1"
+        shift
+      fi
+      ;;
+    *)
+      echo "Unknown argument: $1"
+      show_help
+      exit 1
+      ;;
+  esac
+done
+
+# Perform fetch if requested
+if [[ $do_fetch -eq 1 ]]; then
+  echo "Fetching all remotes..."
+  git fetch --all --prune
+fi
+
+# Branch creation mode
+if [[ "$mode" == "branch" ]]; then
+  remote_branch=$(git branch -r | sort |
+    fzf --height 50% --border --ansi --tac --preview-window right:70% \
+      --preview 'git log --color=always --oneline --graph --date=short --pretty=format:"%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -108' |
+    sed 's/^..//' | cut -d' ' -f1)
+
+  if [[ -z "$remote_branch" ]]; then
+    echo "No remote branch selected."
+    exit 1
+  fi
+
+  if [[ -z "$local_branch" ]]; then
+    local_branch="${remote_branch#*/}"
+  fi
+
+  git checkout -b "$local_branch" "$remote_branch"
+  exit 0
+fi
+
+# Default: interactive checkout of local branches only
+result=$(git branch | grep -v '/HEAD\s' | sort |
+  fzf --height 50% --border --ansi --tac --preview-window right:70% \
+    --preview 'git log --color=always --oneline --graph --date=short --pretty=format:"%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -108' |
+  sed 's/^..//' | cut -d' ' -f1)
+
+if [[ -n "$result" ]]; then
+  git checkout "$result"
+fi

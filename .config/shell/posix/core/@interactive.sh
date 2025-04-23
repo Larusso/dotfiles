@@ -9,6 +9,7 @@ alias ll="ls -l"
 alias la="ls -la"
 alias gradle="gw"
 alias gg="git status -s"
+alias kkk='vim $(fzf --preview="bat --color=always {}")'
 if [[ $TERM == *"kitty" ]]
 then
   alias icat="kitty +kitten icat"
