@@ -88,9 +88,50 @@ fenvp() {
     --bind "enter:execute-silent(echo {}=${!})+abort"
 }
 
+remote-shell() {
+  local conn="$1"
+  shift
+
+  local profile="${AWS_PROFILE:-atlas}"
+  local saml_cred_file="$HOME/.cache/saml2aws/credentials"
+  local credfile
+
+  # Use SAML credentials file if it exists
+  if [[ -f "$saml_cred_file" ]]; then
+    credfile="$saml_cred_file"
+  else
+    credfile="$HOME/.aws/credentials"
+  fi
+
+  # Helper to read from chosen credentials file
+  get_aws_cred() {
+    AWS_SHARED_CREDENTIALS_FILE="$credfile" aws configure get "$1" --profile "$profile"
+  }
+
+  local access_key="${AWS_ACCESS_KEY_ID:-$(get_aws_cred aws_access_key_id)}"
+  local secret_key="${AWS_SECRET_ACCESS_KEY:-$(get_aws_cred aws_secret_access_key)}"
+  local session_token="${AWS_SESSION_TOKEN:-$(get_aws_cred aws_session_token)}"
+  local region="${AWS_REGION:-$(get_aws_cred region)}"
+
+  if [[ -z "$access_key" || -z "$secret_key" ]]; then
+    echo "❌ AWS credentials not found for profile '$profile'" >&2
+    return 1
+  fi
+
+  ssh -t "$conn" \
+    "ATLAS_READ_USR='$ATLAS_READ_USR' \
+     ATLAS_READ_PSW='$ATLAS_READ_PSW' \
+     AWS_ACCESS_KEY_ID='$access_key' \
+     AWS_SECRET_ACCESS_KEY='$secret_key' \
+     AWS_SESSION_TOKEN='$session_token' \
+     AWS_REGION='$region' \
+     AWS_DEFAULT_REGION='$region' \
+     exec \$SHELL -l"
+}
+
 if command -v neovide >/dev/null 2>&1; then
   neo() {
-    command neovide "$@" &
+    OPENAI_API_KEY=$(security find-generic-password -a "$USER" -s "OPENAI_NEOVIM_API_KEY" -w 2>/dev/null) command neovide "$@" &
     disown
   }
 fi
