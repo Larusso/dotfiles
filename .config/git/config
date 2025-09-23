@@ -93,7 +93,7 @@
 [gpg]
 	format = "ssh"
 [gpg "ssh"]
-	program = "~/.config/git/ssh-keygen-1p"
+	program = "~/.local/bin/ssh-keygen-1p"
 [user]
 	email = "manfred.endres@tslarusso.de"
 	name = "Manfred Endres"
