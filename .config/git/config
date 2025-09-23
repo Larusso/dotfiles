@@ -90,10 +90,15 @@
 #[url "git@github.com:wooga"]
  	#insteadOf = "https://github.com/wooga"
 
+[gpg]
+	format = "ssh"
+[gpg "ssh"]
+	program = "~/.config/git/ssh-keygen-1p"
 [user]
 	email = "manfred.endres@tslarusso.de"
 	name = "Manfred Endres"
-	signingKey = "EF8E6FD1"
+#	signingKey = "EF8E6FD1"
+	signingKey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRRi448XEYM9BLr1kMyeNUUASAoeZBJP0y5+HLTZqUH"
 	useConfigOnly = true
 
 [diff]
