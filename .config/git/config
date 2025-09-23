@@ -2,7 +2,6 @@
 	ci = "commit"
 	co = "!f() { if [[ \"$1\" == \"-i\" ]]; then shift; git cof \"$@\"; else git checkout \"$@\"; fi; }; f"
 	commend = "commit --amend --no-edit"
-	fco = "!git co $(git branch | fzf)"
 	fix-message = "commit --amend --allow-empty"
 
 	lg = !"git lg1"
