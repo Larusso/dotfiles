@@ -62,8 +62,8 @@ export_aws_secret_string() {
 
     secret_env_name="$1"
     secret_id="$2"
-
-    export "${secret_env_name}"=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretString")
+    secret=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r '.SecretString')
+    export "${secret_env_name}"="${secret}"
 }
 
 export_aws_secret_username_password() {
