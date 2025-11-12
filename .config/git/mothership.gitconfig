@@ -1,0 +1,9 @@
+[user]
+	email = "manfred.endres@wooga.net"
+	name = "Manfred Endres"
+	useConfigOnly = true
+    signingKey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfHwH4c1cMH/TX8FfjbEnoUBB/frNY1QFB38GU+ni7N"
+[init]
+	defaultBranch = main
+
+

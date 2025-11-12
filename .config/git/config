@@ -87,9 +87,6 @@
 	gpgsign = true
 	sort = version:refname
 
-#[url "git@github.com:wooga"]
- 	#insteadOf = "https://github.com/wooga"
-
 [gpg]
 	format = "ssh"
 [gpg "ssh"]
@@ -97,14 +94,8 @@
 [user]
 	email = "manfred.endres@tslarusso.de"
 	name = "Manfred Endres"
-#	signingKey = "EF8E6FD1"
 	signingKey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRRi448XEYM9BLr1kMyeNUUASAoeZBJP0y5+HLTZqUH"
 	useConfigOnly = true
-
-[diff]
-	external = difft
-    tool = difftastic
-    guitool = kitty.gui
 
 [difftool]
     prompt = false
@@ -121,6 +112,8 @@
 
 [includeIf "gitdir:work/wooga/"]
     path = wooga.gitconfig
+[IncludeIf "gitdir:work/mothership/"]
+	path = mothership.gitconfig
 [init]
 	defaultBranch = master
 [mergetool]
@@ -129,3 +122,12 @@
     path = ../delta/themes.gitconfig
 [pager]
     difftool = true
+
+[url "git@github-wooga:wooga/"]
+    insteadOf = "git@github.com:wooga/"
+[url "git@github-playtika:Playtika/"]
+    insteadOf = "git@github.com:Playtika/"
+[url "git@github-playtika:"]
+ 	insteadOf = "https://github.com/Playtika"
+[url "git@github-wooga:"]
+ 	insteadOf = "https://github.com/wooga"
