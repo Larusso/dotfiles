@@ -49,3 +49,9 @@ background-blur = true
 working-directory = home
 shell-integration-features = sudo,ssh-terminfo,ssh-env
 copy-on-select = clipboard
+
+quick-terminal-position = center
+quick-terminal-size = 50%,50%
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+keybind = global:cmd+shift+;=toggle_quick_terminal
