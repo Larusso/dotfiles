@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Link LaunchAgents"
+
+mkdir -p "$HOME/Library/LaunchAgents"
+
+for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/launchd/LaunchAgents/*.plist; do
+  target="$HOME/Library/LaunchAgents/$(basename $filename)"
+  if [[ ! -f "$target" ]]; then
+    log_step "Linking $(basename $filename)..."
+    ln -s "$filename" "$target"
+    launchctl load "$target"
+  else
+    log_done "$(basename $filename) already linked"
+  fi
+done
+
+log_done

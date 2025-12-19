@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Install Terminal Fonts"
+
+temp_dir=$(mktemp -d)
+trap "rm -rf $temp_dir" EXIT
+
+base_url="https://github.com/romkatv/powerlevel10k-media/raw/master"
+fonts=("MesloLGS NF Regular.ttf" "MesloLGS NF Bold.ttf" "MesloLGS NF Italic.ttf" "MesloLGS NF Bold Italic.ttf")
+
+for font in "${fonts[@]}"; do
+  log_step "Downloading $font..."
+  wget -q -O "$temp_dir/$font" "$base_url/${font// /%20}"
+  cp "$temp_dir/$font" "$HOME/Library/Fonts/"
+done
+
+log_done "Fonts installed"

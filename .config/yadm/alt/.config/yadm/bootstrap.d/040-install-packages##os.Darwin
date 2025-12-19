@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Install Packages (Homebrew)"
+
+export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+
+if [ -f "${HOME}/.Brewfile" ]; then
+  log_step "Running brew bundle..."
+  brew bundle --global
+  log_done
+else
+  log_skip "No ~/.Brewfile found"
+fi

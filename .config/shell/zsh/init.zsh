@@ -24,3 +24,4 @@ xsh module highlighter      interactive
 xsh module gradle           login
 xsh module cargo            interactive
 xsh module emacs            interactive:login
+xsh module boundry          interactive

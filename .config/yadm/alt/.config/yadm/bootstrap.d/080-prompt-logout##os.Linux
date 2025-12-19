@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Session Logout"
+
+log_prompt "Relogin recommended. Logout now? [Y/n]"
+read -sk ans; print
+
+if [[ $ans != ('y'|$'\n') ]]; then
+  log_step "Skipping logout"
+  exit 0
+fi
+
+log_step "Terminating session..."
+session=$(loginctl session-status | head -n 1 | awk '{print $1}' || true)
+loginctl terminate-session $session

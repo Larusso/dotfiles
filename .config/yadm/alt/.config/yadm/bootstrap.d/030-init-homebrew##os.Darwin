@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Init Homebrew"
+
+export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+
+if ! command -v brew >/dev/null 2>&1; then
+  log_step "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  log_done "Homebrew installed"
+else
+  log_done "Homebrew already installed"
+fi

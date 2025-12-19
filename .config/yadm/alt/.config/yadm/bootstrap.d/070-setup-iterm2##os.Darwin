@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Setup iTerm2"
+
+ITERM_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/iterm2"
+
+if [ -d "$ITERM_CONFIG_DIR" ]; then
+  log_step "Setting preferences folder..."
+  defaults write com.googlecode.iterm2 PrefsCustomFolder "$ITERM_CONFIG_DIR"
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool 'yes'
+  log_done
+else
+  log_skip "Config directory not found"
+fi

@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Change Login Shell"
+
+if [[ $(cat /etc/passwd | grep $USER) == *:/bin/zsh ]]; then
+  log_done "Already using zsh"
+  exit 0
+fi
+
+log_step "Changing login shell to /bin/zsh..."
+chsh $USER --shell=/bin/zsh
+
+log_done

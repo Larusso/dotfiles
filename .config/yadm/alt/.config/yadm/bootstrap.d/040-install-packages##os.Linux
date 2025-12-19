@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Install Packages (Paru)"
+
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/packages.sh"
+
+log_step "Installing packages with paru..."
+paru -S --needed --noconfirm $pacman_packages
+
+log_done
