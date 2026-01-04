@@ -24,6 +24,7 @@ brew "rustup"
 brew "ripgrep"
 brew "direnv"
 brew "awscli"
+brew "mise"
 cask "visual-studio-code"
 {% if yadm.hostname == "mw-llaruss-C94H" %}
 tap "gdubw/gng"

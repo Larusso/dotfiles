@@ -19,6 +19,7 @@ xsh module fzf              interactive
 #xsh module atuin            interactive
 xsh module env              env
 xsh module direnv           interactive
+xsh module mise             interactive
 xsh module uvm              env
 xsh module highlighter      interactive 
 xsh module gradle           login
