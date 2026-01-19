@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+
+# Boundary shell wrapper - connects via boundary and opens remote-shell
+# Usage: boundary-shell [-w] [-l USER] [-h HOST] [-s SCOPE] [-v] [BOUNDARY_TARGET]
+#   -w              : Target is a Windows host
+#   -l USER         : Username for remote connection (extracted from target if not provided)
+#   -h HOST         : Local host to bind to (default: 127.0.0.1)
+#   -s SCOPE        : Scope filter for target selection (default: $BOUNDARY_SCOPE or prompt)
+#   -v              : Verbose output (debug logging)
+#   BOUNDARY_TARGET : Boundary target name or ID (optional - will use fzf if not provided)
+
+set -euo pipefail
+
+windows=0
+username=""
+local_host="127.0.0.1"
+scope_filter="${BOUNDARY_SCOPE:-}"
+boundary_target=""
+verbose=0
+
+# Verbose logging function
+log_verbose() {
+  if [[ $verbose -eq 1 ]]; then
+    echo "🔍 [VERBOSE] $*" >&2
+  fi
+}
+
+# Parse options
+while getopts "wl:h:s:v" opt; do
+  case "$opt" in
+    w) windows=1 ;;
+    l) username="$OPTARG" ;;
+    h) local_host="$OPTARG" ;;
+    s) scope_filter="$OPTARG" ;;
+    v) verbose=1 ;;
+    *) 
+      echo "Usage: boundary-shell [-w] [-l USER] [-h HOST] [-s SCOPE] [-v] [BOUNDARY_TARGET]" >&2
+      exit 1 
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+log_verbose "boundary-shell starting"
+log_verbose "Windows mode: $windows"
+log_verbose "Username: ${username:-<not set>}"
+log_verbose "Local host: $local_host"
+log_verbose "Scope filter: ${scope_filter:-<not set>}"
+
+boundary_target="${1:-}"
+
+# Extract username from target if provided in USER@TARGET format on command line
+if [[ -n "$boundary_target" ]] && [[ -z "$username" ]]; then
+  if [[ "$boundary_target" =~ ^([^@]+)@(.+)$ ]]; then
+    username="${BASH_REMATCH[1]}"
+    boundary_target="${BASH_REMATCH[2]}"
+  fi
+fi
+
+# Find an available port dynamically
+find_available_port() {
+  local port
+  # Try ports in range 52000-52999
+  for port in $(seq 52000 52999); do
+    if ! lsof -Pi :$port -sTCP:LISTEN -t >/dev/null 2>&1; then
+      echo "$port"
+      return 0
+    fi
+  done
+  
+  # Fallback: let the system assign a random port
+  echo "0"
+}
+
+# Authenticate with boundary and set token in environment
+log_verbose "Calling boundary-auth to get token"
+auth_cmd="boundary-auth --env"
+if [[ $verbose -eq 1 ]]; then
+  auth_cmd="$auth_cmd -v"
+fi
+log_verbose "Running: $auth_cmd"
+eval "$($auth_cmd)"
+
+if [[ -z "${BOUNDARY_AUTH_TOKEN:-}" ]]; then
+  echo "❌ Failed to get boundary authentication token" >&2
+  exit 1
+fi
+log_verbose "Token retrieved successfully"
+
+# If no target provided, use fzf to select one
+if [[ -z "$boundary_target" ]]; then
+  log_verbose "No target provided, using fzf for selection"
+  
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "❌ fzf is required for interactive target selection" >&2
+    echo "Usage: boundary-shell [-w] [-l USER] [-h HOST] [-s SCOPE] [-v] [BOUNDARY_TARGET]" >&2
+    exit 1
+  fi
+  
+  if [[ -n "$scope_filter" ]]; then
+    echo "🔍 Fetching targets for scope: $scope_filter" >&2
+    log_verbose "Using scope filter: $scope_filter"
+  else
+    echo "🔍 Fetching all targets..." >&2
+    log_verbose "No scope filter, fetching all targets"
+  fi
+  
+  # Build boundary command with optional filter
+  boundary_cmd=(boundary aliases list -scope-id global -token env://BOUNDARY_AUTH_TOKEN -format json)
+  if [[ -n "$scope_filter" ]]; then
+    boundary_cmd+=(-filter "\"$scope_filter\" in \"/item/value\"")
+  fi
+  
+  log_verbose "Running: ${boundary_cmd[*]}"
+  
+  # Fetch targets and let user select with fzf
+  boundary_target=$("${boundary_cmd[@]}" | \
+    jq -r '.items[].value' | \
+    fzf --prompt="Select target: " --height=50% --border)
+  
+  if [[ -z "$boundary_target" ]]; then
+    log_verbose "No target selected from fzf"
+    echo "❌ No target selected" >&2
+    exit 1
+  fi
+  
+  echo "✓ Selected target: $boundary_target" >&2
+  log_verbose "Selected target: $boundary_target"
+  
+  # Extract username from fzf-selected target if in USER@TARGET format
+  if [[ -z "$username" ]] && [[ "$boundary_target" =~ ^([^@]+)@(.+)$ ]]; then
+    username="${BASH_REMATCH[1]}"
+    boundary_target="${BASH_REMATCH[2]}"
+    log_verbose "Extracted username from target: $username"
+  fi
+fi
+
+# If no username provided, use current user as default
+if [[ -z "$username" ]]; then
+  username="$USER"
+  echo "ℹ️  No username specified, using: $username" >&2
+  log_verbose "Using default username: $username"
+fi
+
+log_verbose "Finding available port"
+listen_port=$(find_available_port)
+
+if [[ "$listen_port" == "0" ]]; then
+  echo "❌ Could not find available port in range 52000-52999" >&2
+  exit 1
+fi
+
+log_verbose "Found available port: $listen_port"
+
+echo "🔗 Connecting to boundary target: $boundary_target" >&2
+echo "📡 Listen port: $listen_port" >&2
+echo "👤 User: $username" >&2
+
+# Build remote-shell arguments
+remote_shell_args=()
+if [[ $windows -eq 1 ]]; then
+  remote_shell_args+=("-w")
+  log_verbose "Using Windows mode (forced)"
+else
+  # Default to auto-detect
+  log_verbose "Using auto-detect mode (remote-shell will detect OS via uname)"
+fi
+remote_shell_args+=("-p" "$listen_port")
+remote_shell_args+=("${username}@${local_host}")
+
+log_verbose "Remote shell args: ${remote_shell_args[*]}"
+
+# Execute boundary connect with remote-shell
+log_verbose "Executing: boundary connect $boundary_target -token env://BOUNDARY_AUTH_TOKEN -listen-port=$listen_port -exec remote-shell -- ${remote_shell_args[*]}"
+boundary connect "$boundary_target" \
+  -token env://BOUNDARY_AUTH_TOKEN \
+  -listen-port="$listen_port" \
+  -exec remote-shell \
+  -- "${remote_shell_args[@]}"
+
