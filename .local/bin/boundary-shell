@@ -174,6 +174,7 @@ log_verbose "Remote shell args: ${remote_shell_args[*]}"
 log_verbose "Executing: boundary connect $boundary_target -token env://BOUNDARY_AUTH_TOKEN -listen-port=$listen_port -exec remote-shell -- ${remote_shell_args[*]}"
 boundary connect "$boundary_target" \
   -token env://BOUNDARY_AUTH_TOKEN \
+  -listen-addr="$local_host" \
   -listen-port="$listen_port" \
   -exec remote-shell \
   -- "${remote_shell_args[@]}"
