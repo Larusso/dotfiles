@@ -14,7 +14,8 @@
 {% if yadm.arch == "arm64" %}
 		<string>/opt/homebrew/bin/gpg-connect-agent</string>
 {% endif %}
-		<string>/bye</string>
+		<string>--supervised</string>
+		<string>--enable-ssh-support</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
