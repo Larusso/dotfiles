@@ -4,3 +4,6 @@
 	useConfigOnly = true
 [init]
 	defaultBranch = master
+[http]
+    sslCAPath = /Library/Certs/Cacert.pem
+    sslCAInfo = /Library/Certs/Cacert.pem

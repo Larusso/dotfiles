@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Init Submodules"
+
+log_step "Updating submodules recursively..."
+cd "$HOME"
+yadm submodule update --recursive --init
+
+log_done

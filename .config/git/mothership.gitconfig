@@ -5,5 +5,8 @@
     signingKey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfHwH4c1cMH/TX8FfjbEnoUBB/frNY1QFB38GU+ni7N"
 [init]
 	defaultBranch = main
+[http]
+    sslCAPath = /Library/Certs/Cacert.pem
+    sslCAInfo = /Library/Certs/Cacert.pem
 
 

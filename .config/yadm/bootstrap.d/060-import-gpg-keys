@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Import GPG Keys"
+
+log_step "Importing local public keys..."
+for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/gnupg/key_*.pub; do
+  gpg --import < "$filename" 2>/dev/null
+done
+
+log_step "Importing GitHub public key for Larusso..."
+curl -s https://github.com/Larusso.gpg | gpg --import 2>/dev/null
+
+log_warn "Remember to update trust level for signing"
+log_done

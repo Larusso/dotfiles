@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Bootstrap XSH"
+
+log_step "Linking shell runcoms..."
+
+XSH_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/shell"
+source "${XSH_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/xsh}/xsh.sh"
+
+xsh bootstrap -s posix:bash:zsh >/dev/null
+
+log_done

@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Update Yadm Repo"
+
+log_step "Setting origin URL..."
+yadm remote set-url origin "git@github.com:Larusso/dotfiles.git"
+
+log_step "Adding readonly remote..."
+yadm remote add readonly "https://github.com/Larusso/dotfiles.git" 2>/dev/null || true
+
+log_done
