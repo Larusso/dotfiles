@@ -13,3 +13,6 @@ vault = "mjyal2admd3wecshhjomaobfta"
 [[ssh-keys]]
 item = "u3gswvnnn2n3edir6i4nx34mga"
 vault = "qws2fge5tqje77rrw2m563w5fy"
+[[ssh-keys]]
+item = "upujkb52no4ec5uzjw4beipilu"
+vault = "qws2fge5tqje77rrw2m563w5fy"
