@@ -1,6 +1,7 @@
 [[ssh-keys]]
 item = "cfab47ctgidp3ofgaj2r5s37nq"
 vault = "qws2fge5tqje77rrw2m563w5fy"
+{% if yadm.hostname == "mw-mendres-JYJJ" %}
 [[ssh-keys]]
 item = "rgjb4uiaha2mw7jq4gar6wgvmy"
 vault = "mjyal2admd3wecshhjomaobfta"
@@ -10,6 +11,7 @@ vault = "mjyal2admd3wecshhjomaobfta"
 [[ssh-keys]]
 item = "ytdlviensxjcozev2i7i7hcqgi"
 vault = "mjyal2admd3wecshhjomaobfta"
+{% endif %}
 [[ssh-keys]]
 item = "u3gswvnnn2n3edir6i4nx34mga"
 vault = "qws2fge5tqje77rrw2m563w5fy"
