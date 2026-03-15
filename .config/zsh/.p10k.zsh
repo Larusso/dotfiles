@@ -22,6 +22,9 @@
 () {
   emulate -L zsh -o extended_glob
 
+  local is_ssh_session=false
+  [[ -n ${SSH_CONNECTION:-}${SSH_CLIENT:-}${SSH_TTY:-} ]] && is_ssh_session=true
+
   # Unset all configuration options. This allows you to apply configuration changes without
   # restarting zsh. Edit ~/.p10k.zsh and type `source ~/.p10k.zsh`.
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
@@ -917,6 +920,24 @@
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
   # typeset -g POWERLEVEL9K_CONTEXT_PREFIX='with '
+
+  if $is_ssh_session; then
+    # Subtly tint the first prompt line on remote shells and add a compact SSH badge.
+    typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=110
+    typeset -g POWERLEVEL9K_DIR_BACKGROUND=60
+    typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=066
+    typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=109
+    typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=073
+    typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=131
+    typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=067
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=255
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=67
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_VISUAL_IDENTIFIER_EXPANSION='ssh'
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_PREFIX=' '
+    typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
+    typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=67
+    typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=196
+  fi
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
