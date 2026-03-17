@@ -19,7 +19,7 @@
 	prune-all = "!git remote | xargs -n 1 git remote prune"
 	prune-merged = "!git branch -d $(git branch --merged)"
 	st = "status -s"
-	
+
 [color]
 	ui = "auto"
 [column]
@@ -47,7 +47,7 @@
 	navigate = true
 	dark = true
 	side-by-side = false
-	line-numbers = false 
+	line-numbers = false
 
 
 [filter "lfs"]
@@ -91,7 +91,7 @@
 	format = "ssh"
 [gpg "ssh"]
 	program = "~/.local/bin/ssh-keygen-1p"
-	
+
 [user]
 	email = "manfred.endres@tslarusso.de"
 	name = "Manfred Endres"
@@ -133,3 +133,5 @@
  	insteadOf = "https://github.com/Playtika"
 [url "git@github-wooga:"]
  	insteadOf = "https://github.com/wooga"
+[Include]
+    path = platform_specific.gitconfig
