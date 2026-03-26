@@ -9,9 +9,9 @@
 
 xsh module core             interactive:env:login
 xsh module gpg              interactive
-xsh module git              env 
+xsh module git              env
 xsh module ssh              interactive
-xsh module docker           env 
+xsh module docker           env
 xsh module vim-mode         interactive
 xsh module powerlevel10k    interactive
 xsh module aws		        interactive:env
@@ -21,8 +21,9 @@ xsh module env              env
 xsh module direnv           interactive
 xsh module mise             interactive
 xsh module uvm              env
-xsh module highlighter      interactive 
+xsh module highlighter      interactive
 xsh module gradle           login
 xsh module cargo            interactive
 xsh module emacs            interactive:login
 xsh module boundry          interactive
+xsh module ai               interactive

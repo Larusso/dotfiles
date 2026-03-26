@@ -20,3 +20,6 @@
 [submodule ".config/vifm/colors"]
 	path = .config/vifm/colors
 	url = https://github.com/vifm/vifm-colors
+[submodule "/Users/larusso/.config/tmux/plugins/tpm"]
+	path = /Users/larusso/.config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

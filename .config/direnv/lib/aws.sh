@@ -1,40 +1,3 @@
-#export DIRENV_LOG_FORMAT=""
-
-use_jenv() {
-    export JENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/jenv
-    eval "$(command jenv init -)"
-}
-
-use_rbenv() {
-  export RBENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/rbenv
-  eval "$(command rbenv init -)" 
-}
-
-use_pyenv() {
-    export PYENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/pyenv
-    eval "$(command pyenv init -)"
-}
-
-use_nodenv() {
-    export NODEENV_ROOT=${XDG_DATA_HOME:-$HOME/.local/share}/nodenv
-    eval "$(command nodenv init -)"
-}
-
-alias_dir=${XDG_DATA_HOME:-$HOME/.local/share}/direnv/aliases
-rm -rf "$alias_dir"
-
-export_alias() {
-  local name=$1
-  shift
-  local target="$alias_dir/$name"
-  mkdir -p "$alias_dir"
-  PATH_add "$alias_dir"
-  echo "#!/usr/bin/env bash" > "$target"
-  echo "$@ \"\$@\"" >> "$target"
-  chmod +x "$target"
-  1>&2 echo "direnv: export alias +$name"
-}
-
 export_aws_secret_file() {
     local secret_id
     local secret_file
@@ -53,7 +16,7 @@ export_aws_secret_file() {
     fi
 
     aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretBinary" | base64 -D > "${secret_file}"
-    export "${env_name}"="${secret_file}" 
+    export "${env_name}"="${secret_file}"
 }
 
 export_aws_secret_string() {
@@ -90,14 +53,4 @@ export_aws_credentials() {
 
     export AWS_ACCESS_KEY_ID="${secret_key_id}"
     export AWS_SECRET_ACCESS_KEY="${secret_access_key}"
-}
-
-export_1password_secret_string() {
-    local secret_id
-    local secret_env_name
-
-    secret_env_name="$1"
-    secret_id="$2"
-
-    export "${secret_env_name}"="$(op read "$secret_id")"
 }

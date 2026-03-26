@@ -1,0 +1,19 @@
+{% if yadm.hostname == "mw-mendres-JYJJ" %}
+(allow file-read*
+    (subpath "/Library/Application Support/Playtika Corp. IT")
+)
+{% endif %}
+
+(allow file-read* file-write*
+    (subpath "/nix")
+    (subpath "/etc/nix")
+    (home-subpath "/.nix-defexpr")
+    (home-subpath "/.nix-profile")
+    (home-subpath "/.local/state/nix")
+    (home-subpath "/.cache/nix")
+)
+
+(allow file-read*
+    (home-subpath "/.config/nix")
+    (home-subpath "/.config/delta")
+)
