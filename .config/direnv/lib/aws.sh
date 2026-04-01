@@ -15,18 +15,24 @@ export_aws_secret_file() {
       secret_file=$(mktemp)
     fi
 
-    aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretBinary" | base64 -D > "${secret_file}"
+    aws secretsmanager get-secret-value --secret-id "${secret_id}" --output text --query 'SecretBinary' | base64 -D > "${secret_file}"
     export "${env_name}"="${secret_file}"
 }
 
-export_aws_secret_string() {
+export_aws_secret() {
     local secret_id
     local secret_env_name
+    local query
 
     secret_env_name="$1"
     secret_id="$2"
-    secret=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r '.SecretString')
+    query="$3"
+    secret=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" --output text --query "${query}")
     export "${secret_env_name}"="${secret}"
+}
+
+export_aws_secret_string() {
+    export_aws_secret "$1" "$2" "SecretString || SecretBinary"
 }
 
 export_aws_secret_username_password() {
@@ -38,7 +44,7 @@ export_aws_secret_username_password() {
     password_env_name="$2"
     secret_id="$3"
 
-    export "${username_env_name}"="$(aws secretsmanager describe-secret --secret-id "${secret_id}" | jq -r ".Tags[1].Value")"
+    export "${username_env_name}"="$(aws secretsmanager describe-secret --secret-id "${secret_id}" --output text --query "Tags[?Key=='jenkins:credentials:username'].Value | [0]")"
     export_aws_secret_string "${password_env_name}" "${secret_id}"
 }
 
@@ -48,8 +54,8 @@ export_aws_credentials() {
     local secret_access_key
 
     secret_id="$1"
-    secret_key_id=$(aws secretsmanager describe-secret --secret-id "${secret_id}" | jq -r ".Tags[1].Value")
-    secret_access_key=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" | jq -r ".SecretString")
+    secret_key_id=$(aws secretsmanager describe-secret --secret-id "${secret_id}" --output text --query "Tags[?Key=='jenkins:credentials:username'].Value | [0]")
+    secret_access_key=$(aws secretsmanager get-secret-value --secret-id "${secret_id}" --output text --query 'SecretString')
 
     export AWS_ACCESS_KEY_ID="${secret_key_id}"
     export AWS_SECRET_ACCESS_KEY="${secret_access_key}"
