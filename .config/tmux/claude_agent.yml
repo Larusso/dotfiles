@@ -1,0 +1,8 @@
+windows:
+  - name: "main"
+    dir: .
+    panes:
+      - name: "shell"
+      - split: vertical
+        size: 30%
+        cmd: claude # First pane - no split, just the initial pane
