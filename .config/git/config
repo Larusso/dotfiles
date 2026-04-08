@@ -125,13 +125,6 @@
     difftool = true
 
 # Fun with different SSH keys per github organization
-[url "git@github-wooga:wooga/"]
-    insteadOf = "git@github.com:wooga/"
-[url "git@github-playtika:Playtika/"]
-    insteadOf = "git@github.com:Playtika/"
-[url "git@github-playtika:"]
- 	insteadOf = "https://github.com/Playtika"
-[url "git@github-wooga:"]
- 	insteadOf = "https://github.com/wooga"
+
 [Include]
     path = platform_specific.gitconfig
