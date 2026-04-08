@@ -1,9 +1,11 @@
 {% if yadm.hostname == "mw-mendres-JYJJ" %}
 (allow file-read*
     (subpath "/Library/Application Support/Playtika Corp. IT")
+    (subpath "/Library/Certs/")
 )
 {% endif %}
 
+;; NIX
 (allow file-read* file-write*
     (subpath "/nix")
     (subpath "/etc/nix")
@@ -16,4 +18,22 @@
 (allow file-read*
     (home-subpath "/.config/nix")
     (home-subpath "/.config/delta")
+)
+
+;; CLAUDE
+(allow file-read*
+    (literal "/Library/Preferences/com.apple.security.plist")
+    (home-literal "/Library/Preferences/com.apple.security.plist")
+)
+
+(allow mach-lookup
+    (global-name "com.apple.SecurityServer")
+)
+
+(allow file-read* file-write*
+    (home-literal "/.claude.json")
+    (home-literal "/.claude.json*")
+    (home-subpath "/.config/claude")
+    (home-subpath "/.claude")
+    (home-subpath "/Library/Keychains")
 )
