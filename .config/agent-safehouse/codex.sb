@@ -1,0 +1,19 @@
+;; CODEX
+(allow file-read* file-write*
+    (home-subpath "/.codex")
+;;    (home-literal "/Library")
+;;    (home-subpath "/Library/Keychains")
+;;    (home-literal "/.zshenv")
+;;    (home-literal "/.zprofile")
+;;    (home-literal "/.zshrc")
+;;    (home-subpath "/.config/xsh")
+;;    (literal "/private/etc/zprofile")
+;;    (literal "/Library/Preferences/com.apple.security.plist")
+;;    (subpath "/private/var")
+)
+
+(allow file-read*
+;;    (subpath "/usr/bin")
+;;    (home-subpath "/.config/xsh")
+;;    (subpath "/private/etc/")
+)

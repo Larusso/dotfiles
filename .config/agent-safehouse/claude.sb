@@ -1,0 +1,17 @@
+;; CLAUDE
+(allow file-read*
+    (literal "/Library/Preferences/com.apple.security.plist")
+    (home-literal "/Library/Preferences/com.apple.security.plist")
+)
+
+(allow mach-lookup
+    (global-name "com.apple.SecurityServer")
+)
+
+(allow file-read* file-write*
+    (home-literal "/.claude.json")
+    (home-literal "/.claude.json*")
+    (home-subpath "/.config/claude")
+    (home-subpath "/.claude")
+    (home-subpath "/Library/Keychains")
+)

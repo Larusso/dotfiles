@@ -5,56 +5,15 @@
 )
 {% endif %}
 
-;; NIX
-(allow file-read* file-write*
-    (subpath "/nix")
-    (subpath "/etc/nix")
-    (home-subpath "/.nix-defexpr")
-    (home-subpath "/.nix-profile")
-    (home-subpath "/.local/state/nix")
-    (home-subpath "/.cache/nix")
-)
+;; AGENTS
+(define ssh-1password-agent-sock (home-literal "/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"))
+(deny network-outbound ssh-1password-agent-sock)
 
+;; GITHUB AUTH PROVIDER
 (allow file-read*
-    (home-subpath "/.config/nix")
-    (home-subpath "/.config/delta")
+    (home-subpath "/.config/github-auth-provider")
 )
 
-;; CLAUDE
-(allow file-read*
-    (literal "/Library/Preferences/com.apple.security.plist")
-    (home-literal "/Library/Preferences/com.apple.security.plist")
-)
-
-(allow mach-lookup
-    (global-name "com.apple.SecurityServer")
-)
-
-(allow file-read* file-write*
-    (home-literal "/.claude.json")
-    (home-literal "/.claude.json*")
-    (home-subpath "/.config/claude")
-    (home-subpath "/.claude")
-    (home-subpath "/Library/Keychains")
-)
-
-;; CODEX
-
-(allow file-read* file-write*
-    (home-subpath "/.codex")
-;;    (home-literal "/Library")
-;;    (home-subpath "/Library/Keychains")
-;;    (home-literal "/.zshenv")
-;;    (home-literal "/.zprofile")
-;;    (home-literal "/.zshrc")
-;;    (home-subpath "/.config/xsh")
-;;    (literal "/private/etc/zprofile")
-;;    (literal "/Library/Preferences/com.apple.security.plist")
-;;    (subpath "/private/var")
-)
-
-(allow file-read*
-;;    (subpath "/usr/bin")
-;;    (home-subpath "/.config/xsh")
-;;    (subpath "/private/etc/")
+(deny file-write*
+  (regex #".*/\.github-auth(/.*)?$")
 )
