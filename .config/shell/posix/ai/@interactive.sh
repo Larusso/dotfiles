@@ -4,6 +4,7 @@ export SAFEHOUSE_PROFILE_LOCAL_OVERRIDES="${SAFEHOUSE_PROFILE_LOCAL_OVERRIDES:-$
 export SAFEHOUSE_PROFILE_CARGO="${SAFEHOUSE_PROFILE_CARGO:-${XDG_CACHE_HOME:-$HOME/.cache}/agent-safehouse/cargo.sb}"
 export SAFEHOUSE_PROFILE_CLAUDE="${SAFEHOUSE_PROFILE_CLAUDE:-$HOME/.config/agent-safehouse/claude.sb}"
 export SAFEHOUSE_PROFILE_CODEX="${SAFEHOUSE_PROFILE_CODEX:-$HOME/.config/agent-safehouse/codex.sb}"
+export SAFEHOUSE_PROFILE_CURSOR="${SAFEHOUSE_PROFILE_CURSOR:-$HOME/.config/agent-safehouse/cursor.sb}"
 export SAFEHOUSE_PROFILE_GEMINI="${SAFEHOUSE_PROFILE_GEMINI:-$HOME/.config/agent-safehouse/gemini.sb}"
 export SAFEHOUSE_PROFILE_NIX="${SAFEHOUSE_PROFILE_NIX:-$HOME/.config/agent-safehouse/nix.sb}"
 SAFEHOUSE_APPEND_PROFILES_CARGO="${SAFEHOUSE_APPEND_PROFILES_CARGO:-$SAFEHOUSE_PROFILE_CARGO}"
@@ -96,12 +97,195 @@ safe_refresh_profiles() {
     safe_refresh_cargo_profile
 }
 
+safe_profile_path_for_name() {
+    case "$1" in
+      cargo) printf '%s\n' "$SAFEHOUSE_PROFILE_CARGO" ;;
+      claude) printf '%s\n' "$SAFEHOUSE_PROFILE_CLAUDE" ;;
+      codex) printf '%s\n' "$SAFEHOUSE_PROFILE_CODEX" ;;
+      cursor) printf '%s\n' "$SAFEHOUSE_PROFILE_CURSOR" ;;
+      gemini) printf '%s\n' "$SAFEHOUSE_PROFILE_GEMINI" ;;
+      local|local-overrides) printf '%s\n' "$SAFEHOUSE_PROFILE_LOCAL_OVERRIDES" ;;
+      nix) printf '%s\n' "$SAFEHOUSE_PROFILE_NIX" ;;
+      *)
+        echo "safe: unknown profile name '$1'" >&2
+        return 1
+        ;;
+    esac
+}
+
+safe_profile_extra_for_name() {
+    case "$1" in
+      claude) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_CLAUDE_EXTRA" ;;
+      codex) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_CODEX_EXTRA" ;;
+      gemini) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA" ;;
+      nix) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA" ;;
+      *)
+        printf '%s\n' ""
+        ;;
+    esac
+}
+
+safe_parse_args() {
+    local -a remaining_args safehouse_args
+    local parsed_profiles=""
+    local parsed_profile_extras=""
+    local profile_path=""
+    local profile_name=""
+
+    while [ "$#" -gt 0 ]; do
+      case "$1" in
+        --with-cargo|--with-claude|--with-codex|--with-cursor|--with-gemini|--with-local|--with-local-overrides|--with-nix)
+          profile_name="${1#--with-}"
+          profile_path="$(safe_profile_path_for_name "$profile_name")" || return 1
+          parsed_profiles="$(safe_join_profile_lists "$parsed_profiles" "$profile_path")"
+          parsed_profile_extras="$(safe_join_profile_lists "$parsed_profile_extras" "$(safe_profile_extra_for_name "$profile_name")")"
+          shift
+          ;;
+        --with-profile)
+          if [ "$#" -lt 2 ]; then
+            echo "safe: missing value for --with-profile" >&2
+            return 1
+          fi
+          parsed_profiles="$(safe_join_profile_lists "$parsed_profiles" "$2")"
+          shift 2
+          ;;
+        --with-profile=*)
+          parsed_profiles="$(safe_join_profile_lists "$parsed_profiles" "${1#--with-profile=}")"
+          shift
+          ;;
+        --enable|--env-pass|--add-dirs-ro|--add-dirs|--workdir|--append-profile|--output)
+          if [ "$#" -lt 2 ]; then
+            echo "safe: missing value for $1" >&2
+            return 1
+          fi
+          safehouse_args+=("$1" "$2")
+          shift 2
+          ;;
+        --enable=*|--env=*|--env-pass=*|--add-dirs-ro=*|--add-dirs=*|--workdir=*|--trust-workdir-config=*|--append-profile=*|--output=*)
+          safehouse_args+=("$1")
+          shift
+          ;;
+        --env|--stdout|--explain|--version|-h|--help|--trust-workdir-config)
+          safehouse_args+=("$1")
+          shift
+          ;;
+        --)
+          shift
+          while [ "$#" -gt 0 ]; do
+            remaining_args+=("$1")
+            shift
+          done
+          break
+          ;;
+        *)
+          while [ "$#" -gt 0 ]; do
+            remaining_args+=("$1")
+            shift
+          done
+          break
+          ;;
+      esac
+    done
+
+    SAFEHOUSE_PARSED_EXTRA_PROFILES="$parsed_profiles"
+    SAFEHOUSE_PARSED_PROFILE_EXTRAS="$parsed_profile_extras"
+    SAFEHOUSE_PARSED_SAFEHOUSE_ARGS=("${safehouse_args[@]}")
+    SAFEHOUSE_PARSED_ARGS=("${remaining_args[@]}")
+}
+
+safe_print_help() {
+    cat <<'EOF'
+Usage:
+  safe [profile options] [--] <command> [args...]
+
+Profile options:
+  --with-cargo
+  --with-claude
+  --with-codex
+  --with-cursor
+  --with-gemini
+  --with-local
+  --with-local-overrides
+  --with-nix
+  --with-profile PATH
+  --with-profile=PATH
+  --help
+
+Safehouse passthrough options:
+  --enable FEATURES
+  --enable=FEATURES
+  --env
+  --env=FILE
+  --env-pass NAMES
+  --env-pass=NAMES
+  --add-dirs-ro PATHS
+  --add-dirs-ro=PATHS
+  --add-dirs PATHS
+  --add-dirs=PATHS
+  --workdir DIR
+  --workdir=DIR
+  --trust-workdir-config
+  --trust-workdir-config=BOOL
+  --append-profile PATH
+  --append-profile=PATH
+  --output PATH
+  --output=PATH
+  --stdout
+  --explain
+  --version
+  -h, --help
+
+Environment:
+  SAFEHOUSE_APPEND_PROFILES
+  SAFEHOUSE_APPEND_PROFILES_EXTRA
+  SAFEHOUSE_APPEND_PROFILES_CLAUDE_EXTRA
+  SAFEHOUSE_APPEND_PROFILES_CODEX_EXTRA
+  SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA
+  SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA
+
+Exported profile paths:
+  SAFEHOUSE_PROFILE_LOCAL_OVERRIDES
+  SAFEHOUSE_PROFILE_CARGO
+  SAFEHOUSE_PROFILE_CLAUDE
+  SAFEHOUSE_PROFILE_CODEX
+  SAFEHOUSE_PROFILE_CURSOR
+  SAFEHOUSE_PROFILE_GEMINI
+  SAFEHOUSE_PROFILE_NIX
+EOF
+}
+
+safe_args_include_help() {
+    local arg
+    for arg in "$@"; do
+      if [ "$arg" = "--help" ]; then
+        return 0
+      fi
+    done
+    return 1
+}
+
 safe() {
     local -a append_profile_args auth_provider_env
     local auth_provider_env_inline
-    local profile
+    local profile append_profiles inherited_profiles
+
+    if safe_args_include_help "$@"; then
+      safe_print_help
+      return 0
+    fi
 
     safe_refresh_profiles
+    safe_parse_args "$@" || return 1
+    set -- "${SAFEHOUSE_PARSED_ARGS[@]}"
+
+    inherited_profiles="${SAFEHOUSE_APPEND_PROFILES_EFFECTIVE:-${SAFEHOUSE_APPEND_PROFILES:-}}"
+    append_profiles="$(safe_join_profile_lists \
+      "$SAFEHOUSE_APPEND_PROFILES_DEFAULT" \
+      "$inherited_profiles" \
+      "$SAFEHOUSE_APPEND_PROFILES_EXTRA" \
+      "$SAFEHOUSE_PARSED_PROFILE_EXTRAS" \
+      "$SAFEHOUSE_PARSED_EXTRA_PROFILES")"
+    local SAFEHOUSE_APPEND_PROFILES_EFFECTIVE="$append_profiles"
 
     while IFS= read -r profile; do
       [[ -z "$profile" ]] && continue
@@ -115,70 +299,61 @@ safe() {
     echo "start sandbox ${append_profile_args[*]}" && \
     safehouse --add-dirs-ro="$WORK_BASE" \
       "${append_profile_args[@]}" \
-      --env-pass="GITHUB_AUTH_PROVIDER_PROJECT,GIT_TRACE" -- "${auth_provider_env[@]}" "$@";
+      "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" \
+      --env-pass="GITHUB_AUTH_PROVIDER_PROJECT,GIT_TRACE,CLAUDE_CONFIG_DIR" -- "${auth_provider_env[@]}" "$@";
 }
 
 is_nix_shell() {
   [[ -n "$IN_NIX_SHELL" ]]
 }
 
-safe_nix_shell_aware() {
-  local -a cmd
-  local append_profiles
-  local inherited_profiles
-
-  inherited_profiles="${SAFEHOUSE_APPEND_PROFILES_EFFECTIVE:-${SAFEHOUSE_APPEND_PROFILES:-}}"
-
-  if is_nix_shell; then
-    append_profiles="$(safe_join_profile_lists \
-      "$inherited_profiles" \
-      "$SAFEHOUSE_APPEND_PROFILES_NIX" \
-      "$SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA" \
-      "$SAFEHOUSE_APPEND_PROFILES_EXTRA")"
-    cmd=(env QUIET_NIX_SHELL=1 nix develop --command "$@")
-  else
-    append_profiles="$(safe_join_profile_lists \
-      "$inherited_profiles" \
-      "$SAFEHOUSE_APPEND_PROFILES_EXTRA")"
-    cmd=("$@")
-  fi
-
-  local SAFEHOUSE_APPEND_PROFILES_EFFECTIVE="$append_profiles"
-  safe "${cmd[@]}"
-}
-
 if command -v claude >/dev/null 2>&1; then
   claude_path="$(command -v claude)"
   claude() {
-    local append_profiles
-    append_profiles="$(safe_join_profile_lists \
-      "$SAFEHOUSE_APPEND_PROFILES_CLAUDE" \
-      "$SAFEHOUSE_APPEND_PROFILES_CLAUDE_EXTRA" \
-      "${SAFEHOUSE_APPEND_PROFILES:-}")"
-    local SAFEHOUSE_APPEND_PROFILES_EFFECTIVE="$append_profiles"
-    safe_nix_shell_aware "$claude_path" --dangerously-skip-permissions "$@"
+    if safe_args_include_help "$@"; then
+      safe_print_help
+      printf '\nWrapper:\n  claude [profile options] [--] [claude args...]\n'
+      return 0
+    fi
+    safe_parse_args "$@" || return 1
+    if is_nix_shell; then
+      safe --with-nix --with-claude "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" env QUIET_NIX_SHELL=1 nix develop --command \
+        "$claude_path" --dangerously-skip-permissions "${SAFEHOUSE_PARSED_ARGS[@]}"
+    else
+      safe --with-claude "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" "$claude_path" --dangerously-skip-permissions "${SAFEHOUSE_PARSED_ARGS[@]}"
+    fi
   }
 fi
 
 if command -v codex >/dev/null 2>&1; then
   codex_path="$(command -v codex)"
   codex() {
-      local append_profiles
-      append_profiles="$(safe_join_profile_lists \
-        "$SAFEHOUSE_APPEND_PROFILES_CODEX" \
-        "$SAFEHOUSE_APPEND_PROFILES_CODEX_EXTRA" \
-        "${SAFEHOUSE_APPEND_PROFILES:-}")"
-      local SAFEHOUSE_APPEND_PROFILES_EFFECTIVE="$append_profiles"
-      safe_nix_shell_aware "$codex_path" --dangerously-bypass-approvals-and-sandbox "$@"
+      if safe_args_include_help "$@"; then
+        safe_print_help
+        printf '\nWrapper:\n  codex [profile options] [--] [codex args...]\n'
+        return 0
+      fi
+      safe_parse_args "$@" || return 1
+      if is_nix_shell; then
+        safe --with-nix --with-codex "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" env QUIET_NIX_SHELL=1 nix develop --command \
+          "$codex_path" --dangerously-bypass-approvals-and-sandbox "${SAFEHOUSE_PARSED_ARGS[@]}"
+      else
+        safe --with-codex "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" "$codex_path" --dangerously-bypass-approvals-and-sandbox "${SAFEHOUSE_PARSED_ARGS[@]}"
+      fi
   }
 fi
 
 gemini() {
-  local append_profiles
-  append_profiles="$(safe_join_profile_lists \
-    "$SAFEHOUSE_APPEND_PROFILES_GEMINI" \
-    "$SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA" \
-    "${SAFEHOUSE_APPEND_PROFILES:-}")"
-  local SAFEHOUSE_APPEND_PROFILES_EFFECTIVE="$append_profiles"
-  NO_BROWSER=true safe_nix_shell_aware gemini --yolo "$@"
+  if safe_args_include_help "$@"; then
+    safe_print_help
+    printf '\nWrapper:\n  gemini [profile options] [--] [gemini args...]\n'
+    return 0
+  fi
+  safe_parse_args "$@" || return 1
+  if is_nix_shell; then
+    NO_BROWSER=true safe --with-nix --with-gemini "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" env QUIET_NIX_SHELL=1 nix develop --command \
+      gemini --yolo "${SAFEHOUSE_PARSED_ARGS[@]}"
+  else
+    NO_BROWSER=true safe --with-gemini "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" gemini --yolo "${SAFEHOUSE_PARSED_ARGS[@]}"
+  fi
 }

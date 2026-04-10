@@ -6,3 +6,7 @@ windows:
       - split: vertical
         size: 30%
         cmd: claude # First pane - no split, just the initial pane
+  - name: "code"
+    panes:
+      - name: "nvim"
+        cmd: vim .
