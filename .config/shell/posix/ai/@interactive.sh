@@ -7,6 +7,7 @@ export SAFEHOUSE_PROFILE_CODEX="${SAFEHOUSE_PROFILE_CODEX:-$HOME/.config/agent-s
 export SAFEHOUSE_PROFILE_CURSOR="${SAFEHOUSE_PROFILE_CURSOR:-$HOME/.config/agent-safehouse/cursor.sb}"
 export SAFEHOUSE_PROFILE_GEMINI="${SAFEHOUSE_PROFILE_GEMINI:-$HOME/.config/agent-safehouse/gemini.sb}"
 export SAFEHOUSE_PROFILE_NIX="${SAFEHOUSE_PROFILE_NIX:-$HOME/.config/agent-safehouse/nix.sb}"
+SAFE_GITHUB_AUTH_PROVIDER="${SAFE_GITHUB_AUTH_PROVIDER:-github-auth-provider}"
 SAFEHOUSE_APPEND_PROFILES_CARGO="${SAFEHOUSE_APPEND_PROFILES_CARGO:-$SAFEHOUSE_PROFILE_CARGO}"
 SAFEHOUSE_APPEND_PROFILES_DEFAULT="${SAFEHOUSE_APPEND_PROFILES_DEFAULT:-$SAFEHOUSE_PROFILE_LOCAL_OVERRIDES}"
 SAFEHOUSE_APPEND_PROFILES_CLAUDE="${SAFEHOUSE_APPEND_PROFILES_CLAUDE:-$SAFEHOUSE_PROFILE_CLAUDE}"
@@ -63,7 +64,11 @@ safe_append_profiles() {
 }
 
 safe_auth_provider_env() {
-    /Users/larusso/work/wooga/ai_tools/github-auth-provider/target/release/github-auth-provider env --format=inline
+    if ! command -v "$SAFE_GITHUB_AUTH_PROVIDER" >/dev/null 2>&1; then
+      return 0
+    fi
+
+    "$SAFE_GITHUB_AUTH_PROVIDER" env --format=inline
 }
 
 safe_refresh_cargo_profile() {
@@ -293,8 +298,12 @@ safe() {
     done < <(safe_append_profiles)
 
     auth_provider_env_inline="$(safe_auth_provider_env)"
-    # github-auth-provider emits trusted shell words like KEY=value.
-    eval "auth_provider_env=($auth_provider_env_inline)"
+    if [[ -n "$auth_provider_env_inline" ]]; then
+      # github-auth-provider emits trusted shell words like KEY=value.
+      eval "auth_provider_env=($auth_provider_env_inline)"
+    else
+      auth_provider_env=()
+    fi
 
     echo "start sandbox ${append_profile_args[*]}" && \
     safehouse --add-dirs-ro="$WORK_BASE" \
