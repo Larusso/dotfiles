@@ -12,6 +12,10 @@
 ;;    (subpath "/private/var")
 )
 
+(allow mach-lookup
+    (global-name "com.apple.SecurityServer")
+)
+
 (allow file-read*
 ;;    (subpath "/usr/bin")
 ;;    (home-subpath "/.config/xsh")
