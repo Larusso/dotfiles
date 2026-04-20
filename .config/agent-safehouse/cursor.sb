@@ -1,0 +1,3 @@
+;; CURSOR
+(allow file-read* file-write*
+    (home-subpath "/.config/cursor")
