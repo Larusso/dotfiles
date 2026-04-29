@@ -8,6 +8,7 @@ export SAFEHOUSE_PROFILE_CURSOR="${SAFEHOUSE_PROFILE_CURSOR:-$HOME/.config/agent
 export SAFEHOUSE_PROFILE_GEMINI="${SAFEHOUSE_PROFILE_GEMINI:-$HOME/.config/agent-safehouse/gemini.sb}"
 export SAFEHOUSE_PROFILE_NIX="${SAFEHOUSE_PROFILE_NIX:-$HOME/.config/agent-safehouse/nix.sb}"
 export SAFEHOUSE_PROFILE_DOTNET="${SAFEHOUSE_PROFILE_DOTNET:-$HOME/.config/agent-safehouse/dotnet.sb}"
+export SAFEHOUSE_PROFILE_DOCKER="${SAFEHOUSE_PROFILE_DOCKER:-$HOME/.config/agent-safehouse/docker.sb}"
 SAFE_GITHUB_AUTH_PROVIDER="${SAFE_GITHUB_AUTH_PROVIDER:-github-auth-provider}"
 SAFEHOUSE_APPEND_PROFILES_CARGO="${SAFEHOUSE_APPEND_PROFILES_CARGO:-$SAFEHOUSE_PROFILE_CARGO}"
 SAFEHOUSE_APPEND_PROFILES_DEFAULT="${SAFEHOUSE_APPEND_PROFILES_DEFAULT:-$SAFEHOUSE_PROFILE_LOCAL_OVERRIDES}"
@@ -23,6 +24,7 @@ SAFEHOUSE_APPEND_PROFILES_CURSOR_EXTRA="${SAFEHOUSE_APPEND_PROFILES_CURSOR_EXTRA
 SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA="${SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA:-}"
 SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA="${SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA:-}"
 SAFEHOUSE_APPEND_PROFILES_DOTNET_EXTRA="${SAFEHOUSE_APPEND_PROFILES_DOTNET_EXTRA:-}"
+SAFEHOUSE_APPEND_PROFILES_DOCKER_EXTRA="${SAFEHOUSE_APPEND_PROFILES_DOCKER_EXTRA:-}"
 WORK_BASE="$HOME/work"
 
 safe_debug() {
@@ -116,6 +118,7 @@ safe_profile_path_for_name() {
       local|local-overrides) printf '%s\n' "$SAFEHOUSE_PROFILE_LOCAL_OVERRIDES" ;;
       nix) printf '%s\n' "$SAFEHOUSE_PROFILE_NIX" ;;
       dotnet) printf '%s\n' "$SAFEHOUSE_PROFILE_DOTNET" ;;
+      docker) printf '%s\n' "$SAFEHOUSE_PROFILE_DOCKER" ;;
       *)
         echo "safe: unknown profile name '$1'" >&2
         return 1
@@ -131,6 +134,7 @@ safe_profile_extra_for_name() {
       gemini) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA" ;;
       nix) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA" ;;
       dotnet) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_DOTNET_EXTRA" ;;
+      docker) printf '%s\n' "$SAFEHOUSE_APPEND_PROFILES_DOCKER_EXTRA" ;;
       *)
         printf '%s\n' ""
         ;;
@@ -146,7 +150,7 @@ safe_parse_args() {
 
     while [ "$#" -gt 0 ]; do
       case "$1" in
-        --with-cargo|--with-claude|--with-codex|--with-cursor|--with-gemini|--with-local|--with-local-overrides|--with-nix|--with-dotnet)
+        --with-cargo|--with-claude|--with-codex|--with-cursor|--with-gemini|--with-local|--with-local-overrides|--with-nix|--with-dotnet|--with-docker)
           profile_name="${1#--with-}"
           profile_path="$(safe_profile_path_for_name "$profile_name")" || return 1
           parsed_profiles="$(safe_join_profile_lists "$parsed_profiles" "$profile_path")"
@@ -216,6 +220,7 @@ Profile options:
   --with-codex
   --with-cursor
   --with-gemini
+  --with-docker
   --with-local
   --with-local-overrides
   --with-nix
@@ -255,6 +260,7 @@ Environment:
   SAFEHOUSE_APPEND_PROFILES_CURSOR_EXTRA
   SAFEHOUSE_APPEND_PROFILES_GEMINI_EXTRA
   SAFEHOUSE_APPEND_PROFILES_NIX_EXTRA
+  SAFEHOUSE_APPEND_PROFILES_DOCKER_EXTRA
 
 Exported profile paths:
   SAFEHOUSE_PROFILE_LOCAL_OVERRIDES
@@ -264,6 +270,7 @@ Exported profile paths:
   SAFEHOUSE_PROFILE_CURSOR
   SAFEHOUSE_PROFILE_GEMINI
   SAFEHOUSE_PROFILE_NIX
+  SAFEHOUSE_PROFILE_DOCKER
 EOF
 }
 
@@ -448,3 +455,7 @@ gemini() {
     NO_BROWSER=true safe --with-gemini "${SAFEHOUSE_PARSED_SAFEHOUSE_ARGS[@]}" gemini --yolo "${SAFEHOUSE_PARSED_ARGS[@]}"
   fi
 }
+
+if command -v agent-skill-sync >/dev/null 2>&1; then
+  agent-skill-sync
+fi

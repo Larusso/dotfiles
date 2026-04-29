@@ -1,6 +1,10 @@
 {
   "permissions": {
-    "allow": ["Shell(ls)", "Shell(cat)", "Shell(find)"],
+    "allow": [
+      "Shell(ls)",
+      "Shell(cat)",
+      "Shell(find)"
+    ],
     "deny": []
   },
   "version": 1,
@@ -12,14 +16,16 @@
     "displayModelId": "composer-2-fast",
     "displayName": "Composer 2 Fast",
     "displayNameShort": "Composer 2 Fast",
-    "aliases": ["composer"],
+    "aliases": [
+      "composer"
+    ],
     "maxMode": false
   },
   "hasChangedDefaultModel": false,
   "privacyCache": {
     "ghostMode": true,
     "privacyMode": 2,
-    "updatedAt": 1776424860200
+    "updatedAt": 1777459396904
   },
   "network": {
     "useHttp1ForAgent": false

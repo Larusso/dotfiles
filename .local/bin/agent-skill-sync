@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+src="${1:-$config_home/agent-skills}"
+
+for target in "$HOME/.codex/skills" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills" "$HOME/.cursor/skills"; do
+  mkdir -p "$target"
+  rsync -a --delete "$src"/ "$target"/
+done
