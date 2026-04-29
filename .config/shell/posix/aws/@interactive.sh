@@ -1,3 +1,5 @@
+command -v aws >/dev/null 2>&1 || return 1
+
 s3-touch() {
   aws s3 cp \
     --metadata 'touched=touched' \

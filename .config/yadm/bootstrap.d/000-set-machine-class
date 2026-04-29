@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Set Machine Class"
+
+current_class=$(yadm config local.class 2>/dev/null || true)
+
+if [[ -n "$current_class" ]]; then
+  log_done "Class already set: $current_class"
+  exit 0
+fi
+
+typeset -a classes
+classes=(home-primary home-secondary work-primary)
+
+print ""
+for i in {1..${#classes}}; do
+  log_step "[$i] ${classes[$i]}"
+done
+print ""
+
+log_prompt "Select machine class [1-${#classes}]:"
+read -rk1 choice
+print ""
+
+if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#classes} )); then
+  selected="${classes[$choice]}"
+  yadm config local.class "$selected"
+  log_step "Applying class-based alt files..."
+  yadm alt
+  log_done "Machine class set to: $selected"
+else
+  print "Invalid selection" >&2
+  exit 1
+fi

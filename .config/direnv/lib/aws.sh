@@ -1,3 +1,5 @@
+command -v aws >/dev/null 2>&1 || return 0
+
 export_aws_secret_file() {
     local secret_id
     local secret_file

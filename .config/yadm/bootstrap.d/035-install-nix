@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Install Nix"
+
+if command -v nix >/dev/null 2>&1; then
+  log_done "Nix already installed ($(nix --version))"
+  exit 0
+fi
+
+log_step "Installing Nix (Determinate Systems installer)..."
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix \
+  | sh -s -- install --no-confirm
+
+# Source Nix into the current session so subsequent bootstrap steps can use it
+NIX_PROFILE="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+if [[ -f "$NIX_PROFILE" ]]; then
+  source "$NIX_PROFILE"
+fi
+
+log_done "Nix $(nix --version) installed"

@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Install Nix Tools"
+
+# Source Nix if it was just installed in this bootstrap run
+if ! command -v nix >/dev/null 2>&1; then
+  NIX_PROFILE="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  [[ -f "$NIX_PROFILE" ]] && source "$NIX_PROFILE"
+fi
+
+if ! command -v nix >/dev/null 2>&1; then
+  log_skip "Nix not available"
+  exit 0
+fi
+
+FLAKE="${XDG_CONFIG_HOME:-$HOME/.config}/yadm"
+PROFILE=$(yadm config local.class 2>/dev/null || true)
+
+if [[ -z "$PROFILE" ]]; then
+  log_warn "No machine class set, falling back to base profile"
+  PROFILE="base"
+fi
+
+log_step "Profile: $PROFILE"
+
+if nix profile list 2>/dev/null | grep -qF "$(realpath "${FLAKE}")"; then
+  log_step "Upgrading Nix profile..."
+  nix profile upgrade '.*'
+else
+  log_step "Installing Nix profile..."
+  nix profile install "path:${FLAKE}#${PROFILE}"
+fi
+
+log_done
