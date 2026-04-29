@@ -1,4 +1,4 @@
-{% if yadm.hostname == "mw-mendres-JYJJ" %}
+{% if yadm.class == "work-primary" %}
 (allow file-read*
     (subpath "/Library/Application Support/Playtika Corp. IT")
     (subpath "/Library/Certs/")

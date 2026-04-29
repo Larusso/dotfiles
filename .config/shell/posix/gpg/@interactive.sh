@@ -13,8 +13,7 @@ ensure_gpg_agent_running() {
 }
 
 export GPG_TTY=$(tty)
-current_hostname=$(uname -n)
-if [[ "$current_hostname" == "mw-llaruss-C94H" ]] || [[ "$current_hostname" == "mw-mendres-JYJJ" ]]; then
+if [[ "$(yadm config local.class 2>/dev/null)" == "work-primary" ]]; then
   ensure_gpg_agent_running
 else
   gpg-connect-agent updatestartuptty /bye >/dev/null

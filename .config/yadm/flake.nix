@@ -16,24 +16,29 @@
     in {
       packages = forAllSystems (system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
 
           bundle = name: paths: pkgs.symlinkJoin { inherit name paths; };
 
           # Installed on every machine
           base = with pkgs; [
+            atuin
             bat
             delta
+            difftastic
             eza
             fd
             fzf
+            gh
             htop
             jq
             ripgrep
             shellcheck
             shfmt
             tmux
+            watch
             wget
+            yq
             zoxide
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             coreutils
@@ -44,10 +49,14 @@
 
           # Added on machines used for active development
           development = base ++ (with pkgs; [
+            act
             awscli2
+            direnv
             git-crypt
             git-lfs
             graphviz
+            jujutsu
+            saml2aws
           ]);
 
         in {

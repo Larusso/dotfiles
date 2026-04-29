@@ -24,7 +24,7 @@ fi
 
 log_step "Profile: $PROFILE"
 
-if nix profile list 2>/dev/null | grep -qF "$(realpath "${FLAKE}")"; then
+if nix profile list 2>/dev/null | grep -qF "$(cd "${FLAKE}" && pwd)"; then
   log_step "Upgrading Nix profile..."
   nix profile upgrade '.*'
 else

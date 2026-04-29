@@ -1,7 +1,7 @@
 [[ssh-keys]]
 item = "cfab47ctgidp3ofgaj2r5s37nq"
 vault = "qws2fge5tqje77rrw2m563w5fy"
-{% if yadm.hostname == "mw-mendres-JYJJ" %}
+{% if yadm.class == "work-primary" %}
 [[ssh-keys]]
 item = "rgjb4uiaha2mw7jq4gar6wgvmy"
 vault = "mjyal2admd3wecshhjomaobfta"
