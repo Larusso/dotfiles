@@ -24,6 +24,7 @@
           base = with pkgs; [
             atuin
             bat
+            zsh-powerlevel10k
             delta
             difftastic
             eza
@@ -51,7 +52,7 @@
           development = base ++ (with pkgs; [
             act
             awscli2
-            direnv
+            (direnv.overrideAttrs (_: { doCheck = false; }))
             git-crypt
             git-lfs
             graphviz

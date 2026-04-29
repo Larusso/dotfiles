@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Cleanup Homebrew"
+
+export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+
+if ! command -v brew >/dev/null 2>&1; then
+  log_skip "Homebrew not available"
+  exit 0
+fi
+
+cleanup=$(brew bundle cleanup --global 2>/dev/null)
+
+if [[ -z "$cleanup" ]]; then
+  log_done "Nothing to clean up"
+  exit 0
+fi
+
+print ""
+print "$cleanup"
+print ""
+
+log_prompt "Remove unlisted packages? [y/N]"
+read -rk1 ans; print
+
+if [[ "$ans" != 'y' ]]; then
+  log_step "Skipping cleanup"
+  exit 0
+fi
+
+log_step "Removing unlisted packages..."
+brew bundle cleanup --global --force
+
+log_step "Removing orphaned dependencies..."
+brew autoremove
+
+log_done

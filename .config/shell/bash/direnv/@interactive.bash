@@ -10,7 +10,8 @@ fi
 
 # Setup and cache the shell hook.
 direnv_cache="$XDG_CACHE_HOME/direnv/hook.bash"
-if [[ ! -s "$direnv_cache" || $commands[direnv] -nt $direnv_cache ]]; then
+if [[ ! -s "$direnv_cache" || $(command -v direnv) -nt $direnv_cache ]] \
+   || ! grep -qF "$(command -v direnv)" "$direnv_cache"; then
   command mkdir -p ${direnv_cache:h} && direnv hook bash >|"$direnv_cache"
 fi
 source $direnv_cache

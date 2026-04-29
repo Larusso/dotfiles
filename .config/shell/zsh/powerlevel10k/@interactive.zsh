@@ -9,11 +9,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p9k-instant-prompt-${(%):-%n}.zsh" ]];
 fi
 
 function p10k_theme_install_path {
-  p10k_install_paths=( 
+  p10k_install_paths=(
     "${XDG_DATA_HOME:-$HOME/.local/share}/powerlevel10k"
-    "/usr/share/zsh-theme-powerlevel10k/"
-    "/usr/local/opt/powerlevel10k/"
-    "/opt/homebrew/opt/powerlevel10k/share/powerlevel10k/"
+    "${HOME}/.nix-profile/share/zsh-powerlevel10k"
+    "/usr/share/zsh-theme-powerlevel10k"
+    "/usr/local/opt/powerlevel10k"
+    "/opt/homebrew/opt/powerlevel10k/share/powerlevel10k"
   )
 
   for path in "${p10k_install_paths[@]}"
