@@ -8,9 +8,8 @@ if command -v nix >/dev/null 2>&1; then
   exit 0
 fi
 
-log_step "Installing Nix (Determinate Systems installer)..."
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix \
-  | sh -s -- install --no-confirm
+log_step "Installing Nix (official installer)..."
+curl -fsSL https://nixos.org/nix/install | sh -s -- --daemon
 
 # Source Nix into the current session so subsequent bootstrap steps can use it
 NIX_PROFILE="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
