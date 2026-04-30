@@ -52,10 +52,12 @@
           development = base ++ (with pkgs; [
             act
             awscli2
+            dash
             (direnv.overrideAttrs (_: { doCheck = false; }))
             git-crypt
             git-lfs
             graphviz
+            jdk25
             jujutsu
             saml2aws
           ]);

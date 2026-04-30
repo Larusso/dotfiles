@@ -24,13 +24,13 @@ cask "temurin@11"
 brew "rbenv"
 brew "pyenv"
 brew "nodenv"
-brew "jenv"
 cask "jetbrains-toolbox"
 cask "blender"
 cask "unity-hub"
 cask "parallels"
 cask "google-chrome"
 cask "claude"
+cask "claude-code"
 cask "docker-desktop"
 {% endif %}
 {% if yadm.class == "home-primary" %}
@@ -40,6 +40,7 @@ cask "crystalfetch"
 cask "gog-galaxy"
 cask "inkscape"
 cask "tailscale-app"
+cask "jetbrains-toolbox"
 {% endif %}
 
 {% if yadm.class == "home-secondary" %}
@@ -47,10 +48,8 @@ cask "tailscale-app"
 {% endif %}
 
 {% if yadm.class != "home-secondary" %}
-cask "adobe-creative-cloud"
 cask "cursor"
 cask "cursor-cli"
-cask "jetbrains-toolbox"
 cask "proxyman"
 {% endif %}
 cask "adobe-creative-cloud"

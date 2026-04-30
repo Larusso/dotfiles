@@ -1,25 +1,20 @@
 #!/usr/bin/env bash
 #
 # Bootstrap program for the system.
+# Machine class is set interactively during bootstrap.
 #
-set -e
+# Usage:
+#   bash <(curl -fsSL https://raw.githubusercontent.com/Larusso/dotfiles/master/setup)
+#
+set -euo pipefail
 
-# Detect the platform (similar to $OSTYPE)
 os="$(uname)"
 distro="unknown"
 brew_home="/usr/local/bin"
 
-# Color variables
-red='\033[0;31m'
 green='\033[0;32m'
-yellow='\033[0;33m'
 blue='\033[0;34m'
-magenta='\033[0;35m'
-cyan='\033[0;36m'
-# Clear the color after that
 clear='\033[0m'
-
-class=$1
 
 case $os in
   'Linux')
@@ -40,100 +35,62 @@ case $os in
     ;;
   *) ;;
 esac
-echo -e "${green}::${clear} detected OS ${os} and distro ${distro}"
-echo $brew_home
+echo -e "${green}::${clear} OS: ${os} / distro: ${distro}"
 
-# install paru if missing
-# https://github.com/morganamilo/paru
 function install_paru {
-    if ! command -v paru >/dev/null 2>&1; then
-        echo -e "${blue}::${clear} installing puru dependencies ..."
-        sudo pacman -S --needed git base-devel --noconfirm
-
-        echo -e "${blue}::${clear} installing paru ..."
-        git clone https://aur.archlinux.org/paru.git
-        cd paru
-        makepkg -si --noconfirm
-    else
-        echo -e "${green}::${clear} paru already installed"
-    fi
+  if ! command -v paru >/dev/null 2>&1; then
+    echo -e "${blue}::${clear} installing paru..."
+    sudo pacman -S --needed git base-devel --noconfirm
+    git clone https://aur.archlinux.org/paru.git
+    cd paru && makepkg -si --noconfirm && cd -
+  else
+    echo -e "${green}::${clear} paru already installed"
+  fi
 }
 
-# install homebrew if missing
 function init_homebrew {
-    echo -e "${blue}::${clear} init homebrew ..."
-
-    if ! command -v brew >/dev/null 2>&1; then
-        echo -e "${blue}::${clear} installing homebrew ..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    else
-        echo -e "${green}::${clear} brew already installed"
-    fi
+  echo -e "${blue}::${clear} init homebrew..."
+  if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  else
+    echo -e "${green}::${clear} homebrew already installed"
+  fi
 }
 
-# setup yadm class
-function set_yadm_class {
-    if [ -z ${class+x} ]; then
-        echo -e "${green}::${clear} no yadm class set"
-    else
-        echo -e "${blue}::${clear} set yadm class to '${class}'"
-        $1 config local.class "${class}"
-    fi
-}
-
-# bootstrap yadm
 function init_yadm {
-    echo -e "${blue}::${clear} init yadm dotfile manager ..."
+  echo -e "${blue}::${clear} init yadm..."
 
-    if ! command -v yadm >/dev/null 2>&1; then
-        echo -e "${blue}::${clear} installing yadm..."
-
-        if [ "$os" = "macOS" ]; then
-            "${brew_home}/brew" install yadm 
-            yadm="${brew_home}/yadm"
-        elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
-            paru -S lsb-release yadm --noconfirm
-            yadm="yadm"
-        fi
-    else
-        echo -e "${green}::${clear} yadm already installed"
-        yadm="yadm"
+  if ! command -v yadm >/dev/null 2>&1; then
+    echo -e "${blue}::${clear} installing yadm..."
+    if [[ "$os" == "macOS" ]]; then
+      "${brew_home}/brew" install yadm
+      yadm_bin="${brew_home}/yadm"
+    elif [[ "$os" == "Linux" && "$distro" == "arch" ]]; then
+      paru -S lsb-release yadm --noconfirm
+      yadm_bin="yadm"
     fi
+  else
+    echo -e "${green}::${clear} yadm already installed"
+    yadm_bin="yadm"
+  fi
 
-    if [ -d "$HOME/.local/share/yadm/repo.git" ]; then
-        echo -e "${green}::${clear} yadm repo already setup"
-        set_yadm_class "$yadm"
-        $yadm pull
-    else
-        $yadm init -f
-        set_yadm_class "$yadm"
-        $yadm remote add origin https://github.com/Larusso/dotfiles.git
-        $yadm pull origin master --set-upstream
-        $yadm alt
-        $yadm bootstrap
-    fi
+  if [[ -d "$HOME/.local/share/yadm/repo.git" ]]; then
+    echo -e "${green}::${clear} yadm repo already present, pulling and re-running bootstrap..."
+    "$yadm_bin" pull
+    "$yadm_bin" bootstrap
+  else
+    "$yadm_bin" init -f
+    "$yadm_bin" remote add origin https://github.com/Larusso/dotfiles.git
+    "$yadm_bin" pull origin master --set-upstream
+    "$yadm_bin" alt
+    "$yadm_bin" bootstrap
+  fi
 }
 
-# install zsh
-function install_zsh {
-    echo -e "${blue}::${clear} init zsh ..."
-    if ! command -v zsh >/dev/null 2>&1; then
-        echo -e "${blue}::${clear} installing zsh ..."
-        if [ "$os" = "macOS" ]; then
-            "${brew_home}/brew" install zsh    
-        elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
-            paru -S zsh --noconfirm
-        fi
-    else
-        echo -e "${green}::${clear} zsh already installed"
-    fi
-}
-
-if [ "$os" = "macOS" ]; then
-    init_homebrew
-elif [ "$os" = "Linux" ] && [ "$distro" = "arch" ]; then
-    install_paru
+if [[ "$os" == "macOS" ]]; then
+  init_homebrew
+elif [[ "$os" == "Linux" && "$distro" == "arch" ]]; then
+  install_paru
 fi
 
-install_zsh
 init_yadm
