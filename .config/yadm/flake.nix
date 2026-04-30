@@ -41,6 +41,7 @@
             wget
             yq
             zoxide
+            boundary
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             coreutils
             gawk

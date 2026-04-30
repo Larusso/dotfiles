@@ -12,4 +12,5 @@ xsh module gpg
 xsh module ssh
 xsh module core
 xsh module env
-xsh module uvm 
+xsh module nix
+xsh module uvm
