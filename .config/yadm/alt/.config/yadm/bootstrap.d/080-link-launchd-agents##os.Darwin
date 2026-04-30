@@ -10,9 +10,14 @@ for filename in "${XDG_CONFIG_HOME:-$HOME/.config}"/launchd/LaunchAgents/*.plist
   if [[ ! -f "$target" ]]; then
     log_step "Linking $(basename $filename)..."
     ln -s "$filename" "$target"
+  else
+    log_step "$(basename $filename) already linked"
+  fi
+  if ! launchctl list | grep -q "$(basename $filename .plist)"; then
+    log_step "Loading $(basename $filename)..."
     launchctl load "$target"
   else
-    log_done "$(basename $filename) already linked"
+    log_done "$(basename $filename) already loaded"
   fi
 done
 
