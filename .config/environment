@@ -1,9 +1,11 @@
 #!/bin/sh
 
-set -e
-syslog -s -l warn "Set environment variables with ~/.config/environment $(whoami) - start"
+launchctl setenv XSH_CONFIG_DIR "$HOME/.config/shell"
+launchctl setenv GNUPGHOME "$HOME/.config/gnupg"
 
-launchctl setenv XSH_CONFIG_DIR ~/.config/shell
-launchctl setenv GNUPGHOME ~/.config/gnupg
-launchctl setenv SSH_AUTH_SOCK $(gpgconf --list-dirs agent-ssh-socket)
-syslog -s -l warn "Set environment variables with ~/.config/environment $(whoami) - complete"
+# gpgconf is in Homebrew which is not on launchd's default PATH
+GPGCONF="/opt/homebrew/bin/gpgconf"
+if [ -x "$GPGCONF" ]; then
+  SSH_SOCK=$("$GPGCONF" --list-dirs agent-ssh-socket 2>/dev/null)
+  [ -n "$SSH_SOCK" ] && launchctl setenv SSH_AUTH_SOCK "$SSH_SOCK"
+fi
