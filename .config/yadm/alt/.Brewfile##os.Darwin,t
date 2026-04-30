@@ -11,7 +11,7 @@ brew "pinentry-mac"
 brew "neovim"
 brew "git"
 brew "rustup"
-brew "mise"
+brew "eugene1g/safehouse/agent-safehouse"
 cask "visual-studio-code"
 {% if yadm.class == "work-primary" %}
 tap "gdubw/gng"
@@ -26,21 +26,37 @@ brew "pyenv"
 brew "nodenv"
 brew "jenv"
 cask "jetbrains-toolbox"
+cask "blender"
 cask "unity-hub"
 cask "parallels"
 cask "google-chrome"
+cask "claude"
+cask "docker-desktop"
 {% endif %}
 {% if yadm.class == "home-primary" %}
 cask "utm"
+cask "crossover"
+cask "crystalfetch"
+cask "gog-galaxy"
+cask "inkscape"
+cask "tailscale-app"
 {% endif %}
+
+{% if yadm.class == "home-secondary" %}
+cask "tailscale-app"
+{% endif %}
+
 {% if yadm.class != "home-secondary" %}
 cask "adobe-creative-cloud"
-cask "claude"
 cask "cursor"
 cask "cursor-cli"
-cask "zed"
+cask "jetbrains-toolbox"
+cask "proxyman"
 {% endif %}
+cask "adobe-creative-cloud"
+cask "codex"
 cask "1password"
+cask "1password-cli"
 cask "kitty"
 cask "ghostty"
 cask "firefox"
@@ -48,3 +64,4 @@ cask "bettertouchtool"
 cask "visual-studio-code"
 cask "path-finder"
 cask "chatgpt"
+cask "zed"
