@@ -23,6 +23,7 @@
           # Installed on every machine
           base = with pkgs; [
             atuin
+            git
             bat
             zsh-powerlevel10k
             delta

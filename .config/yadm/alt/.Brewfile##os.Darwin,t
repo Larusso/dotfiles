@@ -41,6 +41,7 @@ cask "gog-galaxy"
 cask "inkscape"
 cask "tailscale-app"
 cask "jetbrains-toolbox"
+cask "sony-ps-remote-play"
 {% endif %}
 
 {% if yadm.class == "home-secondary" %}
