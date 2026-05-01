@@ -3,7 +3,6 @@
 # -----------------------------------
 # shared formulars
 # -----------------------------------
-brew "yadm"
 brew "eugene1g/safehouse/agent-safehouse"
 {% if yadm.class == "work-primary" %}
 # -----------------------------------
