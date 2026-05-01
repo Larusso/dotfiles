@@ -29,7 +29,7 @@ if nix profile list 2>/dev/null | grep -qF "$(cd "${FLAKE}" && pwd)"; then
   nix profile upgrade "${PROFILE}"
 else
   log_step "Installing Nix profile..."
-  nix profile install "path:${FLAKE}#${PROFILE}"
+  nix profile add "path:${FLAKE}#${PROFILE}"
 fi
 
 log_done
