@@ -22,8 +22,14 @@
 
           # Installed on every machine
           base = with pkgs; [
+            yadm
             atuin
             git
+            neovim
+            curl
+            subversion
+            gnupg
+            openssh
             bat
             zsh-powerlevel10k
             delta
@@ -42,12 +48,13 @@
             wget
             yq
             zoxide
-            boundary
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             coreutils
             gawk
             gnused
             gnutar
+            pinentry_mac
+            util-linux
           ];
 
           # Added on machines used for active development
@@ -61,7 +68,11 @@
             graphviz
             jdk25
             jujutsu
-            saml2aws
+            rustup
+          ]);
+
+          work = development ++ (with pkgs; [
+            boundary
           ]);
 
         in {
@@ -75,7 +86,7 @@
           home-primary   = bundle "home-primary-tools"   development;
 
           # Work MacBook — full dev setup
-          work-primary   = bundle "work-primary-tools"   development;
+          work-primary   = bundle "work-primary-tools"   work;
 
           default        = bundle "base-tools"           base;
         }
