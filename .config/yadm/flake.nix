@@ -20,6 +20,20 @@
 
           bundle = name: paths: pkgs.symlinkJoin { inherit name paths; };
 
+          shell = with pkgs; [
+            zsh-powerlevel10k
+            delta
+            difftastic
+            eza
+            fd
+            fzf
+            jq
+            yq
+            tmux
+            watch
+            wget
+          ];
+
           # Installed on every machine
           base = with pkgs; [
             yadm
@@ -31,22 +45,11 @@
             gnupg
             openssh
             bat
-            zsh-powerlevel10k
-            delta
-            difftastic
-            eza
-            fd
-            fzf
             gh
             htop
-            jq
             ripgrep
             shellcheck
             shfmt
-            tmux
-            watch
-            wget
-            yq
             zoxide
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             coreutils
@@ -58,7 +61,7 @@
           ];
 
           # Added on machines used for active development
-          development = base ++ (with pkgs; [
+          development = base ++ shell ++ (with pkgs; [
             act
             awscli2
             dash
@@ -69,6 +72,8 @@
             jdk25
             jujutsu
             rustup
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+            tart
           ]);
 
           work = development ++ (with pkgs; [
