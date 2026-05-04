@@ -74,10 +74,15 @@
             rustup
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             tart
+            softnet
           ]);
 
           work = development ++ (with pkgs; [
             boundary
+            gradle
+            rbenv
+            pyenv
+            nodeenv
           ]);
 
         in {
