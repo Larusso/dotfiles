@@ -11,29 +11,32 @@ set -euo pipefail
 os="$(uname)"
 distro="unknown"
 brew_home="/usr/local/bin"
+cmd=$(ps -p $$ -o comm=)
+cmd=${cmd#-}
+shell=${cmd##*/}
 
 green='\033[0;32m'
 blue='\033[0;34m'
 clear='\033[0m'
 
 case $os in
-  'Linux')
-    os='Linux'
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        distro=$ID
-    fi
-    ;;
-  'WindowsNT')
-    os='Windows'
-    ;;
-  'Darwin')
-    os='macOS'
-    if [ "$(uname -m)" == "arm64" ]; then
-        brew_home="/opt/homebrew/bin"
-    fi
-    ;;
-  *) ;;
+'Linux')
+  os='Linux'
+  if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    distro=$ID
+  fi
+  ;;
+'WindowsNT')
+  os='Windows'
+  ;;
+'Darwin')
+  os='macOS'
+  if [ "$(uname -m)" == "arm64" ]; then
+    brew_home="/opt/homebrew/bin"
+  fi
+  ;;
+*) ;;
 esac
 echo -e "${green}::${clear} OS: ${os} / distro: ${distro}"
 
@@ -52,6 +55,8 @@ function init_homebrew {
   echo -e "${blue}::${clear} init homebrew..."
   if ! command -v brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+    eval "$(/opt/homebrew/bin/brew shellenv "$shell")"
   else
     echo -e "${green}::${clear} homebrew already installed"
   fi

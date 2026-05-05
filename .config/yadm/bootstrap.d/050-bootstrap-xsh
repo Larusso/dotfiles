@@ -7,7 +7,7 @@ log_step "Linking shell runcoms..."
 
 XSH_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/shell"
 source "${XSH_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/xsh}/xsh.sh"
-
+log_step "Bootstrap XSH"
 xsh bootstrap -s posix:bash:zsh >/dev/null
 
 log_done
