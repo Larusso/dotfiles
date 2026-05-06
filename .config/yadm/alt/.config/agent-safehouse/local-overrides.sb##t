@@ -1,4 +1,4 @@
-{% if yadm.class == "work-primary" %}
+{% if "context:work" in yadm.classes %}
 (allow file-read*
     (subpath "/Library/Application Support/Playtika Corp. IT")
     (subpath "/Library/Certs/")

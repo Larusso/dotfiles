@@ -13,14 +13,13 @@
         aarch64-linux  = f "aarch64-linux";
         x86_64-linux   = f "x86_64-linux";
       };
-    in {
-      packages = forAllSystems (system:
+
+      # Single source of truth for all role/context package sets.
+      # Keys map directly to yadm class values (role:*, context:*, type:*).
+      # Home Manager will consume this same attrset via a module.
+      rolePackages = pkgs: with pkgs;
         let
-          pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-
-          bundle = name: paths: pkgs.symlinkJoin { inherit name paths; };
-
-          shell = with pkgs; [
+          shell = [
             zsh-powerlevel10k
             delta
             difftastic
@@ -33,9 +32,25 @@
             watch
             wget
           ];
+        in {
+          # --- context ---
+          private = [
+            mosh
+          ];
 
-          # Installed on every machine
-          base = with pkgs; [
+          work = [
+            boundary
+            gradle
+            rbenv
+            pyenv
+            nodeenv
+          ];
+
+          # --- type ---
+          vm = [];
+
+          # --- role ---
+          base = [
             yadm
             atuin
             git
@@ -51,7 +66,7 @@
             shellcheck
             shfmt
             zoxide
-          ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+          ] ++ lib.optionals stdenv.isDarwin [
             coreutils
             gawk
             gnused
@@ -60,8 +75,7 @@
             util-linux
           ];
 
-          # Added on machines used for active development
-          development = base ++ shell ++ (with pkgs; [
+          development = shell ++ [
             act
             awscli2
             dash
@@ -72,34 +86,26 @@
             jdk25
             jujutsu
             rustup
-          ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+          ] ++ lib.optionals stdenv.isDarwin [
             tart
             softnet
-          ]);
+          ];
 
-          work = development ++ (with pkgs; [
-            boundary
-            gradle
-            rbenv
-            pyenv
-            nodeenv
-          ]);
+          server          = [];
+          hardware-hacking = [];
+          photography     = [];
+          web             = [];
+          general         = [];
+        };
 
-        in {
-          # All machines get at least this
-          base           = bundle "base-tools"           base;
-
-          # Terminal/SSH machine — light, no dev layer
-          home-secondary = bundle "home-secondary-tools" (base ++ [ pkgs.mosh ]);
-
-          # Mac Mini M4 Pro — full dev setup
-          home-primary   = bundle "home-primary-tools"   development;
-
-          # Work MacBook — full dev setup
-          work-primary   = bundle "work-primary-tools"   work;
-
-          default        = bundle "base-tools"           base;
-        }
+    in {
+      packages = forAllSystems (system:
+        let
+          pkgs   = import nixpkgs { inherit system; config.allowUnfree = true; };
+          roles  = rolePackages pkgs;
+          bundle = name: paths: pkgs.symlinkJoin { inherit name paths; };
+        in
+          builtins.mapAttrs (name: paths: bundle "${name}-tools" paths) roles
       );
     };
 }

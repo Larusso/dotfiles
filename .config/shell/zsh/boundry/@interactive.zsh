@@ -1,4 +1,4 @@
-[[ "$(yadm config local.class 2>/dev/null)" == "work-primary" ]] || return 1
+yadm config --get-all local.class 2>/dev/null | grep -qx "work" || return 1
 
 alias bsh="boundary connect ssh"
 alias bauth="boundary authenticate oidc"

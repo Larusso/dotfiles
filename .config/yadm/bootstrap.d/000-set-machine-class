@@ -3,33 +3,150 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
 
 log_header "Set Machine Class"
 
-current_class=$(yadm config local.class 2>/dev/null || true)
+current_classes=(${(f)"$(yadm config --get-all local.class 2>/dev/null || true)"})
 
-if [[ -n "$current_class" ]]; then
-  log_done "Class already set: $current_class"
-  exit 0
+# Returns the value portion of a namespaced class (e.g. "role:development" → "development")
+function get_ns_value() {
+  local prefix="${1}:"
+  local class
+  for class in "${current_classes[@]}"; do
+    [[ "$class" == ${prefix}* ]] && print -- "${class#${prefix}}" && return 0
+  done
+  return 1
+}
+
+# Single-select: writes "namespace:selection" into PROMPT_RESULT
+typeset -g PROMPT_RESULT=""
+function prompt_choice() {
+  local namespace="$1"
+  local title="$2"
+  shift 2
+  local -a options=("$@")
+
+  local current_val
+  current_val=$(get_ns_value "$namespace" 2>/dev/null) || true
+
+  local default_idx=1
+  for i in {1..${#options}}; do
+    [[ "${options[$i]}" == "$current_val" ]] && default_idx=$i && break
+  done
+
+  print ""
+  log_step "$title:"
+  for i in {1..${#options}}; do
+    log_step "  [$i] ${options[$i]}"
+  done
+  print ""
+
+  log_prompt "Select [1-${#options}] (default: ${options[$default_idx]}):"
+  read -r choice
+  print ""
+  [[ -z "$choice" ]] && choice="$default_idx"
+
+  if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#options} )); then
+    PROMPT_RESULT="${namespace}:${options[$choice]}"
+    return 0
+  else
+    print "Invalid selection" >&2
+    return 1
+  fi
+}
+
+# Multi-select: writes array of "namespace:selection" values into PROMPT_MULTI_RESULT
+typeset -g -a PROMPT_MULTI_RESULT=()
+function prompt_multi_choice() {
+  local namespace="$1"
+  local title="$2"
+  shift 2
+  local -a options=("$@")
+
+  typeset -a current_indices=()
+  for i in {1..${#options}}; do
+    for c in "${current_classes[@]}"; do
+      [[ "$c" == "${namespace}:${options[$i]}" ]] && current_indices+=($i) && break
+    done
+  done
+
+  local default_str="${current_indices[*]}"
+
+  print ""
+  log_step "$title (space-separated, e.g. 1 3):"
+  for i in {1..${#options}}; do
+    if (( ${current_indices[(Ie)$i]} > 0 )); then
+      log_step "  [$i] ${options[$i]} ✓"
+    else
+      log_step "  [$i] ${options[$i]}"
+    fi
+  done
+  print ""
+
+  local prompt_hint="${default_str:-required}"
+  log_prompt "Select [1-${#options}] (default: ${prompt_hint}):"
+  read -r choices_input
+  print ""
+  [[ -z "$choices_input" && -n "$default_str" ]] && choices_input="$default_str"
+
+  if [[ -z "$choices_input" ]]; then
+    print "At least one selection required" >&2
+    return 1
+  fi
+
+  PROMPT_MULTI_RESULT=()
+  for choice in ${=choices_input}; do
+    if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#options} )); then
+      PROMPT_MULTI_RESULT+=("${namespace}:${options[$choice]}")
+    else
+      print "Invalid selection: $choice" >&2
+      return 1
+    fi
+  done
+  return 0
+}
+
+if (( ${#current_classes} > 0 )); then
+  log_step "Classes already set:"
+  for current_class in "${current_classes[@]}"; do
+    log_step "  $current_class"
+  done
+  print ""
+
+  log_prompt "Adjust machine classes? [y/N]:"
+  read -r adjust_choice
+  print ""
+
+  case "${adjust_choice:l}" in
+    y|yes) ;;
+    ""|n|no)
+      log_done "Keeping machine classes: ${current_classes[*]}"
+      exit 0
+      ;;
+    *)
+      print "Invalid selection" >&2
+      exit 1
+      ;;
+  esac
 fi
 
-typeset -a classes
-classes=(home-primary home-secondary work-primary)
+typeset -a selected_classes=()
 
-print ""
-for i in {1..${#classes}}; do
-  log_step "[$i] ${classes[$i]}"
+prompt_choice context "Context" private work || exit 1
+selected_classes+=("$PROMPT_RESULT")
+
+prompt_choice type "Type" physical vm || exit 1
+selected_classes+=("$PROMPT_RESULT")
+
+prompt_multi_choice role "Role" development server hardware-hacking photography web general || exit 1
+selected_classes+=("${PROMPT_MULTI_RESULT[@]}")
+
+log_step "Replacing configured machine classes..."
+yadm config --unset-all local.class 2>/dev/null || true
+for selected_class in "${selected_classes[@]}"; do
+  yadm config --add local.class "$selected_class"
 done
-print ""
 
-log_prompt "Select machine class [1-${#classes}]:"
-read -rk1 choice
-print ""
+yadm config local.template j2
 
-if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#classes} )); then
-  selected="${classes[$choice]}"
-  yadm config local.class "$selected"
-  log_step "Applying class-based alt files..."
-  yadm alt
-  log_done "Machine class set to: $selected"
-else
-  print "Invalid selection" >&2
-  exit 1
-fi
+log_step "Applying class-based alt files..."
+yadm alt
+
+log_done "Machine classes set to: ${selected_classes[*]}"

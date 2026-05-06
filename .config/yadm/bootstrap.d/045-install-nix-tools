@@ -15,21 +15,102 @@ if ! command -v nix >/dev/null 2>&1; then
 fi
 
 FLAKE="${XDG_CONFIG_HOME:-$HOME/.config}/yadm"
-PROFILE=$(yadm config local.class 2>/dev/null || true)
+classes=(${(f)"$(yadm config --get-all local.class 2>/dev/null || true)"})
 
-if [[ -z "$PROFILE" ]]; then
-  log_warn "No machine class set, falling back to base profile"
-  PROFILE="base"
+function has_value() {
+  local expected="$1"
+  shift
+  local current
+
+  for current in "$@"; do
+    [[ "$current" == "$expected" ]] && return 0
+  done
+
+  return 1
+}
+
+# Returns true if the named profile is installed from this flake
+function profile_from_this_flake() {
+  local profile="$1"
+  local flake_url="path:${FLAKE}"
+
+  NO_COLOR=1 nix profile list 2>/dev/null \
+    | sed $'s/\x1b\\[[0-9;]*m//g' \
+    | awk -v profile="$profile" -v flake_url="$flake_url" '
+        /^Name:/ { name = $2 }
+        /^Original flake URL:/ {
+          url = $0
+          sub(/^Original flake URL:[[:space:]]*/, "", url)
+          if (name == profile && url == flake_url) { found = 1 }
+        }
+        END { exit found ? 0 : 1 }
+      '
+}
+
+# Returns all profile names currently installed from this flake
+function installed_profiles_from_this_flake() {
+  local flake_url="path:${FLAKE}"
+
+  NO_COLOR=1 nix profile list 2>/dev/null \
+    | sed $'s/\x1b\\[[0-9;]*m//g' \
+    | awk -v flake_url="$flake_url" '
+        /^Name:/ { name = $2 }
+        /^Original flake URL:/ {
+          url = $0
+          sub(/^Original flake URL:[[:space:]]*/, "", url)
+          if (url == flake_url) { print name }
+        }
+      '
+}
+
+typeset -a desired_profiles
+desired_profiles=(base)
+
+for class in "${classes[@]}"; do
+  case "$class" in
+    role:*)
+      desired_profiles+=("${class#role:}")
+      ;;
+    context:private)
+      desired_profiles+=(private)
+      ;;
+    context:work)
+      desired_profiles+=(work)
+      ;;
+    type:vm)
+      desired_profiles+=(vm)
+      ;;
+    type:physical)
+      ;;
+    *)
+      log_warn "Ignoring unknown machine class: $class"
+      ;;
+  esac
+done
+
+if (( ${#classes} == 0 )); then
+  log_warn "No machine class set, only installing base profile"
 fi
 
-log_step "Profile: $PROFILE"
+# Remove profiles installed from this flake that are no longer desired
+while IFS= read -r profile; do
+  if ! has_value "$profile" "${desired_profiles[@]}"; then
+    log_step "Removing Nix profile: $profile"
+    nix profile remove "$profile"
+  fi
+done < <(installed_profiles_from_this_flake)
 
-if nix profile list 2>/dev/null | grep -qF "$(cd "${FLAKE}" && pwd)"; then
-  log_step "Upgrading Nix profile..."
-  nix profile upgrade "${PROFILE}"
-else
-  log_step "Installing Nix profile..."
-  nix profile add "path:${FLAKE}#${PROFILE}"
-fi
+log_step "Profiles: ${desired_profiles[*]}"
+
+for profile in "${desired_profiles[@]}"; do
+  if profile_from_this_flake "$profile"; then
+    log_step "Upgrading Nix profile: $profile"
+    nix profile upgrade "$profile"
+  elif nix profile add "path:${FLAKE}#${profile}" 2>/dev/null; then
+    log_done "Installed Nix profile: $profile"
+  else
+    log_skip "no flake output for profile: $profile"
+  fi
+done
 
 log_done
