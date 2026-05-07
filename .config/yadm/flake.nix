@@ -50,7 +50,7 @@
           vm = [];
 
           # --- role ---
-          base = [
+          base = shell ++ [
             yadm
             atuin
             git
@@ -75,10 +75,9 @@
             util-linux
           ];
 
-          development = shell ++ [
+          development = [
             act
             awscli2
-            dash
             (direnv.overrideAttrs (_: { doCheck = false; }))
             git-crypt
             git-lfs
@@ -94,6 +93,7 @@
           server          = [];
           hardware-hacking = [];
           photography     = [];
+          gaming          = [];
           web             = [];
           general         = [];
         };

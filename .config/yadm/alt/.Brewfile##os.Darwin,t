@@ -10,26 +10,17 @@ cask "1password"
 cask "1password-cli"
 cask "bettertouchtool"
 cask "chatgpt"
-cask "codex"
 cask "firefox"
 cask "ghostty"
-cask "kitty"
 cask "path-finder"
-cask "visual-studio-code"
 cask "zed"
-
-{% if "type:vm" not in yadm.classes %}
-cask "adobe-creative-cloud"
-{% endif %}
 
 {% if "role:development" in yadm.classes %}
 # -----------------------------------
 # development
 # -----------------------------------
-cask "claude"
-cask "claude-code"
-cask "cursor"
-cask "cursor-cli"
+cask "codex"
+cask "dash"
 cask "jetbrains-toolbox"
 cask "proxyman"
 
@@ -38,15 +29,32 @@ cask "docker-desktop"
 {% endif %}
 {% endif %}
 
+{% if "role:photography" in yadm.classes and "type:vm" not in yadm.classes %}
+# -----------------------------------
+# photography
+# -----------------------------------
+cask "adobe-creative-cloud"
+{% endif %}
+
 {% if "context:work" in yadm.classes %}
 # -----------------------------------
 # work (wooga)
 # -----------------------------------
+{% if "type:vm" not in yadm.classes %}
+cask "adobe-creative-cloud"
+{% endif %}
+
+cask "google-chrome"
+
+{% if "role:development" in yadm.classes %}
 tap "gdubw/gng"
 brew "gng"
-cask "temurin@8"
-cask "temurin@11"
-cask "google-chrome"
+cask "claude"
+cask "claude-code"
+cask "cursor"
+cask "cursor-cli"
+
+{% endif %}
 
 {% if "type:vm" not in yadm.classes %}
 cask "blender"
@@ -65,11 +73,17 @@ cask "tailscale-app"
 cask "inkscape"
 
 {% if "type:vm" not in yadm.classes %}
-cask "crossover"
 cask "crystalfetch"
-cask "gog-galaxy"
-cask "sony-ps-remote-play"
 cask "utm"
 {% endif %}
 {% endif %}
+{% endif %}
+
+{% if "role:gaming" in yadm.classes and "type:vm" not in yadm.classes %}
+# -----------------------------------
+# gaming
+# -----------------------------------
+cask "crossover"
+cask "gog-galaxy"
+cask "sony-ps-remote-play"
 {% endif %}
