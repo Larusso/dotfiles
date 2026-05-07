@@ -15,7 +15,7 @@ cask "ghostty"
 cask "path-finder"
 cask "zed"
 
-{% if "role:development" in yadm.classes %}
+{% if yadm.class == "role:development" %}
 # -----------------------------------
 # development
 # -----------------------------------
@@ -24,29 +24,31 @@ cask "dash"
 cask "jetbrains-toolbox"
 cask "proxyman"
 
-{% if "type:vm" not in yadm.classes %}
+{% if yadm.class == "type:physical" %}
 cask "docker-desktop"
 {% endif %}
 {% endif %}
 
-{% if "role:photography" in yadm.classes and "type:vm" not in yadm.classes %}
+{% if yadm.class == "role:photography" %}
+{% if yadm.class == "type:physical" %}
 # -----------------------------------
 # photography
 # -----------------------------------
 cask "adobe-creative-cloud"
 {% endif %}
+{% endif %}
 
-{% if "context:work" in yadm.classes %}
+{% if yadm.class == "context:work" %}
 # -----------------------------------
 # work (wooga)
 # -----------------------------------
-{% if "type:vm" not in yadm.classes %}
+{% if yadm.class == "type:physical" %}
 cask "adobe-creative-cloud"
 {% endif %}
 
 cask "google-chrome"
 
-{% if "role:development" in yadm.classes %}
+{% if yadm.class == "role:development" %}
 tap "gdubw/gng"
 brew "gng"
 cask "claude"
@@ -56,34 +58,36 @@ cask "cursor-cli"
 
 {% endif %}
 
-{% if "type:vm" not in yadm.classes %}
+{% if yadm.class == "type:physical" %}
 cask "blender"
 cask "parallels"
 cask "unity-hub"
 {% endif %}
 {% endif %}
 
-{% if "context:private" in yadm.classes %}
+{% if yadm.class == "context:private" %}
 # -----------------------------------
 # private
 # -----------------------------------
 cask "tailscale-app"
 
-{% if "role:development" in yadm.classes %}
+{% if yadm.class == "role:development" %}
 cask "inkscape"
 
-{% if "type:vm" not in yadm.classes %}
+{% if yadm.class == "type:physical" %}
 cask "crystalfetch"
 cask "utm"
 {% endif %}
 {% endif %}
 {% endif %}
 
-{% if "role:gaming" in yadm.classes and "type:vm" not in yadm.classes %}
+{% if yadm.class == "role:gaming" %}
+{% if yadm.class == "type:physical" %}
 # -----------------------------------
 # gaming
 # -----------------------------------
 cask "crossover"
 cask "gog-galaxy"
 cask "sony-ps-remote-play"
+{% endif %}
 {% endif %}
