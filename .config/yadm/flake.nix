@@ -19,38 +19,8 @@
       # Home Manager will consume this same attrset via a module.
       rolePackages = pkgs: with pkgs;
         let
-          shell = [
-            zsh-powerlevel10k
-            delta
-            difftastic
-            eza
-            fd
-            fzf
-            jq
-            yq
-            tmux
-            watch
-            wget
-          ];
-        in {
-          # --- context ---
-          private = [
-            mosh
-          ];
-
-          work = [
-            boundary
-            gradle
-            rbenv
-            pyenv
-            nodeenv
-          ];
-
-          # --- type ---
-          vm = [];
-
-          # --- role ---
-          base = shell ++ [
+          # Internal lists — composed into profiles, not installed directly.
+          base = [
             yadm
             atuin
             git
@@ -75,7 +45,39 @@
             util-linux
           ];
 
-          development = [
+          shell = [
+            zsh-powerlevel10k
+            delta
+            difftastic
+            eza
+            fd
+            fzf
+            jq
+            yq
+            tmux
+            watch
+            wget
+          ];
+        in {
+          # --- context ---
+          private = base ++ shell ++ [
+            mosh
+          ];
+
+          work = base ++ shell ++ [
+            boundary
+            gradle
+            rbenv
+            pyenv
+            nodeenv
+          ];
+
+          # --- type ---
+          vm = [];
+
+          # --- role ---
+          general         = base ++ shell;
+          development     = base ++ shell ++ [
             act
             awscli2
             (direnv.overrideAttrs (_: { doCheck = false; }))
@@ -89,13 +91,11 @@
             tart
             softnet
           ];
-
-          server          = [];
-          hardware-hacking = [];
-          photography     = [];
-          gaming          = [];
-          web             = [];
-          general         = [];
+          server          = base ++ shell;
+          hardware-hacking = base ++ shell;
+          photography     = base ++ shell;
+          gaming          = base ++ shell;
+          web             = base ++ shell;
         };
 
     in {
