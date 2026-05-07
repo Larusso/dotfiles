@@ -7,6 +7,8 @@
 
   outputs = { self, nixpkgs }:
     let
+      lib = nixpkgs.lib;
+
       forAllSystems = f: {
         aarch64-darwin = f "aarch64-darwin";
         x86_64-darwin  = f "x86_64-darwin";
@@ -15,13 +17,15 @@
       };
 
       # Single source of truth for all role/context package sets.
-      # Keys map directly to yadm class values (role:*, context:*, type:*).
-      # Home Manager will consume this same attrset via a module.
-      rolePackages = pkgs: with pkgs;
+      # Keys map directly to yadm class values (role:*, context:*).
+      # Profiles are additive — no package appears in more than one profile.
+      profilePackages = pkgs:
         let
-          # Internal lists — composed into profiles, not installed directly.
-          base = [
-            yadm
+          # --- yadm: always installed, even with no class configured ---
+          yadm-pkg = with pkgs; [ yadm ];
+
+          # --- general: base tools always present on any configured machine ---
+          general = (with pkgs; [
             atuin
             git
             neovim
@@ -36,16 +40,6 @@
             shellcheck
             shfmt
             zoxide
-          ] ++ lib.optionals stdenv.isDarwin [
-            coreutils
-            gawk
-            gnused
-            gnutar
-            pinentry_mac
-            util-linux
-          ];
-
-          shell = [
             zsh-powerlevel10k
             delta
             difftastic
@@ -57,55 +51,66 @@
             tmux
             watch
             wget
-          ];
-        in {
-          # --- context ---
-          private = base ++ shell ++ [
-            mosh
-          ];
+          ]) ++ lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
+            coreutils
+            gawk
+            gnused
+            gnutar
+            pinentry_mac
+            util-linux
+          ]);
 
-          work = base ++ shell ++ [
-            boundary
-            gradle
-            rbenv
-            pyenv
-            nodeenv
-          ];
+          # --- context profiles: additive, no overlap with general ---
+          work    = with pkgs; [ boundary gradle rbenv pyenv nodeenv ];
+          private = with pkgs; [ mosh ];
 
-          # --- type ---
-          vm = [];
-
-          # --- role ---
-          general         = base ++ shell;
-          development     = base ++ shell ++ [
+          # --- role profiles: additive, no overlap with general or context ---
+          development = (with pkgs; [
             act
             awscli2
             (direnv.overrideAttrs (_: { doCheck = false; }))
             git-crypt
             git-lfs
             graphviz
-            jdk25
+            jdk
             jujutsu
             rustup
-          ] ++ lib.optionals stdenv.isDarwin [
+          ]) ++ lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
             tart
             softnet
-          ];
-          server          = base ++ shell;
-          hardware-hacking = base ++ shell;
-          photography     = base ++ shell;
-          gaming          = base ++ shell;
-          web             = base ++ shell;
+          ]);
+        in {
+          # Always installed regardless of class selection.
+          yadm = yadm-pkg;
+
+          # Always installed when any class is configured.
+          general = general;
+
+          # Context profiles.
+          work    = work;
+          private = private;
+
+          # Role profiles.
+          development      = development;
+          server           = [];
+          "hardware-hacking" = [];
+          photography      = [];
+          gaming           = [];
+          web              = [];
         };
 
     in {
       packages = forAllSystems (system:
         let
-          pkgs   = import nixpkgs { inherit system; config.allowUnfree = true; };
-          roles  = rolePackages pkgs;
-          bundle = name: paths: pkgs.symlinkJoin { inherit name paths; };
+          pkgs     = import nixpkgs { inherit system; config.allowUnfree = true; };
+          profiles = profilePackages pkgs;
+          bundle   = name: paths:
+            if paths == []
+            then null
+            else pkgs.symlinkJoin { inherit name paths; };
         in
-          builtins.mapAttrs (name: paths: bundle "${name}-tools" paths) roles
+          lib.filterAttrs (_: v: v != null)
+            (builtins.mapAttrs (name: paths: bundle "${name}-tools" paths) profiles)
       );
     };
 }

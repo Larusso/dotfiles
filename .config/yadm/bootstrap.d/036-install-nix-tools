@@ -64,32 +64,35 @@ function installed_profiles_from_this_flake() {
 }
 
 typeset -a desired_profiles
-desired_profiles=()
+desired_profiles=(yadm)
+typeset context="" type_val=""
 
 for class in "${classes[@]}"; do
   case "$class" in
-    role:*)
-      desired_profiles+=("${class#role:}")
-      ;;
-    context:private)
-      desired_profiles+=(private)
-      ;;
-    context:work)
-      desired_profiles+=(work)
-      ;;
-    type:vm)
-      desired_profiles+=(vm)
-      ;;
-    type:physical)
-      ;;
-    *)
-      log_warn "Ignoring unknown machine class: $class"
-      ;;
+    context:*) context="${class#context:}" ;;
+    type:*)    type_val="${class#type:}" ;;
   esac
 done
 
 if (( ${#classes} == 0 )); then
-  log_warn "No machine class set, only installing base profile"
+  log_warn "No machine class set — only yadm will be installed"
+elif [[ -z "$context" ]]; then
+  log_warn "No context class set (context:work or context:private) — only yadm will be installed"
+elif [[ -z "$type_val" ]]; then
+  log_warn "No type class set (type:physical or type:vm) — only yadm will be installed"
+else
+  desired_profiles+=("$context")
+  for class in "${classes[@]}"; do
+    case "$class" in
+      role:*)
+        desired_profiles+=("${class#role:}")
+        ;;
+      context:*|type:*) ;;
+      *)
+        log_warn "Ignoring unknown machine class: $class"
+        ;;
+    esac
+  done
 fi
 
 # Remove profiles installed from this flake that are no longer desired
