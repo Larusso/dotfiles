@@ -113,4 +113,15 @@ for profile in "${desired_profiles[@]}"; do
   fi
 done
 
+# Remove packages that were installed by the setup script for bootstrapping
+# and are now provided by nix.
+if command -v brew >/dev/null 2>&1; then
+  for pkg in yadm; do
+    if brew list --formula "$pkg" &>/dev/null; then
+      log_step "Removing bootstrap brew package: $pkg (now provided by nix)"
+      brew uninstall "$pkg" || log_warn "Could not remove $pkg from brew"
+    fi
+  done
+fi
+
 log_done

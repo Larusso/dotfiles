@@ -30,7 +30,12 @@ if [[ "$ans" != 'y' ]]; then
 fi
 
 log_step "Removing unlisted packages..."
-brew bundle cleanup --global --force
+print "$cleanup" \
+  | awk '/^Would uninstall formulae:/{p=1;next} p && /^Would /{p=0} p && NF{print $1}' \
+  | while read -r pkg; do
+      brew uninstall "$pkg" 2>/dev/null \
+        || log_warn "Skipping $pkg: dependency conflict (will retry via autoremove)"
+    done
 
 log_step "Removing orphaned dependencies..."
 brew autoremove

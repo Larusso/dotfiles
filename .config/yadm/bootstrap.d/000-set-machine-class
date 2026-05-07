@@ -87,8 +87,8 @@ function prompt_multi_choice() {
   [[ -z "$choices_input" && -n "$default_str" ]] && choices_input="$default_str"
 
   if [[ -z "$choices_input" ]]; then
-    print "At least one selection required" >&2
-    return 1
+    PROMPT_MULTI_RESULT=()
+    return 0
   fi
 
   PROMPT_MULTI_RESULT=()
@@ -135,7 +135,7 @@ selected_classes+=("$PROMPT_RESULT")
 prompt_choice type "Type" physical vm || exit 1
 selected_classes+=("$PROMPT_RESULT")
 
-prompt_multi_choice role "Role" development server hardware-hacking photography web general || exit 1
+prompt_multi_choice role "Role" general development server hardware-hacking photography gaming web || exit 1
 selected_classes+=("${PROMPT_MULTI_RESULT[@]}")
 
 log_step "Replacing configured machine classes..."
@@ -143,8 +143,6 @@ yadm config --unset-all local.class 2>/dev/null || true
 for selected_class in "${selected_classes[@]}"; do
   yadm config --add local.class "$selected_class"
 done
-
-yadm config local.template j2
 
 log_step "Applying class-based alt files..."
 yadm alt
