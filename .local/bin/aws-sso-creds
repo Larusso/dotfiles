@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+SOURCE_PROFILE="${1:?source profile required}"
+
+confirm_sso_login() {
+  /usr/bin/osascript <<EOF
+tell application "System Events"
+  activate
+  set answer to display dialog "AWS SSO login requested.
+Profile: $SOURCE_PROFILE
+Command may mint AWS credentials.
+Allow?" buttons {"Deny", "Allow"} default button "Deny" with icon caution giving up after 60
+  if gave up of answer is true then error "Timed out"
+  if button returned of answer is not "Allow" then error "Denied"
+end tell
+EOF
+}
+
+if ! aws configure export-credentials \
+  --profile "$SOURCE_PROFILE" \
+  --format process 2>/dev/null
+
+then
+  confirm_sso_login >/dev/null || {
+    echo "AWS SSO login denied or timed out" >&2
+    exit 1
+  }
+
+  if [[ -n "${AWS_SSO_BROWSER:-}" ]]; then
+    BROWSER="$AWS_SSO_BROWSER" aws sso login --profile "$SOURCE_PROFILE" >&2
+  else
+    aws sso login --profile "$SOURCE_PROFILE" >&2
+  fi
+
+  aws configure export-credentials \
+    --profile "$SOURCE_PROFILE" \
+    --format process
+fi
