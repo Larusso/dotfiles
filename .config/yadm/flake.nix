@@ -16,56 +16,49 @@
         x86_64-linux   = f "x86_64-linux";
       };
 
-      # Single source of truth for all role/context package sets.
-      # Keys map directly to yadm class values (role:*, context:*).
-      # Profiles are additive — no package appears in more than one profile.
       profilePackages = pkgs:
         let
-          # --- yadm: always installed, even with no class configured ---
-          yadm-pkg = with pkgs; [ yadm ];
-
-          # --- general: base tools always present on any configured machine ---
-          general = (with pkgs; [
+          # Base shell tools — present in every role profile.
+          # yadm is excluded here; it lives in the standalone yadm profile.
+          base = (with pkgs; [
             atuin
-            git
-            neovim
-            curl
-            subversion
-            gnupg
-            openssh
             bat
-            gh
-            htop
-            ripgrep
-            shellcheck
-            shfmt
-            zoxide
-            zsh-powerlevel10k
+            curl
             delta
             difftastic
             eza
             fd
             fzf
+            gh
+            git
+            gnupg
+            htop
             jq
-            yq
+            neovim
+            openssh
+            ripgrep
+            shellcheck
+            shfmt
+            subversion
             tmux
             watch
             wget
-          ]) ++ lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
+            yq
+            zoxide
+            zsh-powerlevel10k
+          ]) ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.pinentry_mac ];
+
+          # GNU userland — development / linux-compat only, macOS only.
+          gnu = lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
             coreutils
             gawk
             gnused
             gnutar
-            pinentry_mac
             util-linux
           ]);
 
-          # --- context profiles: additive, no overlap with general ---
-          work    = with pkgs; [ boundary gradle rbenv pyenv nodeenv ];
-          private = with pkgs; [ mosh ];
-
-          # --- role profiles: additive, no overlap with general or context ---
-          development = (with pkgs; [
+          # Development tools shared by all work development profiles.
+          dev_work = (with pkgs; [
             act
             awscli2
             (direnv.overrideAttrs (_: { doCheck = false; }))
@@ -75,28 +68,78 @@
             jdk
             jujutsu
             rustup
-          ]) ++ lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
-            tart
-            softnet
           ]);
+
+          # Extra tools only on a physical work dev machine.
+          dev_work_physical_extra = with pkgs; [
+            boundary
+            gradle
+            nodeenv
+            pyenv
+            rbenv
+          ];
+
+          # Development tools shared by all private development profiles.
+          dev_private = (with pkgs; [
+            act
+            awscli2
+            (direnv.overrideAttrs (_: { doCheck = false; }))
+            git-crypt
+            git-lfs
+            jujutsu
+          ]);
+
+          # VM tooling only on a private physical dev machine.
+          dev_private_physical_extra = lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
+            softnet
+            tart
+          ]);
+
         in {
           # Always installed regardless of class selection.
-          yadm = yadm-pkg;
+          yadm = with pkgs; [ yadm ];
 
-          # Always installed when any class is configured.
-          general = general;
+          # role: general
+          general_work_physical    = base;
+          general_work_vm          = base;
+          general_private_physical = base;
+          general_private_vm       = base;
 
-          # Context profiles.
-          work    = work;
-          private = private;
+          # role: development
+          development_work_physical    = base ++ dev_work ++ dev_work_physical_extra ++ gnu;
+          development_work_vm          = base ++ dev_work ++ gnu;
+          development_private_physical = base ++ dev_private ++ dev_private_physical_extra ++ gnu;
+          development_private_vm       = base ++ dev_private ++ gnu;
 
-          # Role profiles.
-          development      = development;
-          server           = [];
-          "hardware-hacking" = [];
-          photography      = [];
-          gaming           = [];
-          web              = [];
+          # role: server
+          server_work_physical    = base ++ gnu;
+          server_work_vm          = base ++ gnu;
+          server_private_physical = base ++ gnu;
+          server_private_vm       = base ++ gnu;
+
+          # role: hardware-hacking
+          "hardware-hacking_work_physical"    = base ++ gnu;
+          "hardware-hacking_work_vm"          = base ++ gnu;
+          "hardware-hacking_private_physical" = base ++ gnu;
+          "hardware-hacking_private_vm"       = base ++ gnu;
+
+          # role: photography
+          photography_work_physical    = base;
+          photography_work_vm          = base;
+          photography_private_physical = base;
+          photography_private_vm       = base;
+
+          # role: gaming
+          gaming_work_physical    = base;
+          gaming_work_vm          = base;
+          gaming_private_physical = base;
+          gaming_private_vm       = base;
+
+          # role: web
+          web_work_physical    = base;
+          web_work_vm          = base;
+          web_private_physical = base;
+          web_private_vm       = base;
         };
 
     in {
@@ -104,13 +147,9 @@
         let
           pkgs     = import nixpkgs { inherit system; config.allowUnfree = true; };
           profiles = profilePackages pkgs;
-          bundle   = name: paths:
-            if paths == []
-            then null
-            else pkgs.symlinkJoin { inherit name paths; };
+          bundle   = name: paths: pkgs.symlinkJoin { inherit name paths; };
         in
-          lib.filterAttrs (_: v: v != null)
-            (builtins.mapAttrs (name: paths: bundle "${name}-tools" paths) profiles)
+          builtins.mapAttrs (name: paths: bundle "${name}-tools" paths) profiles
       );
     };
 }

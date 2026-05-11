@@ -81,11 +81,12 @@ elif [[ -z "$context" ]]; then
 elif [[ -z "$type_val" ]]; then
   log_warn "No type class set (type:physical or type:vm) — only yadm will be installed"
 else
-  desired_profiles+=("$context")
+  # One combination profile per selected role: {role}_{context}_{type}
   for class in "${classes[@]}"; do
     case "$class" in
       role:*)
-        desired_profiles+=("${class#role:}")
+        local role="${class#role:}"
+        desired_profiles+=("${role}_${context}_${type_val}")
         ;;
       context:*|type:*) ;;
       *)
