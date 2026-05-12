@@ -9,10 +9,12 @@
 cask "google-chrome"
 
 {% if yadm.class == "type:physical" %}
+{% if yadm.class == "role:development" %}
 cask "adobe-creative-cloud"
 cask "blender"
 cask "parallels"
 cask "unity-hub"
+{% endif %}
 {% endif %}
 
 {% if yadm.class == "role:development" %}
@@ -58,19 +60,23 @@ cask "docker-desktop"
 # -----------------------------------
 # role: photography
 # -----------------------------------
+{% if yadm.class == "context:private" %}
 {% if yadm.class == "role:photography" %}
 {% if yadm.class == "type:physical" %}
 cask "adobe-creative-cloud"
+{% endif %}
 {% endif %}
 {% endif %}
 
 # -----------------------------------
 # role: gaming
 # -----------------------------------
+{% if yadm.class == "context:private" %}
 {% if yadm.class == "role:gaming" %}
 {% if yadm.class == "type:physical" %}
 cask "crossover"
 cask "gog-galaxy"
 cask "sony-ps-remote-play"
+{% endif %}
 {% endif %}
 {% endif %}
