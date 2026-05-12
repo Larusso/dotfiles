@@ -114,8 +114,6 @@ for profile in "${desired_profiles[@]}"; do
     nix profile upgrade "$profile"
   elif nix profile add "path:${FLAKE}#${profile}" 2>/dev/null; then
     log_done "Installed Nix profile: $profile"
-  else
-    log_skip "no flake output for profile: $profile"
   fi
 done
 
