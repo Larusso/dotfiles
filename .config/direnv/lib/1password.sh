@@ -7,3 +7,12 @@ export_1password_secret_string() {
 
     export "${secret_env_name}"="$(op read "$secret_id")"
 }
+
+use_1password_env() {
+    local environment_id
+
+    environment_id="$1"
+    set -a
+    source <(op environment read "$environment_id")
+    set +a
+}
