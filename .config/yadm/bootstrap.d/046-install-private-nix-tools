@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Install Private Nix Tools"
+
+if ! command -v nix >/dev/null 2>&1; then
+  log_skip "Nix not available"
+  exit 0
+fi
+
+if ! ssh-add -l >/dev/null 2>&1; then
+  log_warn "SSH agent has no keys — skipping private nix tools"
+  log_warn "Set up 1Password SSH agent and re-run bootstrap"
+  exit 0
+fi
+
+classes=(${(f)"$(yadm config --get-all local.class 2>/dev/null || true)"})
+context=""
+for class in "${classes[@]}"; do
+  [[ "$class" == context:* ]] && context="${class#context:}" && break
+done
+
+case "$context" in
+  work)
+    REPO="git+ssh://git@github.com/wooga/ai-engineering-clortho-poc"
+    ;;
+  private)
+    REPO="git+ssh://git@github.com/Larusso/clortho"
+    ;;
+  *)
+    log_skip "No private nix profile for context '${context:-unset}'"
+    exit 0
+    ;;
+esac
+
+if NO_COLOR=1 nix profile list 2>/dev/null | sed $'s/\x1b\\[[0-9;]*m//g' | grep -qF "$REPO"; then
+  log_step "Upgrading private nix profile (context:$context)..."
+  nix profile upgrade "$REPO"
+else
+  log_step "Installing private nix profile (context:$context)..."
+  nix profile add "${REPO}"
+fi
+
+log_done
