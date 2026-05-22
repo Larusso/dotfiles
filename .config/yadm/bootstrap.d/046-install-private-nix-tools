@@ -8,9 +8,18 @@ if ! command -v nix >/dev/null 2>&1; then
   exit 0
 fi
 
+# 1Password SSH agent socket — macOS uses a Group Containers path, Linux uses ~/.1password/
+typeset -a op_sockets=(
+  "${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  "${HOME}/.1password/agent.sock"
+)
+for sock in "${op_sockets[@]}"; do
+  [[ -S "$sock" ]] && export SSH_AUTH_SOCK="$sock" && break
+done
+
 if ! ssh-add -l >/dev/null 2>&1; then
-  log_warn "SSH agent has no keys — skipping private nix tools"
-  log_warn "Set up 1Password SSH agent and re-run bootstrap"
+  log_warn "1Password SSH agent not running or has no keys — skipping private nix tools"
+  log_warn "Start 1Password, enable SSH agent, and re-run bootstrap"
   exit 0
 fi
 

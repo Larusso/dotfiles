@@ -29,25 +29,22 @@ function has_value() {
   return 1
 }
 
-# Returns true if the named profile is installed from this flake
-function profile_from_this_flake() {
+# Returns the stored Original flake URL for a named profile, or empty string
+function get_profile_url() {
   local profile="$1"
-  local flake_url="path:${FLAKE}"
-
   NO_COLOR=1 nix profile list 2>/dev/null \
     | sed $'s/\x1b\\[[0-9;]*m//g' \
-    | awk -v profile="$profile" -v flake_url="$flake_url" '
+    | awk -v profile="$profile" '
         /^Name:/ { name = $2 }
         /^Original flake URL:/ {
-          url = $0
-          sub(/^Original flake URL:[[:space:]]*/, "", url)
-          if (name == profile && url == flake_url) { found = 1 }
+          if (name == profile) {
+            url = $0; sub(/^Original flake URL:[[:space:]]*/, "", url); print url; exit
+          }
         }
-        END { exit found ? 0 : 1 }
       '
 }
 
-# Returns all profile names currently installed from this flake
+# Returns all profile names currently installed from this flake URL
 function installed_profiles_from_this_flake() {
   local flake_url="path:${FLAKE}"
 
@@ -84,8 +81,10 @@ else
   # general_{context}_{type} is always installed — it is the shared base layer
   desired_profiles+=("general_${context}_${type_val}")
   # role delta profiles: {role}_{context}_{type} (skipped silently if no flake output)
+  # role:general is intentionally excluded — it maps to the base profile already added above
   for class in "${classes[@]}"; do
     case "$class" in
+      role:general) ;;
       role:*)
         local role="${class#role:}"
         desired_profiles+=("${role}_${context}_${type_val}")
@@ -109,7 +108,14 @@ done < <(installed_profiles_from_this_flake)
 log_step "Profiles: ${desired_profiles[*]}"
 
 for profile in "${desired_profiles[@]}"; do
-  if profile_from_this_flake "$profile"; then
+  current_url=$(get_profile_url "$profile")
+  if [[ -n "$current_url" && "$current_url" != "path:${FLAKE}" ]]; then
+    log_step "Removing stale Nix profile (wrong source): $profile"
+    nix profile remove "$profile"
+    current_url=""
+  fi
+
+  if [[ -n "$current_url" ]]; then
     log_step "Upgrading Nix profile: $profile"
     nix profile upgrade "$profile"
   elif nix profile add "path:${FLAKE}#${profile}" 2>/dev/null; then
