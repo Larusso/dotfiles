@@ -42,12 +42,19 @@ case "$context" in
     ;;
 esac
 
-if NO_COLOR=1 nix profile list 2>/dev/null | sed $'s/\x1b\\[[0-9;]*m//g' | grep -qF "$REPO"; then
-  log_step "Upgrading private nix profile (context:$context)..."
-  nix profile upgrade "$REPO"
-else
-  log_step "Installing private nix profile (context:$context)..."
-  nix profile add "${REPO}"
-fi
+typeset -a packages=(clortho gozer)
+
+for pkg in "${packages[@]}"; do
+  flake_ref="${REPO}#${pkg}"
+  if NO_COLOR=1 nix profile list 2>/dev/null \
+      | sed $'s/\x1b\\[[0-9;]*m//g' \
+      | awk -v ref="$flake_ref" '/^Original flake URL:/ { url=$0; sub(/^Original flake URL:[[:space:]]*/,"",url); if(url==ref) found=1 } END { exit found?0:1 }'; then
+    log_step "Upgrading $pkg (context:$context)..."
+    nix profile upgrade "$pkg"
+  else
+    log_step "Installing $pkg (context:$context)..."
+    nix profile add "$flake_ref"
+  fi
+done
 
 log_done
