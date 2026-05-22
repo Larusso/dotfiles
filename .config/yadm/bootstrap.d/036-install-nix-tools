@@ -14,7 +14,7 @@ if ! command -v nix >/dev/null 2>&1; then
   exit 0
 fi
 
-FLAKE="${XDG_CONFIG_HOME:-$HOME/.config}/yadm"
+FLAKE="${0:A:h:h}"
 classes=(${(f)"$(yadm config --get-all local.class 2>/dev/null || true)"})
 
 function has_value() {
