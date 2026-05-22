@@ -1,0 +1,12 @@
+# --- base (begin) ---
+brew "eugene1g/safehouse/agent-safehouse"
+
+cask "1password"
+cask "1password-cli"
+cask "bettertouchtool"
+cask "chatgpt"
+cask "firefox"
+cask "ghostty"
+cask "path-finder"
+cask "zed"
+# --- base (end) ---

@@ -13,7 +13,7 @@ ensure_gpg_agent_running() {
 }
 
 export GPG_TTY=$(tty)
-if [[ "$(yadm config local.class 2>/dev/null)" == "work-primary" ]]; then
+if yadm config --get-all local.class 2>/dev/null | grep -qx "work"; then
   ensure_gpg_agent_running
 else
   gpg-connect-agent updatestartuptty /bye >/dev/null

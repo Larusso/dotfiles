@@ -4,7 +4,7 @@
 
 export UVM_AUTO_SWITCH_UNITY_EDITOR="YES"
 export UVM_AUTO_INSTALL_UNITY_EDITOR="YES"
-if [[ "$(yadm config local.class 2>/dev/null)" == "work-primary" ]]; then
+if [ "$(uname)" = "Darwin" ]; then
     export UVM_UNITY_INSTALL_BASE_DIR="/Applications/Unity/Hub/Editor"
 fi
 

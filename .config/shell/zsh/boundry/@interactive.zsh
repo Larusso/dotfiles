@@ -1,4 +1,4 @@
-[[ "$(yadm config local.class 2>/dev/null)" == "work-primary" ]] || return 1
+command -v boundary >/dev/null 2>&1 || return 1
 
 alias bsh="boundary connect ssh"
 alias bauth="boundary authenticate oidc"

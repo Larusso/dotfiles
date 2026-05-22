@@ -5,9 +5,11 @@
 #
 # Usage:
 #   bash <(curl -fsSL https://raw.githubusercontent.com/Larusso/dotfiles/master/setup)
+#   YADM_BRANCH=my-branch bash -c 'bash <(curl -fsSL "https://raw.githubusercontent.com/Larusso/dotfiles/${YADM_BRANCH}/setup")'
 #
 set -euo pipefail
 
+branch="${YADM_BRANCH:-master}"
 os="$(uname)"
 distro="unknown"
 brew_home="/usr/local/bin"
@@ -39,6 +41,7 @@ case $os in
 *) ;;
 esac
 echo -e "${green}::${clear} OS: ${os} / distro: ${distro}"
+echo -e "${green}::${clear} branch: ${branch}"
 
 function install_paru {
   if ! command -v paru >/dev/null 2>&1; then
@@ -81,12 +84,12 @@ function init_yadm {
 
   if [[ -d "$HOME/.local/share/yadm/repo.git" ]]; then
     echo -e "${green}::${clear} yadm repo already present, pulling and re-running bootstrap..."
-    "$yadm_bin" pull
+    "$yadm_bin" pull origin "$branch"
     "$yadm_bin" bootstrap
   else
     "$yadm_bin" init -f
     "$yadm_bin" remote add origin https://github.com/Larusso/dotfiles.git
-    "$yadm_bin" pull origin master --set-upstream
+    "$yadm_bin" pull origin "$branch" --set-upstream
     "$yadm_bin" alt
     "$yadm_bin" bootstrap
   fi
