@@ -16,3 +16,4 @@ use_1password_env() {
     source <(op environment read "$environment_id")
     set +a
 }
+
