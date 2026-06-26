@@ -1,0 +1,23 @@
+(allow file-read*
+    (subpath "/Library/Application Support/Playtika Corp. IT")
+    (subpath "/Library/Certs/")
+)
+
+;; AGENTS
+(define ssh-1password-agent-sock (home-literal "/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"))
+(deny network-outbound ssh-1password-agent-sock)
+
+;; GITHUB AUTH PROVIDER
+(allow file-read*
+    (home-subpath "/.config/github-auth-provider")
+)
+
+;; TODO: Figure out what needs access or maybe grant complete read access to /etc/...
+(allow file-read*
+    (subpath "/etc")
+    (subpath "/private/etc")
+)
+
+(deny file-write*
+  (regex #".*/\.github-auth(/.*)?$")
+)

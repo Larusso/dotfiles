@@ -1,0 +1,34 @@
+command = "claude"
+args = ["--dangerously-skip-permissions"]
+
+[backend]
+type = "seatbelt"
+sub_profiles = [
+    "proc",
+    "sys-libs",
+    "sys-private",
+    "tmp-write",
+    "devices",
+    "mach-core",
+    "network-outbound",
+    "keychain-read",
+    "processes",
+    "claude",
+    "local-overrides",
+    "nix",
+]
+extra_env = []
+
+[backend.sub_profile_checksums]
+network-outbound = "de92b417a185150b51f4ad3bff22935ed7d5fa08f4a1ac679da8657dcbf1b9d7"
+processes = "443cdd4582aa8f131765df803644904ba07ff00fb02a3d30a1af5b601866b1ba"
+claude = "ba70329cb32177bed91de10dc0b486751a7504a6ef21ef3387719d3df690cef3"
+local-overrides = "501d8296ed62581c769d6f9f9be515bc3bad6152318aa92f0addb75d7bc756fc"
+keychain-read = "acf19556db034e257db86a40f95285879c2ed6991bdedc2eac972d4aaa22d36f"
+tmp-write = "f8143e4ed2224d01d3dd9edd5d0dac78dca2f3038d63d51b7695da418848b31a"
+sys-libs = "943c662ddd70f823ac2e39fc7b1f01755c3294da36cbed6d711904d3b3390207"
+sys-private = "9fd5c07341f2fde4fba38a1c8c20ae667014d33a66f1656d27b74e8c08f85307"
+nix = "7cee469cfddad890c5320bde40f04e413d6546cec0b6ea00df8a6d0522fa5717"
+mach-core = "a0bf63b87ea31329ac3e1a7cf76c7e0f01f6a1de62076a9d0d7b0d7b47fb24be"
+proc = "60b0440b8a63111fd6a711b25df2794e50a2632c8b548b714f861284aaf9f714"
+devices = "7bc3fcf02a203e15b7a210352d63ffbb9887d5f4b12f7ab7b55c2bab8f396f10"

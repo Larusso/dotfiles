@@ -1,0 +1,15 @@
+;; DOCKER
+
+(allow network-outbound
+    (path "/var/run/docker.sock")
+    (remote unix-socket (path-literal "/private/var/run/docker.sock"))
+    (home-literal "/.docker/run/docker.sock")
+)
+
+(allow file-read* file-write*
+    (literal "/var/run/docker.sock")
+    (literal "/private/var/run/docker.sock")
+    (home-literal "/.docker/run/docker.sock")  
+    (home-subpath "/.docker")
+    (subpath "/Applications/Docker.app")
+)

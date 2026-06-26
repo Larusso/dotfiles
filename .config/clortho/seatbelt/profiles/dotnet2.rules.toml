@@ -1,0 +1,27 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-network"
+action = "allow"
+op = "network-inbound"
+subject_sbpl = "(remote ip)"
+
+[[entries]]
+kind = "sandbox-network"
+action = "allow"
+op = "network-outbound"
+subject_sbpl = "(remote ip)"
+
+[[entries]]
+kind = "define"
+name = "foo"
+
+[entries.value]
+kind = "env"
+var = "HOME"
+
+[[entries]]
+kind = "sandbox-network"
+action = "allow"
+op = "network-bind"
+subject_sbpl = "(subpath foo)"

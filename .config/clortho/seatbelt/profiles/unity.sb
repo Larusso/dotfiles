@@ -1,0 +1,70 @@
+;;; Sandbox allow rules for Unity Editor running inside the Claude Code sandbox.
+;;;
+;;; Covers:
+;;;   1. Unity prefs / data / logs  — Unity startup + editor operation
+;;;   2. macOS GUI services          — Unity window, dock, clipboard
+;;;   3. System plists               — required by macOS frameworks Unity uses
+;;;   4. Process management          — lets Claude Code find/kill processes
+;;;                                    (pgrep, lsof, kill — needed for daemon mgmt)
+
+;; ---------------------------------------------------------------------------
+;; 1. Unity-specific file reads
+;; ---------------------------------------------------------------------------
+(allow file-read-data file-read-metadata
+    ;; Unity editor preferences
+    (home-literal  "/Library/Preferences/com.unity3d.UnityEditor5.x.plist")
+    ;; Unity user data directory (project MRU, license cache, etc.)
+    (home-subpath  "/Library/Application Support/Unity")
+    ;; Unity editor log — critical for CI / autonomous debug
+    (home-subpath  "/Library/Logs/Unity")
+    (home-literal  "/Library/Logs"))
+
+;; ---------------------------------------------------------------------------
+;; 2. macOS GUI / accessibility / input services
+;;    (Unity needs these to show its window and interact with the display)
+;; ---------------------------------------------------------------------------
+(allow mach-lookup
+    (global-name "com.apple.windowserver.active")
+    (global-name "com.apple.dock.server")
+    (global-name "com.apple.distributed_notifications@Uv3")
+    (global-name "com.apple.pasteboard.1")
+    (global-name "com.apple.hiservices-xpcservice")
+    (global-name "com.apple.ViewBridgeAuxiliary")
+    (global-name "com.apple.tccd.system"))           ;; TCC privacy daemon
+
+(allow mach-register
+    (local-name "com.apple.axserver")                ;; accessibility server
+    (local-name "com.apple.tsm.portname"))           ;; text input manager
+
+(allow user-preference-read
+    (preference-domain "com.apple.hitoolbox")        ;; keyboard / input
+    (preference-domain "com.apple.universalaccess"))
+
+(allow file-read-data
+    (home-literal "/Library/Preferences/com.apple.universalaccess.plist")
+    (home-literal "/Library/Preferences/com.apple.speech.recognition.AppleSpeechRecognition.prefs.plist"))
+
+;; ---------------------------------------------------------------------------
+;; 3. System-level plists / databases
+;; ---------------------------------------------------------------------------
+(allow file-read-data
+    (literal "/private/var/db/mds/messages/502/se_SecurityMessages")
+    (literal "/private/var/db/eligibilityd/eligibility.plist"))
+
+;; ---------------------------------------------------------------------------
+;; 4. Process management — lets Claude Code run pgrep / lsof / kill
+;;    to manage the daemon and Unity lifecycle autonomously
+;; ---------------------------------------------------------------------------
+(allow process-info-pidinfo)                         ;; ps / pgrep
+(allow process-info-listpids)                        ;; pgrep -l
+(allow signal (target other))                        ;; kill <pid>
+
+(allow file-read-data file-read-metadata
+    ;; lsof reads /dev/kmem and proc entries to list open files/sockets
+    (subpath "/dev")
+    (subpath "/proc")
+    (literal "/usr/sbin/lsof")
+    (literal "/usr/bin/lsof"))
+
+(allow network-outbound                              ;; lsof -i needs this
+    (local tcp))

@@ -1,0 +1,30 @@
+command = "codex"
+args = ["--dangerously-bypass-approvals-and-sandbox"]
+
+[backend]
+type = "seatbelt"
+sub_profiles = [
+    "proc",
+    "sys-libs",
+    "sys-private",
+    "user-prefs",
+    "tmp-write",
+    "devices",
+    "mach-core",
+    "network-all",
+    "codex",
+    "local-overrides",
+]
+extra_env = []
+
+[backend.sub_profile_checksums]
+codex = "092da1d79c38d50da73be0306b7fa3877fe35a939b9cf5771ffcce54a928e481"
+proc = "60b0440b8a63111fd6a711b25df2794e50a2632c8b548b714f861284aaf9f714"
+devices = "7bc3fcf02a203e15b7a210352d63ffbb9887d5f4b12f7ab7b55c2bab8f396f10"
+network-all = "5890e24198d62f8d54d6aaf7e8b5621417e8ebcd486a9e797f57ee68d469f131"
+local-overrides = "501d8296ed62581c769d6f9f9be515bc3bad6152318aa92f0addb75d7bc756fc"
+user-prefs = "1ebc03feded9af3e85fe10546319d2c9dc17355b53e487c16ea56b27a4b9751d"
+tmp-write = "f8143e4ed2224d01d3dd9edd5d0dac78dca2f3038d63d51b7695da418848b31a"
+mach-core = "a0bf63b87ea31329ac3e1a7cf76c7e0f01f6a1de62076a9d0d7b0d7b47fb24be"
+sys-libs = "943c662ddd70f823ac2e39fc7b1f01755c3294da36cbed6d711904d3b3390207"
+sys-private = "9fd5c07341f2fde4fba38a1c8c20ae667014d33a66f1656d27b74e8c08f85307"

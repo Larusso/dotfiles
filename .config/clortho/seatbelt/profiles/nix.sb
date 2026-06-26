@@ -1,0 +1,14 @@
+;; NIX
+(allow file-read* file-write*
+    (subpath "/nix")
+    (subpath "/etc/nix")
+    (home-subpath "/.nix-defexpr")
+    (home-subpath "/.nix-profile")
+    (home-subpath "/.local/state/nix")
+    (home-subpath "/.cache/nix")
+)
+
+(allow file-read*
+    (home-subpath "/.config/nix")
+    (home-subpath "/.config/delta")
+)
