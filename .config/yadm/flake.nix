@@ -28,6 +28,7 @@
             gnused
             gnutar
             util-linux
+            imgcat
           ]);
 
           base = (with pkgs; [
