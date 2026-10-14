@@ -14,6 +14,12 @@
     (home-subpath "/.config/github-auth-provider")
 )
 
+;; TODO: Figure out what needs access or maybe grant complete read access to /etc/...
+(allow file-read*
+    (subpath "/etc")
+    (subpath "/private/etc")
+)
+
 (deny file-write*
   (regex #".*/\.github-auth(/.*)?$")
 )

@@ -1,0 +1,337 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/atv-wooga-diffusion-api-server"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/wooga-diffusion-photoshop"
+
+[entries.path.base]
+kind = "home"

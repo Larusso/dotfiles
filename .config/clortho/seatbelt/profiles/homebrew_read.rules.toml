@@ -1,0 +1,195 @@
+version = 1
+env_patterns = ["HOMEBREW_*"]
+
+[[entries]]
+kind = "define"
+name = "homebrew_cache_dir"
+
+[entries.value]
+kind = "env"
+var = "HOMEBREW_CACHE"
+fallback_default = "${CLORTHO_ENV_HOME}/Library/Caches/Homebrew"
+
+[[entries]]
+kind = "define"
+name = "homebrew_prefix"
+
+[entries.value]
+kind = "str"
+value = "${CLORTHO_ENV_HOMEBREW_PREFIX:-/opt/homebrew"
+
+[[entries]]
+kind = "define"
+name = "homebrew_cellar"
+
+[entries.value]
+kind = "str"
+value = "${CLORTHO_ENV_HOMEBREW_CELLAR:-/opt/homebrew/Cellar"
+
+[[entries]]
+kind = "define"
+name = "homebrew_repository"
+
+[entries.value]
+kind = "str"
+value = "${CLORTHO_ENV_HOMEBREW_REPOSITORY:-/opt/homebrew"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_prefix"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_cellar"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_repository"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_prefix"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_cellar"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_repository"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_prefix"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_cellar"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "homebrew_repository"
+
+[[entries]]
+kind = "raw"
+sbpl = "(allow file-read* (apply require-any (path-literals homebrew_cache_dir)) (apply require-any (path-literals homebrew_prefix)) (apply require-any (path-literals homebrew_cellar)) (apply require-any (path-literals homebrew_repository)))"

@@ -9,7 +9,13 @@
 (allow file-read* file-write*
     (literal "/var/run/docker.sock")
     (literal "/private/var/run/docker.sock")
-    (home-literal "/.docker/run/docker.sock")  
+    (home-literal "/.docker/run/docker.sock")
     (home-subpath "/.docker")
     (subpath "/Applications/Docker.app")
 )
+
+(allow file-read* file-write* file-search file-test-existence
+    (home-subpath "/Library/Containers/com.docker.docker"))
+(allow file-read-metadata file-test-existence
+    (home-literal "/Library/Containers")
+    (literal "/Applications"))

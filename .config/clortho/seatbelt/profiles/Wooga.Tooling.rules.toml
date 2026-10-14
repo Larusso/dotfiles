@@ -1,0 +1,183 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"

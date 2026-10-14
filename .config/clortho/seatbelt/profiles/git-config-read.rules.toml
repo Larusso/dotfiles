@@ -1,0 +1,135 @@
+version = 1
+
+[[entries]]
+kind = "define"
+name = "clortho_env_git_config_read_xdg_config_home"
+
+[entries.value]
+kind = "env"
+var = "XDG_CONFIG_HOME"
+fallback_default = "__CLORTHO_HOME__/.config"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/git"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_git_config_read_xdg_config_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/git"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_git_config_read_xdg_config_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/git"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_git_config_read_xdg_config_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/git"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_git_config_read_xdg_config_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/git"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_git_config_read_xdg_config_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "home"

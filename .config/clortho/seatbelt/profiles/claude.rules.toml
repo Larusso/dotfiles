@@ -1,0 +1,1637 @@
+version = 1
+env_patterns = [
+    "CLAUDE_CODE_*",
+    "ANTHROPIC_*",
+    "API_FORCE_IDLE_TIMEOUT",
+    "API_TIMEOUT_MS",
+    "AWS_BEARER_TOKEN_BEDROCK",
+    "BASH_DEFAULT_TIMEOUT_MS",
+    "BASH_MAX_OUTPUT_LENGTH",
+    "BASH_MAX_TIMEOUT_MS",
+    "CCR_FORCE_BUNDLE",
+    "CLAUDECODE",
+    "CLAUDE_AGENT_SDK_*",
+    "CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS",
+    "CLAUDE_AUTO*",
+    "CLAUDE_AX_SCREEN_READER",
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR",
+    "CLAUDE_CLIENT_PRESENCE_FILE",
+    "CLAUDE_CODE_*",
+    "DEBUG",
+    "DISABLE_AUTOUPDATER",
+    "DISABLE_ERROR_REPORTING",
+    "DISABLE_FEEDBACK_COMMAND",
+    "DISABLE_TELEMETRY",
+    "DO_NOT_TRACK",
+    "ENABLE_TOOL_SEARCH",
+    "GCLOUD_PROJECT",
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "GOOGLE_CLOUD_PROJECT",
+    "MAX_THINKING_TOKENS",
+]
+
+[[entries]]
+kind = "define"
+name = "claude_code_debug_log_file"
+comment = "CLAUDE"
+
+[entries.value]
+kind = "env"
+var = "CLAUDE_CODE_DEBUG_LOGS_DIR"
+fallback_default = "/dev/null"
+
+[[entries]]
+kind = "define"
+name = "claude_code_plugin_cache_dir"
+
+[entries.value]
+kind = "env"
+var = "CLAUDE_CODE_PLUGIN_CACHE_DIR"
+fallback_default = "${CLORTHO_ENV_HOME}/.claude/plugins"
+
+[[entries]]
+kind = "define"
+name = "claude_code_plugin_seed_dir"
+comment = """
+Path to one or more read-only plugin seed directories, separated by : on Unix or ; on Windows.
+Use this to bundle a pre-populated plugins directory into a container image.
+Claude Code registers marketplaces from these directories at startup and uses
+pre-cached plugins without re-cloning"""
+
+[entries.value]
+kind = "env"
+var = "CLAUDE_CODE_PLUGIN_SEED_DIR"
+fallback_default = "/dev/null"
+
+[[entries]]
+kind = "define"
+name = "claude_code_temp_dir"
+
+[entries.value]
+kind = "env"
+var = "CLAUDE_CODE_TEMP_DIR"
+fallback_default = "/tmp"
+
+[[entries]]
+kind = "define"
+name = "claude_code_config_dir"
+
+[entries.value]
+kind = "env"
+var = "CLAUDE_CONFIG_DIR"
+fallback_default = "${CLORTHO_ENV_HOME}/.claude/"
+
+[[entries]]
+kind = "define"
+name = "claude_code_env_file"
+
+[entries.value]
+kind = "env"
+var = "CLAUDE_ENV_FILE"
+fallback_default = "/dev/null"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_debug_log_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "literal"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_env_file"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_config_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_seed_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_temp_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "claude_code_plugin_cache_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "literal"
+suffix = "/.claude.json*"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Keychains"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-mach"
+action = "allow"
+op = "mach-lookup"
+subject_sbpl = '(global-name "com.apple.SecurityServer")'
+
+[[entries]]
+kind = "raw"
+sbpl = '(allow file-read* (literal "/Library/Preferences/com.apple.security.plist") (home-literal "/Library/Preferences/com.apple.security.plist") (apply require-any (path-literals claude_code_debug_log_file)) (apply require-any (path-literals claude_code_plugin_cache_dir)) (apply require-any (path-literals claude_code_temp_dir)) (apply require-any (path-literals claude_code_config_dir)) (apply require-any (path-literals claude_code_env_file)) (apply require-any (path-list-literals claude_code_plugin_seed_dir #\:)))'
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Application Support/ClaudeCode"
+
+[entries.path.base]
+kind = "absolute"

@@ -1,0 +1,181 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Applications/Parallels Desktop.app"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/Applications/Parallels Desktop.app"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Applications/Parallels Desktop.app"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/Applications/Parallels Desktop.app"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/Applications/Parallels Desktop.app"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Preferences/Parallels"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Preferences/Parallels"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Preferences/Parallels"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Preferences/Parallels"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/Library/Preferences/Parallels"
+
+[entries.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/Parallels"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/Parallels"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/Parallels"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/Parallels"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/Parallels"
+
+[entries.path.base]
+kind = "home"

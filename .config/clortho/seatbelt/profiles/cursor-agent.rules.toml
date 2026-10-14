@@ -1,0 +1,43 @@
+version = 1
+env_patterns = ["CURSOR_*"]
+
+[[entries]]
+kind = "define"
+name = "cursor_config_dir"
+comment = "CURSOR"
+
+[entries.value]
+kind = "env"
+var = "CURSOR_CONFIG_DIR"
+fallback_default = "${CLORTHO_ENV_HOME}/.cursor"
+
+[[entries]]
+kind = "define"
+name = "_homebrew_prefix"
+
+[entries.value]
+kind = "env"
+var = "HOMEBREW_PREFIX"
+fallback_default = "/opt/homebrew"
+
+[[entries]]
+kind = "sandbox-mach"
+action = "allow"
+op = "mach-lookup"
+subject_sbpl = '(global-name "com.apple.SecurityServer")'
+
+[[entries]]
+kind = "raw"
+sbpl = "(define (homebrew-literal rel) (literal (string-append _homebrew_prefix rel)))"
+
+[[entries]]
+kind = "raw"
+sbpl = '(allow file-read* (home-subpath "/Library/Application Support/Cursor") (literal "/Applications") (literal "/usr/local/bin/cursor") (homebrew-literal "/bin/cursor") (subpath "/Applications/Cursor.app"))'
+
+[[entries]]
+kind = "raw"
+sbpl = '(allow file-read* (apply require-any (path-literals cursor_config_dir)) (literal "/Library/Preferences/com.apple.security.plist") (home-literal "/Library/Preferences/com.apple.security.plist"))'
+
+[[entries]]
+kind = "raw"
+sbpl = '(allow file-read* file-write* (home-prefix "/.local/bin/agent") (home-prefix "/.local/bin/cursor-agent") (home-prefix "/.local/bin/cursor") (xdg-data-subpath "/cursor-agent") (xdg-config-subpath "/cursor") (xdg-cache-subpath "/cursor-compile-cache") (subpath cursor_config_dir) (home-subpath "/Library/Caches/cursor-compile-cache") (home-subpath "/Library/Keychains"))'

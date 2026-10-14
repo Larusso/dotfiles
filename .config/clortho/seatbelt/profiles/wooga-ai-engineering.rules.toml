@@ -1,0 +1,66 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+comment = "Wooga AI-Engineering Source Read"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+comment = "Wooga AI-Engineering Source Read"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+comment = "Wooga AI-Engineering Source Read"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+comment = "Wooga AI-Engineering Source Read"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+comment = "Wooga AI-Engineering Source Read"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools"
+
+[entries.path.base]
+kind = "home"

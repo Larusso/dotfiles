@@ -1,0 +1,1177 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/backend/ai-engineering-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/ai-engineering-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-charts"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-infrastructure"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-kubernetes"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/sbs-project-tools"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/sbs/shs-deploy-template"
+
+[entries.path.base]
+kind = "home"
