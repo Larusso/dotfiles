@@ -1,0 +1,55 @@
+version = 1
+
+[[entries]]
+kind = "modified"
+
+[entries.modifiers]
+slot = "after-ops"
+with = [
+    "(with report)",
+    "(with telemetry)",
+    "(with telemetry-backtrace)",
+    "(with no-sandbox)",
+    "(with no-callout)",
+    '(with message "Wohoooo")',
+    "(with send-signal SIGKILL)",
+]
+
+[entries.entry]
+kind = "sandbox-exec"
+action = "allow"
+op = "process-exec"
+
+[entries.entry.path]
+form = "literal"
+suffix = "/bin/bash"
+
+[entries.entry.path.base]
+kind = "absolute"
+
+[[entries]]
+kind = "modified"
+
+[entries.modifiers]
+slot = "after-ops"
+with = [
+    "(with report)",
+    "(with telemetry)",
+    "(with telemetry-backtrace)",
+    "(with no-sandbox)",
+    "(with no-callout)",
+    '(with message "Wohoooo")',
+    "(with send-signal SIGKILL)",
+]
+
+[entries.entry]
+kind = "sandbox-exec"
+action = "allow"
+op = "process-exec-interpreter"
+
+[entries.entry.path]
+form = "literal"
+suffix = "/bin/bash"
+
+[entries.entry.path.base]
+kind = "absolute"

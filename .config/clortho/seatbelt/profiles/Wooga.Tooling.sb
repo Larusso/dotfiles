@@ -4,5 +4,5 @@
 
 ; --- path rules ---
 ; Wooga Tooling Read Write Access
-(allow file-read* file-write* file-search file-test-existence
+(allow file-read* file-write* file-search file-test-existence file-link file-unlink
     (home-subpath "/work/wooga/ai_tools/tools/Wooga.Tooling"))

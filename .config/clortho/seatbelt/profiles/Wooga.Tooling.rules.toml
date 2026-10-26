@@ -42,32 +42,6 @@ kind = "home"
 [[entries]]
 kind = "sandbox-file"
 action = "allow"
-op = "file-search"
-comment = "Wooga Tooling Read Write Access"
-
-[entries.path]
-form = "subpath"
-suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
-
-[entries.path.base]
-kind = "home"
-
-[[entries]]
-kind = "sandbox-file"
-action = "allow"
-op = "file-test-existence"
-comment = "Wooga Tooling Read Write Access"
-
-[entries.path]
-form = "subpath"
-suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
-
-[entries.path.base]
-kind = "home"
-
-[[entries]]
-kind = "sandbox-file"
-action = "allow"
 op = "file-write-data"
 comment = "Wooga Tooling Read Write Access"
 
@@ -174,6 +148,56 @@ kind = "sandbox-file"
 action = "allow"
 op = "file-write-xattr"
 comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+comment = "Wooga Tooling Read Write Access"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-link"
+
+[entries.path]
+form = "subpath"
+suffix = "/work/wooga/ai_tools/tools/Wooga.Tooling"
+
+[entries.path.base]
+kind = "home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-unlink"
 
 [entries.path]
 form = "subpath"

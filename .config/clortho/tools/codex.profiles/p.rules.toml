@@ -1,0 +1,109 @@
+version = 1
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-pidinfo"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-listpids"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-pidfdinfo"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-pidfileportinfo"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-rusage"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-ledger"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-dirtycontrol"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-setcontrol"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-codesignature"
+target = "same-sandbox"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-pidinfo"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-listpids"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-pidfdinfo"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-pidfileportinfo"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-rusage"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-ledger"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-dirtycontrol"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-setcontrol"
+target = "any"
+
+[[entries]]
+kind = "sandbox-process"
+action = "allow"
+op = "process-info-codesignature"
+target = "any"
