@@ -18,5 +18,8 @@ stale_outputs_checked
 *.key
 .fleet/
 .qodo
+.direnv
+.envrc.local
+lefthook-local.yml
 
 **/.claude/settings.local.json
