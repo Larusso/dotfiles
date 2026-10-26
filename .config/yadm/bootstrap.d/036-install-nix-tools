@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+setopt ERR_EXIT PIPE_FAIL
 source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
 
 log_header "Install Nix Tools"
@@ -15,6 +16,9 @@ if ! command -v nix >/dev/null 2>&1; then
 fi
 
 FLAKE="${0:A:h:h}"
+system=$(nix eval --impure --raw --expr builtins.currentSystem)
+available_profiles_text=$(nix eval --raw "path:${FLAKE}#packages.${system}" --apply 'packages: builtins.concatStringsSep "\n" (builtins.attrNames packages)')
+available_profiles=(${(f)available_profiles_text})
 classes=(${(f)"$(yadm config --get-all local.class 2>/dev/null || true)"})
 
 function has_value() {
@@ -108,6 +112,11 @@ done < <(installed_profiles_from_this_flake)
 log_step "Profiles: ${desired_profiles[*]}"
 
 for profile in "${desired_profiles[@]}"; do
+  if ! has_value "$profile" "${available_profiles[@]}"; then
+    log_skip "No Nix package profile defined: $profile"
+    continue
+  fi
+
   current_url=$(get_profile_url "$profile")
   if [[ -n "$current_url" && "$current_url" != "path:${FLAKE}" ]]; then
     log_step "Removing stale Nix profile (wrong source): $profile"
@@ -118,7 +127,8 @@ for profile in "${desired_profiles[@]}"; do
   if [[ -n "$current_url" ]]; then
     log_step "Upgrading Nix profile: $profile"
     nix profile upgrade "$profile"
-  elif nix profile add "path:${FLAKE}#${profile}" 2>/dev/null; then
+  else
+    nix profile add "path:${FLAKE}#${profile}"
     log_done "Installed Nix profile: $profile"
   fi
 done

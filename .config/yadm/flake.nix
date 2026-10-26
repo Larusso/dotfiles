@@ -22,7 +22,7 @@
           # Lives in general_{context}_{type}, always installed.
           # Anything needed by more than one role must go here.
 
-          gnu = lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
+          gnu = lib.optionals pkgs.stdenv.hostPlatform.isDarwin (with pkgs; [
             coreutils   # needed by xsh (GNU ln) and general linux-compat
             gawk
             gnused
@@ -57,7 +57,7 @@
             yq
             zoxide
             zsh-powerlevel10k
-          ]) ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.pinentry_mac ]
+          ]) ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ pkgs.pinentry_mac ]
             ++ gnu;
 
           # ── Role-unique packages ─────────────────────────────────────────
@@ -92,12 +92,55 @@
             jujutsu
           ];
 
-          dev_private_physical_extra = lib.optionals pkgs.stdenv.isDarwin (with pkgs; [
+          dev_private_physical_extra = lib.optionals pkgs.stdenv.hostPlatform.isDarwin (with pkgs; [
             softnet
             tart
           ]);
 
           nonEmpty = ps: if ps == [] then null else ps;
+
+          mlx_python = pkgs.python3.withPackages (pythonPackages: [ pythonPackages.mlx-lm ]);
+
+          local_ai_ramalama = pkgs.symlinkJoin {
+            name = "ramalama-native";
+            paths = [ (pkgs.ramalama.override {
+              withPodman = false;
+              llama-cpp-vulkan = pkgs.llama-cpp;
+            }) ];
+            nativeBuildInputs = [ pkgs.makeWrapper ];
+            postBuild = ''
+              wrapProgram $out/bin/ramalama --set-default RAMALAMA_IN_CONTAINER false
+            '';
+          };
+
+          local_ai_llmfit = if pkgs.stdenv.hostPlatform.isDarwin then
+            pkgs.symlinkJoin {
+              name = "llmfit-with-mlx";
+              paths = [ pkgs.llmfit ];
+              nativeBuildInputs = [ pkgs.makeWrapper ];
+              postBuild = ''
+                wrapProgram $out/bin/llmfit --prefix PATH : ${lib.makeBinPath [ mlx_python ]}
+              '';
+            }
+          else pkgs.llmfit;
+
+          local_ai = [
+            local_ai_llmfit
+            pkgs.ollama
+            pkgs.llama-cpp
+            pkgs.lmstudio
+            pkgs.pi-coding-agent
+            pkgs.opencode
+            local_ai_ramalama
+          ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+            pkgs.python3Packages.mlx-lm
+            (pkgs.writeShellScriptBin "lm-studio" ''
+              exec /usr/bin/open -a "${pkgs.lmstudio}/Applications/LM Studio.app" "$@"
+            '')
+            (pkgs.writeShellScriptBin "lms" ''
+              exec "${pkgs.lmstudio}/Applications/LM Studio.app/Contents/Resources/app/.webpack/lms" "$@"
+            '')
+          ];
 
         in {
           # Always installed, no matter what.
@@ -115,6 +158,11 @@
           development_work_vm          = nonEmpty dev_work;
           development_private_physical = nonEmpty (dev_private ++ dev_private_physical_extra);
           development_private_vm       = nonEmpty dev_private;
+
+          "local-ai_work_physical"    = nonEmpty local_ai;
+          "local-ai_work_vm"          = nonEmpty local_ai;
+          "local-ai_private_physical" = nonEmpty local_ai;
+          "local-ai_private_vm"       = nonEmpty local_ai;
 
           # Remaining roles have no nix-specific packages yet.
           # Add packages here when needed; null means no profile is exposed.

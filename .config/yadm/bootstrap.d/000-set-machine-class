@@ -135,7 +135,7 @@ selected_classes+=("$PROMPT_RESULT")
 prompt_choice type "Type" physical vm || exit 1
 selected_classes+=("$PROMPT_RESULT")
 
-prompt_multi_choice role "Role" general development server hardware-hacking photography gaming web || exit 1
+prompt_multi_choice role "Role" general development server hardware-hacking photography gaming web local-ai || exit 1
 selected_classes+=("${PROMPT_MULTI_RESULT[@]}")
 
 log_step "Replacing configured machine classes..."

@@ -4,11 +4,11 @@
 	useConfigOnly = true
 [init]
 	defaultBranch = main
-[http]
-    sslCAPath = /Library/Certs/Cacert.pem
-    sslCAInfo = /Library/Certs/Cacert.pem
+#[http]
+    #sslCAPath = /Library/Certs/Cacert.pem
+    #sslCAInfo = /Library/Certs/Cacert.pem
 
-[url "git@github-wooga:wooga/"]
-    insteadOf = "git@github.com:wooga/"
-[url "git@github-wooga:"]
- 	insteadOf = "https://github.com/wooga/"
+#[url "git@github-wooga:wooga/"]
+#    insteadOf = "git@github.com:wooga/"
+#[url "git@github-wooga:"]
+ 	#insteadOf = "https://github.com/wooga/"
