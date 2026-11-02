@@ -11,5 +11,4 @@
 
 [url "git@github-playtika:Playtika"]
     insteadOf = "git@github.com:Playtika"
-[url "git@github-playtika:"]
- 	insteadOf = "https://github.com/Playtika"
+    insteadOf = "https://github.com/Playtika"

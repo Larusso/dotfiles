@@ -24,10 +24,10 @@
   "steering": true,
   "rewind": true,
   "model": {
-    "modelId": "composer-2.5",
-    "displayModelId": "composer-2.5",
-    "displayName": "Composer 2.5 Fast",
-    "displayNameShort": "Composer 2.5 Fast",
+    "modelId": "auto-smart",
+    "displayModelId": "auto-smart",
+    "displayName": "Auto Balance",
+    "displayNameShort": "Auto Balance",
     "aliases": [],
     "maxMode": false
   },
@@ -39,22 +39,53 @@
         "id": "fast",
         "value": "true"
       }
-    ]
-  },
-  "selectedModel": {
-    "modelId": "composer-2.5",
-    "parameters": [
+    ],
+    "auto-smart": [
+      {
+        "id": "optimize_for",
+        "value": "balanced"
+      }
+    ],
+    "grok-4.7": [
+      {
+        "id": "context",
+        "value": "256k"
+      },
+      {
+        "id": "reasoning_effort",
+        "value": "high"
+      },
       {
         "id": "fast",
         "value": "true"
       }
     ]
   },
+  "selectedModel": {
+    "modelId": "auto-smart",
+    "parameters": [
+      {
+        "id": "optimize_for",
+        "value": "balanced"
+      }
+    ]
+  },
+  "modelSelectionHistory": [
+    "auto-smart",
+    "grok-4.7"
+  ],
   "exploreSubagentModel": "default",
   "privacyCache": {
     "ghostMode": true,
     "privacyMode": 2,
-    "updatedAt": 1784224230121
+    "updatedAt": 1793614468359
+  },
+  "autoReviewAvailabilityCache": {
+    "backendUrl": "https://api2.cursor.sh",
+    "authCacheKey": "auth:auth0|user_01K4CCN4E55MK9TTM2XF2BSHP0",
+    "teamId": 5323294,
+    "available": true,
+    "updatedAt": 1793131243581
   },
   "serverConfigCache": {
     "backendUrl": "https://api2.cursor.sh",
@@ -66,7 +97,7 @@
     },
     "cliSandboxDefaultEnabled": false,
     "serverHttp2Config": 0,
-    "updatedAt": 1782808612181
+    "updatedAt": 1793604979030
   },
   "authInfo": {
     "email": "manfred.endres@wooga.net",
@@ -74,7 +105,8 @@
     "teamId": 5323294,
     "teamName": "Playtika-Cursor",
     "userId": 291054378,
-    "authId": "auth0|user_01K4CCN4E55MK9TTM2XF2BSHP0"
+    "authId": "auth0|user_01K4CCN4E55MK9TTM2XF2BSHP0",
+    "activeTeamId": 5323294
   },
   "network": {
     "useHttp1ForAgent": false

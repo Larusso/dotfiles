@@ -1,0 +1,27 @@
+{
+  "records": [
+    {
+      "model_name": "Qwen/Qwen2.5-Coder-7B",
+      "provider": "llama.cpp",
+      "result": {
+        "Error": "Download error: timeout: global"
+      },
+      "timestamp": 1793144573,
+      "file_path": null
+    },
+    {
+      "model_name": "coder3101/Qwen3.5-27B-heretic",
+      "provider": "llama.cpp",
+      "result": "Success",
+      "timestamp": 1793602993,
+      "file_path": null
+    },
+    {
+      "model_name": "ManniX-ITA/Qwen3.6-27B-A3B-Coder",
+      "provider": "llama.cpp",
+      "result": "Success",
+      "timestamp": 1793612731,
+      "file_path": null
+    }
+  ]
+}

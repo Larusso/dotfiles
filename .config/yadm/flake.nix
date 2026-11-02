@@ -101,6 +101,21 @@
 
           mlx_python = pkgs.python3.withPackages (pythonPackages: [ pythonPackages.mlx-lm ]);
 
+          # llmfit and llmserve both probe MLX with `python3 -c "import mlx_lm"`,
+          # and llmserve launches it as `python3 -m mlx_lm.server`.
+          # python3Packages.mlx-lm only installs the mlx_lm.* scripts.
+          withMlxOnDarwin = drv: bin:
+            if pkgs.stdenv.hostPlatform.isDarwin then
+              pkgs.symlinkJoin {
+                name = "${bin}-with-mlx";
+                paths = [ drv ];
+                nativeBuildInputs = [ pkgs.makeWrapper ];
+                postBuild = ''
+                  wrapProgram $out/bin/${bin} --prefix PATH : ${lib.makeBinPath [ mlx_python ]}
+                '';
+              }
+            else drv;
+
           local_ai_ramalama = pkgs.symlinkJoin {
             name = "ramalama-native";
             paths = [ (pkgs.ramalama.override {
@@ -113,23 +128,45 @@
             '';
           };
 
+          # llmserve always scans ~/.cache/llmfit/models. On Darwin, llmfit stores
+          # GGUF files in ~/Library/Caches/llmfit/models (dirs::cache_dir) and
+          # ignores XDG_CACHE_HOME. The symlink is the path llmserve already
+          # knows. MLX pulls go through `hf download` into ~/.cache/huggingface/hub,
+          # which llmserve scans on its own. Leave HF_HOME unset: llmserve treats
+          # that variable as the hub directory, while Hugging Face uses $HF_HOME/hub.
           local_ai_llmfit = if pkgs.stdenv.hostPlatform.isDarwin then
             pkgs.symlinkJoin {
               name = "llmfit-with-mlx";
               paths = [ pkgs.llmfit ];
               nativeBuildInputs = [ pkgs.makeWrapper ];
               postBuild = ''
-                wrapProgram $out/bin/llmfit --prefix PATH : ${lib.makeBinPath [ mlx_python ]}
+                wrapProgram $out/bin/llmfit \
+                  --prefix PATH : ${lib.makeBinPath [ mlx_python pkgs.python3Packages.huggingface-hub ]} \
+                  --run 'if [ ! -e "$HOME/.cache/llmfit/models" ]; then mkdir -p "$HOME/.cache/llmfit" "$HOME/Library/Caches/llmfit/models" && ln -s "$HOME/Library/Caches/llmfit/models" "$HOME/.cache/llmfit/models"; fi'
               '';
             }
           else pkgs.llmfit;
+          local_ai_llmserve = withMlxOnDarwin pkgs.llmserve "llmserve";
+
+          # The clortho shim does not forward PI_CODING_AGENT_DIR. Set the XDG
+          # default in the wrapper so discovery still uses ~/.config/pi/extensions.
+          local_ai_pi = pkgs.symlinkJoin {
+            name = "pi-with-agent-dir";
+            paths = [ pkgs.pi-coding-agent ];
+            nativeBuildInputs = [ pkgs.makeWrapper ];
+            postBuild = ''
+              wrapProgram $out/bin/pi \
+                --run 'export PI_CODING_AGENT_DIR="''${PI_CODING_AGENT_DIR:-''${XDG_CONFIG_HOME:-$HOME/.config}/pi}"'
+            '';
+          };
 
           local_ai = [
             local_ai_llmfit
+            local_ai_llmserve
             pkgs.ollama
             pkgs.llama-cpp
             pkgs.lmstudio
-            pkgs.pi-coding-agent
+            local_ai_pi
             pkgs.opencode
             local_ai_ramalama
           ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [

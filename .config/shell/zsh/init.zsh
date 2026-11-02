@@ -28,4 +28,5 @@ xsh module cargo            interactive
 xsh module emacs            interactive:login
 xsh module boundry          interactive
 #xsh module ai               interactive
+xsh module llm              interactive
 xsh module clortho          interactive
