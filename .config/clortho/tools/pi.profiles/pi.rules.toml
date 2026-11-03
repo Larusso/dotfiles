@@ -1,0 +1,382 @@
+version = 1
+env_patterns = ["PI_CODING_AGENT_DIR"]
+
+[[entries]]
+kind = "define"
+name = "clortho_env_tool_pi_pi_home"
+
+[entries.value]
+kind = "env"
+var = "HOME"
+
+[[entries]]
+kind = "define"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[entries.value]
+kind = "env"
+var = "PI_CODING_AGENT_DIR"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-metadata"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-read-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-data"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-create"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-unlink"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-flags"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-mode"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-owner"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-setugid"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-acl"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-write-xattr"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-search"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = "/.pi"
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_home"
+
+[[entries]]
+kind = "sandbox-file"
+action = "allow"
+op = "file-test-existence"
+
+[entries.path]
+form = "subpath"
+suffix = ""
+
+[entries.path.base]
+kind = "define-ref"
+name = "clortho_env_tool_pi_pi_pi_coding_agent_dir"

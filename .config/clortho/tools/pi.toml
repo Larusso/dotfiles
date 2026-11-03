@@ -1,0 +1,36 @@
+command = "pi"
+args = []
+
+[backend]
+type = "seatbelt"
+sub_profiles = [
+    "proc",
+    "sys-libs",
+    "sys-private",
+    "user-prefs",
+    "tmp-write",
+    "devices",
+    "mach-core",
+    "network-outbound",
+    "processes",
+    "nix-read",
+]
+# Passed into the seatbelt. The profile already uses this name for file rules;
+# without it here, Pi falls back to ~/.pi/agent and never loads extensions/.
+extra_env = ["PI_CODING_AGENT_DIR"]
+
+[backend.sub_profile_checksums]
+network-outbound = "de92b417a185150b51f4ad3bff22935ed7d5fa08f4a1ac679da8657dcbf1b9d7"
+devices = "7bc3fcf02a203e15b7a210352d63ffbb9887d5f4b12f7ab7b55c2bab8f396f10"
+sys-libs = "943c662ddd70f823ac2e39fc7b1f01755c3294da36cbed6d711904d3b3390207"
+tmp-write = "f8143e4ed2224d01d3dd9edd5d0dac78dca2f3038d63d51b7695da418848b31a"
+mach-core = "a0bf63b87ea31329ac3e1a7cf76c7e0f01f6a1de62076a9d0d7b0d7b47fb24be"
+processes = "443cdd4582aa8f131765df803644904ba07ff00fb02a3d30a1af5b601866b1ba"
+proc = "60b0440b8a63111fd6a711b25df2794e50a2632c8b548b714f861284aaf9f714"
+nix-read = "ac286121298bd90b1eaae7c467132d2a65d6ae21758c5e3013022d987aeb5b6b"
+sys-private = "9fd5c07341f2fde4fba38a1c8c20ae667014d33a66f1656d27b74e8c08f85307"
+user-prefs = "1ebc03feded9af3e85fe10546319d2c9dc17355b53e487c16ea56b27a4b9751d"
+
+[[backend.local_profiles]]
+name = "pi"
+checksum = "e5fbdcb0d5e039962222018f295d6b3af98d3a0d6b53d3c3d85e8a5ac48724ce"
