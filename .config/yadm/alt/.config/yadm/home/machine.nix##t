@@ -1,0 +1,45 @@
+{
+  home.username = "{{yadm.user}}";
+  home.homeDirectory = "{{env.HOME}}";
+
+  {% if yadm.class == "context:work" %}
+  profiles.context = "work";
+  {% endif %}
+  {% if yadm.class == "context:private" %}
+  profiles.context = "private";
+  {% endif %}
+
+  {% if yadm.class == "type:physical" %}
+  profiles.form = "physical";
+  {% endif %}
+  {% if yadm.class == "type:vm" %}
+  profiles.form = "vm";
+  {% endif %}
+
+  profiles.roles = [
+    {% if yadm.class == "role:general" %}
+    "general"
+    {% endif %}
+    {% if yadm.class == "role:development" %}
+    "development"
+    {% endif %}
+    {% if yadm.class == "role:server" %}
+    "server"
+    {% endif %}
+    {% if yadm.class == "role:hardware-hacking" %}
+    "hardware-hacking"
+    {% endif %}
+    {% if yadm.class == "role:photography" %}
+    "photography"
+    {% endif %}
+    {% if yadm.class == "role:gaming" %}
+    "gaming"
+    {% endif %}
+    {% if yadm.class == "role:web" %}
+    "web"
+    {% endif %}
+    {% if yadm.class == "role:local-ai" %}
+    "local-ai"
+    {% endif %}
+  ];
+}
