@@ -7,9 +7,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    clortho-work.url = "git+ssh://git@github.com/wooga/ai-engineering-clortho-poc";
+    clortho-private.url = "git+ssh://git@github.com/Larusso/clortho";
+    unity-version-manager.url = "github:Larusso/unity-version-manager";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, clortho-work, clortho-private, unity-version-manager, ... }:
     let
       lib = nixpkgs.lib;
 
@@ -54,6 +57,13 @@
             config.allowUnfree = true;
           };
           modules = [ ./home/home.nix ];
+          # Only the branch for this machine's context is evaluated, so a
+          # switch fetches that flake and not the other one.
+          extraSpecialArgs = {
+            clorthoFor = context:
+              if context == "work" then clortho-work else clortho-private;
+            inherit unity-version-manager;
+          };
         }
       );
     };

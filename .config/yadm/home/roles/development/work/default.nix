@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, unity-version-manager, ... }:
 let
   cfg = config.profiles;
 in
@@ -12,6 +12,7 @@ in
       graphviz
       jdk
       rustup
+      unity-version-manager.packages.${pkgs.stdenv.hostPlatform.system}.uvm
     ];
   };
 }

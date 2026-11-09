@@ -27,6 +27,24 @@ fi
 
 system=$(nix eval --impure --raw --expr builtins.currentSystem)
 
+# These used to be `nix profile add`ed from the context flake. Home Manager
+# installs them now, and the old entries would collide on the same binaries.
+while IFS= read -r name; do
+  [[ -n "$name" ]] || continue
+  log_step "Removing Nix profile now provided by Home Manager: ${name}"
+  nix profile remove "$name"
+done < <(NO_COLOR=1 nix profile list 2>/dev/null \
+  | sed $'s/\x1b\\[[0-9;]*m//g' \
+  | awk '
+      /^Name:/ { name = $2 }
+      /^Original flake URL:/ {
+        url = $0
+        sub(/^Original flake URL:[[:space:]]*/, "", url)
+        if (url ~ /ai-engineering-clortho-poc/ || url ~ /github.com\/Larusso\/clortho/ || url ~ /Larusso\/unity-version-manager/)
+          print name
+      }
+    ')
+
 log_step "Switching Home Manager: ${system}"
 nix run "path:${FLAKE}#home-manager" -- switch --flake "path:${FLAKE}#${system}"
 log_done "Home Manager switched: ${system}"
