@@ -73,6 +73,41 @@ let
 in
 {
   config = lib.mkIf (builtins.elem "local-ai" cfg.roles) {
+    programs.llmserve = {
+      enable = false;
+      package = llmserve;
+      piConfigDir = "\${XDG_CONFIG_HOME:-$HOME/.config}/pi";
+      linkDarwinConfigs = [ "llmserve" "llmfit" ];
+      settings = {
+        extra_model_dirs = [ ];
+        preferred_port = 8080;
+        preferred_host = "0.0.0.0";
+        use_ctx_size = true;
+        default_ctx_size = 8192;
+        flash_attn = true;
+        presets = {
+          vllm = { ctx_size = 8192; port = 8000; gpu_layers = -1; extra_args = [ ]; };
+          fastflowlm = { port = 52625; extra_args = [ ]; };
+          mlx = { ctx_size = 4096; extra_args = [ ]; };
+          ollama = { ctx_size = 8192; extra_args = [ ]; };
+          localai = { ctx_size = 8192; port = 8080; extra_args = [ ]; };
+          lemonade = { ctx_size = 4096; port = 8000; extra_args = [ ]; };
+          koboldcpp = { ctx_size = 8192; port = 5001; gpu_layers = -1; extra_args = [ ]; };
+          lm-studio = { extra_args = [ ]; };
+          llama-server = {
+            ctx_size = 20000;
+            use_ctx_size = true;
+            host = "0.0.0.0";
+            port = 8081;
+            flash_attn = true;
+            batch_size = 2048;
+            gpu_layers = -1;
+            extra_args = [ ];
+          };
+        };
+      };
+    };
+
     home.packages = [
       llmfit
       llmserve

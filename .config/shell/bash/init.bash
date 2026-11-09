@@ -17,3 +17,4 @@
 # xsh module env
 # xsh module uvm 
 # xsh module emacs        env
+xsh module hm               env:login:interactive

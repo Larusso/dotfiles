@@ -13,4 +13,5 @@ xsh module ssh
 xsh module core
 xsh module env
 xsh module nix
-xsh module uvm
+#xsh module uvm
+xsh module hm               env:login:interactive
