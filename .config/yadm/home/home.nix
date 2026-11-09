@@ -5,6 +5,7 @@
     ./profiles.nix
     ./machine.nix
     ./roles/editor.nix
+    ./roles/development
   ];
 
   # Username, home directory, and profile selection come from machine.nix,
