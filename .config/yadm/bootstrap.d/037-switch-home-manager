@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+setopt ERR_EXIT PIPE_FAIL
+source "${XDG_CONFIG_HOME:-$HOME/.config}/yadm/lib.zsh"
+
+log_header "Switch Home Manager"
+
+log_step "Rendering machine profile"
+yadm alt
+
+# Source Nix if it was just installed in this bootstrap run
+if ! command -v nix >/dev/null 2>&1; then
+  NIX_PROFILE="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  [[ -f "$NIX_PROFILE" ]] && source "$NIX_PROFILE"
+fi
+
+if ! command -v nix >/dev/null 2>&1; then
+  log_skip "Nix not available"
+  exit 0
+fi
+
+FLAKE="${0:A:h:h}"
+machine="${FLAKE}/home/machine.nix"
+if [[ ! -f "$machine" ]]; then
+  log_skip "Home Manager machine profile was not generated"
+  exit 0
+fi
+
+system=$(nix eval --impure --raw --expr builtins.currentSystem)
+
+log_step "Switching Home Manager: ${system}"
+nix run "path:${FLAKE}#home-manager" -- switch --flake "path:${FLAKE}#${system}"
+log_done "Home Manager switched: ${system}"
