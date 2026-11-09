@@ -3,7 +3,7 @@
 #
 
 alias reload='exec "$XSHELL"' # reload the current shell configuration
-
+alias zed='zed --classic'
 alias ls="eza"
 alias vim="nvim"
 alias ll="ls -l"
