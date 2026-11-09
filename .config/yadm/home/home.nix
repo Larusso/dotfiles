@@ -6,6 +6,7 @@
     ./machine.nix
     ./roles/editor.nix
     ./roles/development
+    ./roles/local-ai.nix
   ];
 
   # Username, home directory, and profile selection come from machine.nix,
