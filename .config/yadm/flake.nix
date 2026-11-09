@@ -24,50 +24,8 @@
 
       profilePackages = pkgs:
         let
-          # ── Shared base layer ────────────────────────────────────────────
-          # Lives in general_{context}_{type}, always installed.
-          # Anything needed by more than one role must go here.
-
-          gnu = lib.optionals pkgs.stdenv.hostPlatform.isDarwin (with pkgs; [
-            coreutils   # needed by xsh (GNU ln) and general linux-compat
-            gawk
-            gnused
-            gnutar
-            util-linux
-            imgcat
-          ]);
-
-          base = (with pkgs; [
-            atuin
-            bat
-            curl
-            delta
-            difftastic
-            eza
-            fd
-            fzf
-            gh
-            git
-            gnupg
-            htop
-            jq
-            neovim
-            openssh
-            ripgrep
-            shellcheck
-            shfmt
-            subversion
-            tmux
-            watch
-            wget
-            yq
-            zoxide
-            zsh-powerlevel10k
-          ]) ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ pkgs.pinentry_mac ]
-            ++ gnu;
-
-          # ── Role-unique packages ─────────────────────────────────────────
-          # No package here may appear in base or in another role profile.
+          # Shared packages now live in home/home.nix.
+          # Role packages below must not repeat those.
 
           dev_work = with pkgs; [
             act
@@ -189,12 +147,11 @@
           # Always installed, no matter what.
           yadm = with pkgs; [ yadm ];
 
-          # Always installed when context + type are configured.
-          # Contains the full base shell environment shared by all roles.
-          general_work_physical    = base;
-          general_work_vm          = base;
-          general_private_physical = base;
-          general_private_vm       = base;
+          # Shared base is installed by Home Manager, not a Nix profile.
+          general_work_physical    = null;
+          general_work_vm          = null;
+          general_private_physical = null;
+          general_private_vm       = null;
 
           # Role deltas — unique packages only, no overlap with base or each other.
           development_work_physical    = nonEmpty (dev_work ++ dev_work_physical_extra);

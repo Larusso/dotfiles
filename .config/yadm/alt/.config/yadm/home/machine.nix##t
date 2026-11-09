@@ -41,5 +41,8 @@
     {% if yadm.class == "role:local-ai" %}
     "local-ai"
     {% endif %}
+    {% if yadm.class == "role:editor" %}
+    "editor"
+    {% endif %}
   ];
 }
