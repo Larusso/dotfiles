@@ -16,7 +16,7 @@ in
       sourceEnv = true;
     };
 
-    shell.uvm = {
+    programs.uvm = {
       enable = true;
       autoSwitch = true;
       autoInstall = true;

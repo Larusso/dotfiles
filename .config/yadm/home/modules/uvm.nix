@@ -1,9 +1,9 @@
 { config, lib, pkgs, unity-version-manager, ... }:
 let
-  cfg = config.shell.uvm;
+  cfg = config.programs.uvm;
 in
 {
-  options.shell.uvm = {
+  options.programs.uvm = {
     enable = lib.mkEnableOption "Unity Version Manager";
 
     package = lib.mkOption {

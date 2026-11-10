@@ -5,6 +5,7 @@
     ./profiles.nix
     ./machine.nix
     ./git.nix
+    ./_modules
     ./modules
     ./roles/editor.nix
     ./roles/development
