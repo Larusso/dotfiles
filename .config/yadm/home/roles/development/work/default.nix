@@ -31,7 +31,6 @@ in
       graphviz
       jdk
       rustup
-      unity-version-manager.packages.${pkgs.stdenv.hostPlatform.system}.uvm
     ];
   };
 }
