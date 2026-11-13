@@ -7,10 +7,6 @@
     ./aws.nix
     ./git.nix
     ./docker.nix
-    ./pyenv.nix
-    ./rbenv.nix
-    ./jenv.nix
-    ./nodenv.nix
     ./gradle.nix
     ./emacs.nix
     ./fzf.nix

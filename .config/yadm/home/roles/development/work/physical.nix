@@ -20,31 +20,36 @@ in
     };
 
     programs.pyenv = {
-      enable = false;
-      root = "\${XDG_DATA_HOME:-$HOME/.local/share}/pyenv";
+      enable = true;
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
     };
 
     programs.rbenv = {
-      enable = false;
-      root = "\${XDG_DATA_HOME:-$HOME/.local/share}/rbenv";
+      enable = true;
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
     };
 
-    shell.jenv = {
-      enable = false;
-      root = "\${XDG_DATA_HOME:-$HOME/.local/share}/jenv";
-    };
+    # programs.jenv = {
+    #   enable = true;
+    #   enableBashIntegration = false;
+    #   enableFishIntegration = false;
+    #   enableZshIntegration = false;
+    # };
 
-    shell.nodenv = {
-      enable = false;
-      root = "\${XDG_DATA_HOME:-$HOME/.local/share}/nodenv";
+    programs.nodeenv = {
+      enable = true;
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
     };
 
     home.packages = with pkgs; [
       boundary
       gradle
-      nodeenv
-      pyenv
-      rbenv
     ];
   };
 }

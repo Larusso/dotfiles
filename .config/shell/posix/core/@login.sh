@@ -13,6 +13,7 @@ add_to_path_if_exists "/nix/var/nix/profiles/default/bin"
 add_to_path_if_exists "$HOME/.nix-profile/bin"
 add_to_path_if_exists "/opt/homebrew/bin"
 add_to_path_if_exists "$HOME/.local/bin"
+add_to_path_if_exists "$HOME/.config/bin"
 
 export PATH
 
