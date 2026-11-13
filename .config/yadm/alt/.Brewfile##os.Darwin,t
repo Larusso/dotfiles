@@ -27,10 +27,6 @@ cask "docker-desktop"
 {% endif %}
 {% if yadm.class == "context:work" %}
 cask "google-chrome"
-tap "gdubw/gng"
-brew "gng"
-cask "claude"
-cask "claude-code"
 cask "cursor"
 cask "cursor-cli"
 {% if yadm.class == "type:physical" %}

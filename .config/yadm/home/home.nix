@@ -11,6 +11,7 @@
     ./roles/development
     ./roles/local-ai.nix
     ./roles/private.nix
+    ./roles/physical.nix
   ];
 
   # Username, home directory, and profile selection come from machine.nix,
@@ -152,6 +153,11 @@
       dotnet = "$HOME/.config/agent-safehouse/dotnet.sb";
       docker = "$HOME/.config/agent-safehouse/docker.sb";
     };
+  };
+
+  programs._1password = {
+    enable = true;
+    installCLI = true;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

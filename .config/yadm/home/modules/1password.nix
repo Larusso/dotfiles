@@ -15,6 +15,12 @@ in
       description = "Install the 1Password CLI.";
     };
 
+    installUI = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Install the 1Password UI Client.";
+    };
+
     package = lib.mkOption {
       type = lib.types.package;
       default = pkgs._1password-gui;
@@ -36,7 +42,7 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      home.packages = [ cfg.package ] ++ lib.optional cfg.installCLI cfg.cliPackage;
+      home.packages = [] ++ (lib.optional cfg.installUI cfg.package) ++ lib.optional cfg.installCLI cfg.cliPackage;
     })
     (lib.mkIf (cfg.sshAgentConfig != { }) {
       xdg.configFile."1password/ssh/agent.toml".source =
