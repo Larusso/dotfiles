@@ -1,0 +1,103 @@
+[profile_sets]
+default = "baseline"
+
+[profile_sets.sets.baseline]
+profiles = [
+  "proc",
+  "sys-libs",
+  "sys-private",
+  "user-prefs",
+  "tmp-write",
+  "devices",
+  "mach-core",
+  "network-outbound",
+]
+
+[profile_sets.sets.workspace]
+profiles = [
+  "proc",
+  "sys-libs",
+  "sys-private",
+  "user-prefs",
+  "tmp-write",
+  "devices",
+  "mach-core",
+  "local-overrides",
+  "nix",
+  "homebrew_read",
+  "network-all",
+  "claude",
+]
+
+[profile_sets.sets.dotnet]
+profiles = [
+  "proc",
+  "sys-libs",
+  "sys-private",
+  "user-prefs",
+  "tmp-write",
+  "devices",
+  "mach-core",
+  "local-overrides",
+  "nix",
+  "homebrew_read",
+  "network-all",
+  "claude",
+  "processes",
+  "dotnet",
+  "git",
+  "keychain-read",
+]
+
+[profile_sets.sets.docker]
+profiles = [
+  "proc",
+  "sys-libs",
+  "sys-private",
+  "user-prefs",
+  "tmp-write",
+  "devices",
+  "mach-core",
+  "local-overrides",
+  "nix",
+  "homebrew_read",
+  "network-all",
+  "claude",
+  "docker",
+]
+
+[profile_sets.sets.node]
+profiles = [
+  "proc",
+  "sys-libs",
+  "sys-private",
+  "user-prefs",
+  "tmp-write",
+  "devices",
+  "mach-core",
+  "local-overrides",
+  "nix",
+  "homebrew_read",
+  "network-all",
+  "claude",
+  "processes",
+  "node-env",
+]
+
+[profile_sets.sets.python]
+profiles = [
+  "proc",
+  "sys-libs",
+  "sys-private",
+  "user-prefs",
+  "tmp-write",
+  "devices",
+  "mach-core",
+  "local-overrides",
+  "nix",
+  "homebrew_read",
+  "network-all",
+  "claude",
+  "processes",
+  "python-env",
+]
