@@ -10,6 +10,7 @@
     ./roles/editor.nix
     ./roles/development
     ./roles/local-ai.nix
+    ./roles/private.nix
   ];
 
   # Username, home directory, and profile selection come from machine.nix,
@@ -62,6 +63,7 @@
     imgcat
     pinentry_mac
   ];
+
 
   # Values for the base tools. Enable stays off; the modules write these
   # once a profile sets enable = true.

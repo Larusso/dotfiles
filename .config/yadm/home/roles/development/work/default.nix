@@ -16,6 +16,28 @@ in
       sourceEnv = true;
     };
 
+    programs._1password.sshAgentConfig = {
+      ssh-keys = [
+        {
+          item = "u3gswvnnn2n3edir6i4nx34mga";
+          vault = "qws2fge5tqje77rrw2m563w5fy";
+        }
+        {
+          item = "rgjb4uiaha2mw7jq4gar6wgvmy";
+          vault = "mjyal2admd3wecshhjomaobfta";
+        }
+        {
+          item = "rduz43k7eol7ei5uewepkfigku";
+          vault = "mjyal2admd3wecshhjomaobfta";
+        }
+        {
+          item = "ytdlviensxjcozev2i7i7hcqgi";
+          vault = "mjyal2admd3wecshhjomaobfta";
+        }
+      ];
+    };
+
+
     programs.uvm = {
       enable = true;
       autoSwitch = true;
