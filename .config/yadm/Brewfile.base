@@ -1,8 +1,4 @@
 # --- base (begin) ---
-brew "eugene1g/safehouse/agent-safehouse"
-
-cask "1password@beta"
-cask "1password-cli@beta"
 cask "bettertouchtool"
 cask "chatgpt"
 cask "firefox"
