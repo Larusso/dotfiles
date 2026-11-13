@@ -19,6 +19,11 @@ in
     programs._1password.sshAgentConfig = {
       ssh-keys = [
         {
+          # This needs to be fixed
+          item = "cfab47ctgidp3ofgaj2r5s37nq";
+          vault = "qws2fge5tqje77rrw2m563w5fy";
+        }
+        {
           item = "u3gswvnnn2n3edir6i4nx34mga";
           vault = "qws2fge5tqje77rrw2m563w5fy";
         }

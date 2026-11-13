@@ -102,7 +102,7 @@ in
     };
 
     programs.clortho = {
-      enable = false;
+      enable = true;
       gozer.enable = true;
       seatbeltDebug = true;
     };
@@ -116,8 +116,6 @@ in
       pkgs.git-crypt
       pkgs.git-lfs
       pkgs.jujutsu
-      source.packages.${system}.clortho
-      source.packages.${system}.gozer
     ];
   };
 }

@@ -17,7 +17,6 @@
     ./powerlevel10k.nix
     ./direnv.nix
     ./mise.nix
-    ./clortho.nix
     ./cargo.nix
     ./atuin.nix
     ./gpg.nix
