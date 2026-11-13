@@ -24,7 +24,7 @@ cask "jetbrains-toolbox"
 cask "proxyman"
 {% if yadm.class == "type:physical" %}
 cask "docker-desktop"
-cask herdr-app
+cask "herdr-app"
 {% endif %}
 {% if yadm.class == "context:work" %}
 cask "google-chrome"
